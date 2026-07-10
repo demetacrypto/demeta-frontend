@@ -26,11 +26,13 @@ The full before/after findings are in [docs/AUDIT.md](docs/AUDIT.md). The evalua
 
 Three original fictional studies prove different material systems. They are examples of reasoning and engineering, not templates to reskin.
 
+**[Open the live interactive showcase](https://demetacrypto.github.io/demeta-frontend/)** — use the depth/lens controls, inspect the transparent device layers, and switch the cloth between drape, fold, and inspection modes.
+
 | Study | Signature medium | Purpose |
 |---|---|---|
-| [Pressure Atlas](showcase/src/pages/PressureAtlas.tsx) | Three.js + GLSL terrain/refraction | Fluid pressure lens over a synthetic dive transect |
-| [Vitreum](showcase/src/pages/Vitreum.tsx) | Three.js + custom GLSL Fresnel glass | Transparent original handset exposing repair layers |
-| [Foldline](showcase/src/pages/Foldline.tsx) | Three.js + CPU Verlet cloth | A textile page that drapes, folds, rests, and reveals construction evidence |
+| [Pressure Atlas](https://demetacrypto.github.io/demeta-frontend/pressure-atlas/) | Three.js + GLSL terrain/refraction | Fluid pressure lens over a synthetic dive transect |
+| [Vitreum](https://demetacrypto.github.io/demeta-frontend/vitreum/) | Three.js + custom GLSL Fresnel glass | Transparent original handset exposing repair layers |
+| [Foldline](https://demetacrypto.github.io/demeta-frontend/foldline/) | Three.js + CPU Verlet cloth | A textile page that drapes, folds, rests, and reveals construction evidence |
 
 ![Vitreum optical-glass study](showcase/public/screenshots/vitreum-desktop.png)
 

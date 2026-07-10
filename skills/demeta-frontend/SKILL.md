@@ -58,6 +58,8 @@ Create a claim ledger using `references/content-integrity.md`. Mark anything not
 
 ### 3. Generate competing concepts
 
+Treat media named in the brief as evidence of ambition, not as a menu or house style. Water, glass, cloth, and the bundled showcase compositions are proof cases, never defaults. Infer a new signature behavior from the subject itself; search beyond familiar frontend patterns into spatial typography, procedural fields, data sculpture, particles, generative geometry, camera choreography, sound-reactive systems, unusual navigation, mixed SVG/Canvas/WebGL compositions, and newly available browser techniques when they earn their cost.
+
 Create three to five candidates with these reasoning roles:
 
 - commercially safe;
@@ -83,6 +85,8 @@ Material simulations are first-class options:
 - particles, fields, organic growth, morphing geometry, and spatial typography.
 
 Do not add Three.js just to satisfy a trend. Read `references/graphics-stack.md`, name the comprehension/conversion benefit, and define a static or low-cost equivalent first.
+
+The chosen medium may be absent from every list in this skill. Prefer an invented interaction grammar that belongs to the brief over a technically impressive replay of a previous effect. If the strongest concept uses no Three.js, document why the alternative is more expressive; if it does use Three.js or another advanced stack, make the technology disappear behind the idea.
 
 ### 5. Write the manifest before implementation
 

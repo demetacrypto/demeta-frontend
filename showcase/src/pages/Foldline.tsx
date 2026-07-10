@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from "react";
 import type { ClothMode } from "../scenes/FoldlineScene";
 import { EvidenceImage } from "../components/EvidenceImage";
 import { SceneBoundary } from "../components/SceneBoundary";
+import { routeHref } from "../routing";
 
 const FoldlineScene = lazy(() => import("../scenes/FoldlineScene"));
 
@@ -66,7 +67,7 @@ export default function Foldline() {
         </div>
         <figure>
           <EvidenceImage
-            src="/assets/foldline-textile.webp"
+            src={routeHref("/assets/foldline-textile.webp")}
             width={1600}
             height={900}
             sizes="(max-width: 900px) 100vw, 50vw"

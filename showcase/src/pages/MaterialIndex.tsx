@@ -1,3 +1,5 @@
+import { routeHref } from "../routing";
+
 const studies = Object.freeze([
   {
     number: "01",
@@ -39,7 +41,7 @@ export default function MaterialIndex() {
       </section>
       <section className="material-grid" aria-label="Material studies">
         {studies.map((study) => (
-          <a className={`material-card ${study.className}`} href={study.path} key={study.path}>
+          <a className={`material-card ${study.className}`} href={routeHref(study.path)} key={study.path}>
             <span className="material-card__number">{study.number}</span>
             <span className="material-card__medium">{study.medium}</span>
             <strong>{study.title}</strong>
@@ -50,7 +52,7 @@ export default function MaterialIndex() {
       </section>
       <footer className="material-index__footer">
         <p>Every study keeps meaning and controls in semantic HTML, with reduced-motion and no-WebGL compositions.</p>
-        <a href="/pressure-atlas">Enter the first study</a>
+        <a href={routeHref("/pressure-atlas")}>Enter the first study</a>
       </footer>
     </main>
   );

@@ -3,6 +3,7 @@ import PressureAtlas from "./pages/PressureAtlas";
 import Vitreum from "./pages/Vitreum";
 import Foldline from "./pages/Foldline";
 import MaterialIndex from "./pages/MaterialIndex";
+import { currentRoute, routeHref } from "./routing";
 
 const studies = Object.freeze([
   { path: "/pressure-atlas", short: "Flow", label: "Pressure Atlas" },
@@ -11,7 +12,7 @@ const studies = Object.freeze([
 ]);
 
 function CurrentPage() {
-  const path = window.location.pathname.replace(/\/$/, "") || "/";
+  const path = currentRoute();
   if (path === "/pressure-atlas") return <PressureAtlas />;
   if (path === "/vitreum") return <Vitreum />;
   if (path === "/foldline") return <Foldline />;
@@ -19,7 +20,7 @@ function CurrentPage() {
 }
 
 export function App() {
-  const current = window.location.pathname.replace(/\/$/, "") || "/";
+  const current = currentRoute();
   const [motionPaused, setMotionPaused] = useState(false);
   const currentStudy = studies.find(({ path }) => path === current);
 
@@ -39,11 +40,11 @@ export function App() {
           <strong>{currentStudy?.label || "Study index"}</strong>
         </div>
         <nav className="study-footer__routes" aria-label="Material studies">
-          <a className={current === "/" ? "is-current" : ""} href="/" aria-current={current === "/" ? "page" : undefined}>
+          <a className={current === "/" ? "is-current" : ""} href={routeHref("/")} aria-current={current === "/" ? "page" : undefined}>
             <span>00</span> Index
           </a>
           {studies.map((study, index) => (
-            <a key={study.path} className={current === study.path ? "is-current" : ""} href={study.path} aria-current={current === study.path ? "page" : undefined}>
+            <a key={study.path} className={current === study.path ? "is-current" : ""} href={routeHref(study.path)} aria-current={current === study.path ? "page" : undefined}>
               <span>0{index + 1}</span> {study.label}
             </a>
           ))}

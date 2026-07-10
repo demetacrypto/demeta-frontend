@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import { EvidenceImage } from "../components/EvidenceImage";
 import { SceneBoundary } from "../components/SceneBoundary";
+import { routeHref } from "../routing";
 
 const PressureAtlasScene = lazy(() => import("../scenes/PressureAtlasScene"));
 
@@ -87,7 +88,7 @@ export default function PressureAtlas() {
       <section id="dive-47" className="accession-story" aria-labelledby="specimen-title">
         <figure className="specimen-figure">
           <EvidenceImage
-            src="/assets/pressure-atlas-specimen.webp"
+            src={routeHref("/assets/pressure-atlas-specimen.webp")}
             width={1600}
             height={900}
             sizes="(max-width: 900px) 100vw, 68vw"

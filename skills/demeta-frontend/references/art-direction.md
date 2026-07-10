@@ -41,6 +41,8 @@ Reject nouns that could fit any industry. A "dashboard," "network," or "workflow
 
 Produce three or four candidates. Use the roles `commercially-safe`, `visually-ambitious`, and `niche-native` to force different reasoning, not a fixed set of media.
 
+The user's examples establish the altitude, not the destination. Run a divergent medium search before naming candidates: include at least one concept outside every medium the user or prior showcase named, then judge all candidates by subject fit. A candidate is not original because its technology is exotic; its content architecture, visual behavior, and conversion logic must form a relationship that would weaken if transplanted to another brief.
+
 Each candidate states:
 
 - direction name that describes an idea, not only the brand;
