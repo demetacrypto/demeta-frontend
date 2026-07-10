@@ -1,0 +1,1163 @@
+{
+  "reportVersion": "1.0.0",
+  "generatedAt": "2026-07-10T14:03:51.612Z",
+  "engine": "axe-core via @axe-core/playwright",
+  "target": "WCAG 2.2 AA",
+  "pass": true,
+  "routes": [
+    {
+      "route": "/pressure-atlas",
+      "profile": "desktop",
+      "axe": {
+        "violations": 0,
+        "critical": 0,
+        "serious": 0,
+        "blockingIds": []
+      },
+      "overflowPx": 0
+    },
+    {
+      "route": "/pressure-atlas",
+      "profile": "mobile",
+      "axe": {
+        "violations": 0,
+        "critical": 0,
+        "serious": 0,
+        "blockingIds": []
+      },
+      "overflowPx": 0
+    },
+    {
+      "route": "/vitreum",
+      "profile": "desktop",
+      "axe": {
+        "violations": 0,
+        "critical": 0,
+        "serious": 0,
+        "blockingIds": []
+      },
+      "overflowPx": 0
+    },
+    {
+      "route": "/vitreum",
+      "profile": "mobile",
+      "axe": {
+        "violations": 0,
+        "critical": 0,
+        "serious": 0,
+        "blockingIds": []
+      },
+      "overflowPx": 0
+    },
+    {
+      "route": "/foldline",
+      "profile": "desktop",
+      "axe": {
+        "violations": 0,
+        "critical": 0,
+        "serious": 0,
+        "blockingIds": []
+      },
+      "overflowPx": 0
+    },
+    {
+      "route": "/foldline",
+      "profile": "mobile",
+      "axe": {
+        "violations": 0,
+        "critical": 0,
+        "serious": 0,
+        "blockingIds": []
+      },
+      "overflowPx": 0
+    }
+  ],
+  "keyboardAndZoom": [
+    {
+      "route": "/pressure-atlas",
+      "tabTraversal": true,
+      "tabOrder": [
+        {
+          "expectedIndex": 0,
+          "focusedIndex": 0,
+          "label": "Skip to content",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 1,
+          "focusedIndex": 1,
+          "label": "Pressure Atlas home",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 2,
+          "focusedIndex": 2,
+          "label": "Open dive 47 ↘",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 3,
+          "focusedIndex": 3,
+          "label": "Open dive 47",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 4,
+          "focusedIndex": 4,
+          "label": "M-01 / 0000 mSurface",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 5,
+          "focusedIndex": 5,
+          "label": "M-02 / 0930 mTwilight",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 6,
+          "focusedIndex": 6,
+          "label": "M-03 / 2930 mMidnight",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 7,
+          "focusedIndex": 7,
+          "label": "M-04 / 6100 mAbyss",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 8,
+          "focusedIndex": 8,
+          "label": "West",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 9,
+          "focusedIndex": 9,
+          "label": "Centre",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 10,
+          "focusedIndex": 10,
+          "label": "East",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 11,
+          "focusedIndex": 11,
+          "label": "Return to the transect",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 12,
+          "focusedIndex": 12,
+          "label": "00 Index",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 13,
+          "focusedIndex": 13,
+          "label": "01 Pressure Atlas",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 14,
+          "focusedIndex": 14,
+          "label": "02 Vitreum",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 15,
+          "focusedIndex": 15,
+          "label": "03 Foldline",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 16,
+          "focusedIndex": 16,
+          "label": "Pause ambient motion",
+          "focusVisible": true
+        }
+      ],
+      "controls": [
+        {
+          "name": "/M-03.*2930 m.*midnight/i",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "/M-04.*6100 m.*abyss/i",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "/M-01.*0000 m.*surface/i",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "/M-02.*0930 m.*twilight/i",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "West",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "East",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "Centre",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        }
+      ],
+      "motion": {
+        "focusVisible": true,
+        "paused": true,
+        "resumed": true
+      },
+      "ctaFocusVisible": true,
+      "ctaActivated": true,
+      "textZoom200Percent": {
+        "headingVisible": true,
+        "ctaVisible": true,
+        "overflowPx": 0,
+        "targets": [
+          {
+            "label": "The ocean remembers pressure.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Skip to content",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Pressure Atlas home",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Open dive 47 ↘",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Open dive 47",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "M-01 / 0000 mSurface",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "M-02 / 0930 mTwilight",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "M-03 / 2930 mMidnight",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "M-04 / 6100 mAbyss",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "West",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Centre",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "East",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Return to the transect",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "00 Index",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "01 Pressure Atlas",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "02 Vitreum",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "03 Foldline",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Pause ambient motion",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          }
+        ]
+      },
+      "reflowEquivalent400Percent": {
+        "headingVisible": true,
+        "ctaVisible": true,
+        "overflowPx": 0,
+        "targets": [
+          {
+            "label": "The ocean remembers pressure.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Skip to content",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Pressure Atlas home",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Open dive 47 ↘",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Open dive 47",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "M-01 / 0000 mSurface",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "M-02 / 0930 mTwilight",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "M-03 / 2930 mMidnight",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "M-04 / 6100 mAbyss",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "West",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Centre",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "East",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Return to the transect",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "00 Index",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "01 Pressure Atlas",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "02 Vitreum",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "03 Foldline",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Pause ambient motion",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "route": "/vitreum",
+      "tabTraversal": true,
+      "tabOrder": [
+        {
+          "expectedIndex": 0,
+          "focusedIndex": 0,
+          "label": "Skip to content",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 1,
+          "focusedIndex": 1,
+          "label": "Vitreum home",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 2,
+          "focusedIndex": 2,
+          "label": "Inspect layers",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 3,
+          "focusedIndex": 3,
+          "label": "Inspect the layer map ↓",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 4,
+          "focusedIndex": 4,
+          "label": "01Optical shellTransmission reveals structure without hiding the interface.",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 5,
+          "focusedIndex": 5,
+          "label": "02Logic planeOne removable board carries the demonstration signal route.",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 6,
+          "focusedIndex": 6,
+          "label": "03Power cellThe warm internal block makes replacement physically legible.",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 7,
+          "focusedIndex": 7,
+          "label": "Return to the device",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 8,
+          "focusedIndex": 8,
+          "label": "00 Index",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 9,
+          "focusedIndex": 9,
+          "label": "01 Pressure Atlas",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 10,
+          "focusedIndex": 10,
+          "label": "02 Vitreum",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 11,
+          "focusedIndex": 11,
+          "label": "03 Foldline",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 12,
+          "focusedIndex": 12,
+          "label": "Pause ambient motion",
+          "focusVisible": true
+        }
+      ],
+      "controls": [
+        {
+          "name": "/02 logic plane/i",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "/03 power cell/i",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "/01 optical shell/i",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        }
+      ],
+      "motion": {
+        "focusVisible": true,
+        "paused": true,
+        "resumed": true
+      },
+      "ctaFocusVisible": true,
+      "ctaActivated": true,
+      "textZoom200Percent": {
+        "headingVisible": true,
+        "ctaVisible": true,
+        "overflowPx": 0,
+        "targets": [
+          {
+            "label": "Nothing insideis hidden from repair.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Skip to content",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Vitreum home",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Inspect layers",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Inspect the layer map ↓",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "01Optical shellTransmission reveals structure without hiding the interface.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "02Logic planeOne removable board carries the demonstration signal route.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "03Power cellThe warm internal block makes replacement physically legible.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Return to the device",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "00 Index",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "01 Pressure Atlas",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "02 Vitreum",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "03 Foldline",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Pause ambient motion",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          }
+        ]
+      },
+      "reflowEquivalent400Percent": {
+        "headingVisible": true,
+        "ctaVisible": true,
+        "overflowPx": 0,
+        "targets": [
+          {
+            "label": "Nothing insideis hidden from repair.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Skip to content",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Vitreum home",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Inspect layers",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Inspect the layer map ↓",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "01Optical shellTransmission reveals structure without hiding the interface.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "02Logic planeOne removable board carries the demonstration signal route.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "03Power cellThe warm internal block makes replacement physically legible.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Return to the device",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "00 Index",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "01 Pressure Atlas",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "02 Vitreum",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "03 Foldline",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Pause ambient motion",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "route": "/foldline",
+      "tabTraversal": true,
+      "tabOrder": [
+        {
+          "expectedIndex": 0,
+          "focusedIndex": 0,
+          "label": "Skip to content",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 1,
+          "focusedIndex": 1,
+          "label": "Foldline home",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 2,
+          "focusedIndex": 2,
+          "label": "Construction",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 3,
+          "focusedIndex": 3,
+          "label": "Open the construction notes",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 4,
+          "focusedIndex": 4,
+          "label": "Drape",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 5,
+          "focusedIndex": 5,
+          "label": "Fold",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 6,
+          "focusedIndex": 6,
+          "label": "Inspect",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 7,
+          "focusedIndex": 7,
+          "label": "Return to the textile",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 8,
+          "focusedIndex": 8,
+          "label": "00 Index",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 9,
+          "focusedIndex": 9,
+          "label": "01 Pressure Atlas",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 10,
+          "focusedIndex": 10,
+          "label": "02 Vitreum",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 11,
+          "focusedIndex": 11,
+          "label": "03 Foldline",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 12,
+          "focusedIndex": 12,
+          "label": "Pause ambient motion",
+          "focusVisible": true
+        }
+      ],
+      "controls": [
+        {
+          "name": "Fold",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "Inspect",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        },
+        {
+          "name": "Drape",
+          "focusVisible": true,
+          "pressedBefore": "false",
+          "pressedAfter": "true",
+          "pass": true
+        }
+      ],
+      "motion": {
+        "focusVisible": true,
+        "paused": true,
+        "resumed": true
+      },
+      "ctaFocusVisible": true,
+      "ctaActivated": true,
+      "textZoom200Percent": {
+        "headingVisible": true,
+        "ctaVisible": true,
+        "overflowPx": 0,
+        "targets": [
+          {
+            "label": "A page thatdrapesbefore it turns.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Skip to content",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Foldline home",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Construction",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Open the construction notes",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Drape",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Fold",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Inspect",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Return to the textile",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "00 Index",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "01 Pressure Atlas",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "02 Vitreum",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "03 Foldline",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Pause ambient motion",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          }
+        ]
+      },
+      "reflowEquivalent400Percent": {
+        "headingVisible": true,
+        "ctaVisible": true,
+        "overflowPx": 0,
+        "targets": [
+          {
+            "label": "A page thatdrapesbefore it turns.",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Skip to content",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Foldline home",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Construction",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Open the construction notes",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Drape",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Fold",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Inspect",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Return to the textile",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "00 Index",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "01 Pressure Atlas",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "02 Vitreum",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "03 Foldline",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "Pause ambient motion",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          }
+        ]
+      },
+      "pass": true
+    }
+  ],
+  "limitations": [
+    "Automated axe checks, route-complete signature keyboard flows, and zoom/reflow checks do not replace a full assistive-technology audit."
+  ]
+}

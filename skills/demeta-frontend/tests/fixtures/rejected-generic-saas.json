@@ -1,0 +1,113 @@
+{
+  "version": "1.0.0",
+  "stage": "verified",
+  "project": {
+    "name": "Nova AI",
+    "niche": "SaaS",
+    "audience": "everyone",
+    "singleJob": "Learn more",
+    "ambition": "premium",
+    "locale": "en"
+  },
+  "thesis": {
+    "concept": "A beautiful modern AI website.",
+    "signature": "Glowing cards.",
+    "aestheticRisk": "Purple gradient.",
+    "restraint": "None."
+  },
+  "nicheIntelligence": {
+    "artifacts": ["dashboard"],
+    "rituals": ["click"],
+    "proofSignals": [],
+    "sensoryCues": [],
+    "conversionAction": "Learn more"
+  },
+  "concepts": [
+    {
+      "id": "default",
+      "mode": "commercially-safe",
+      "name": "Nova AI",
+      "signatureInteraction": "Fade up cards.",
+      "medium": "css",
+      "fingerprint": {
+        "heroArchetype": "split",
+        "composition": "left-right",
+        "palette": "purple-blue-gradient",
+        "geometry": "rounded-cards",
+        "primaryVisual": "dashboard",
+        "motionSignature": "fade-up",
+        "typography": "neutral-sans",
+        "sectionRhythm": "card-grid",
+        "headerArchitecture": "pill-nav",
+        "heroFrame": "boxed-card",
+        "scrollDepthSystem": "fade-only"
+      }
+    }
+  ],
+  "selectedConcept": "default",
+  "system": {
+    "colors": [
+      { "name": "Purple", "value": "#7C3AED", "role": "everything" }
+    ],
+    "typography": { "display": "Inter", "body": "Inter", "utility": "Inter" },
+    "geometry": "rounded cards",
+    "material": "glass"
+  },
+  "architecture": {
+    "header": "logo links CTA",
+    "heroFrame": "left copy right dashboard",
+    "sections": ["hero", "features", "pricing"],
+    "scrollDepth": "fade up",
+    "mobileMutation": "stack columns"
+  },
+  "graphics": {
+    "primaryMedium": "none",
+    "justification": "",
+    "criticalContentInDom": true,
+    "fallbacks": { "noWebGL": "", "reducedMotion": "", "lowPower": "", "assetFailure": "" },
+    "runtime": { "lazyLoaded": false, "pauseWhenHidden": false, "pauseControl": false, "disposeOnUnmount": false, "handlesContextLoss": false }
+  },
+  "motion": {
+    "entrance": "fade up",
+    "nicheMoment": "none",
+    "reducedMotionStrategy": "none",
+    "autoMotionOverFiveSeconds": true,
+    "pauseControl": false
+  },
+  "accessibility": {
+    "target": "",
+    "semanticDom": false,
+    "keyboardComplete": false,
+    "visibleFocus": false,
+    "contrastChecked": false,
+    "zoomAndReflowChecked": false,
+    "reducedMotion": false,
+    "canvasAlternative": false,
+    "targetSizeChecked": false,
+    "errorsAnnounced": false
+  },
+  "performanceBudget": {
+    "initialJsKbGzip": 900,
+    "routeJsKbGzip": 1500,
+    "mediaMbDesktop": 20,
+    "mediaMbMobile": 20,
+    "maxDprDesktop": 3,
+    "maxDprMobile": 3,
+    "maxDrawCalls": 300,
+    "maxTriangles": 2000000,
+    "lcpMs": 7000,
+    "cls": 0.4
+  },
+  "claims": [{ "id": "customers", "text": "Trusted by 10,000 teams", "status": "placeholder" }],
+  "assets": [{ "id": "stock", "type": "image", "source": "unknown", "creator": "", "license": "", "path": "hero.jpg" }],
+  "evidence": {
+    "buildCommand": "",
+    "viewports": [],
+    "screenshots": [],
+    "keyboardFlow": false,
+    "webglFallback": false,
+    "reducedMotionRun": false,
+    "consoleErrors": 12,
+    "axe": { "critical": 4, "serious": 9 }
+  }
+}

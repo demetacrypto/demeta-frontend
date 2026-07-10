@@ -1,0 +1,159 @@
+{
+  "reportVersion": "1.0.0",
+  "generatedAt": "2026-07-10T13:37:52.136Z",
+  "tool": "Lighthouse 13.4.0",
+  "protocol": {
+    "preset": "desktop",
+    "runsPerRoute": 3,
+    "statistic": "median"
+  },
+  "buildFingerprint": "8a572cd198f706dd76bb49d8ca0b8e4ce11c977ad06b38b2f9ee1f64f1e0b0bc",
+  "pass": true,
+  "routes": [
+    {
+      "route": "/pressure-atlas",
+      "pass": true,
+      "budget": {
+        "lcpMs": 2500,
+        "tbtMs": 200,
+        "cls": 0.1
+      },
+      "medians": {
+        "performanceScore": 100,
+        "lcpMs": 554,
+        "tbtMs": 0,
+        "cls": 0
+      },
+      "runs": [
+        {
+          "run": 1,
+          "performanceScore": 100,
+          "fcpMs": 437.1,
+          "lcpMs": 562.9,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 513.8,
+          "ttiMs": 564.9
+        },
+        {
+          "run": 2,
+          "performanceScore": 100,
+          "fcpMs": 428.3,
+          "lcpMs": 552.4,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 501,
+          "ttiMs": 554.4
+        },
+        {
+          "run": 3,
+          "performanceScore": 100,
+          "fcpMs": 429.7,
+          "lcpMs": 554,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 502.8,
+          "ttiMs": 556
+        }
+      ]
+    },
+    {
+      "route": "/vitreum",
+      "pass": true,
+      "budget": {
+        "lcpMs": 2500,
+        "tbtMs": 200,
+        "cls": 0.1
+      },
+      "medians": {
+        "performanceScore": 100,
+        "lcpMs": 534.5,
+        "tbtMs": 0,
+        "cls": 0
+      },
+      "runs": [
+        {
+          "run": 1,
+          "performanceScore": 100,
+          "fcpMs": 430.8,
+          "lcpMs": 534.9,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 513.8,
+          "ttiMs": 534.9
+        },
+        {
+          "run": 2,
+          "performanceScore": 100,
+          "fcpMs": 427.1,
+          "lcpMs": 530.9,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 510.9,
+          "ttiMs": 530.9
+        },
+        {
+          "run": 3,
+          "performanceScore": 100,
+          "fcpMs": 430.4,
+          "lcpMs": 534.5,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 517.3,
+          "ttiMs": 534.5
+        }
+      ]
+    },
+    {
+      "route": "/foldline",
+      "pass": true,
+      "budget": {
+        "lcpMs": 2500,
+        "tbtMs": 200,
+        "cls": 0.1
+      },
+      "medians": {
+        "performanceScore": 100,
+        "lcpMs": 591.9,
+        "tbtMs": 0,
+        "cls": 0
+      },
+      "runs": [
+        {
+          "run": 1,
+          "performanceScore": 100,
+          "fcpMs": 427.3,
+          "lcpMs": 591.2,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 729.8,
+          "ttiMs": 597.2
+        },
+        {
+          "run": 2,
+          "performanceScore": 100,
+          "fcpMs": 428,
+          "lcpMs": 592,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 740.4,
+          "ttiMs": 598
+        },
+        {
+          "run": 3,
+          "performanceScore": 100,
+          "fcpMs": 428,
+          "lcpMs": 591.9,
+          "tbtMs": 0,
+          "cls": 0,
+          "speedIndexMs": 731.4,
+          "ttiMs": 597.9
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Local Lighthouse is lab evidence, not field telemetry.",
+    "Three runs and the median reduce one-run shader, process-startup, and host-load variance; individual runs remain visible."
+  ]
+}

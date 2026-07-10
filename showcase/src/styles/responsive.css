@@ -1,0 +1,576 @@
+@media (max-width: 900px) {
+  .study-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .study-footer__identity {
+    min-height: 6.5rem;
+    border-bottom: 1px solid rgba(234, 241, 238, .22);
+  }
+
+  .study-footer__routes {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .study-footer__routes a {
+    min-height: 6.5rem;
+  }
+
+  .study-footer__motion {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .material-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .material-card {
+    min-height: 17rem;
+  }
+
+  .material-card + .material-card {
+    border-left: 0;
+    border-top: 1px solid rgba(23,37,42,.28);
+  }
+
+  .pressure-masthead {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pressure-masthead p {
+    display: none;
+  }
+
+  .pressure-hero__copy {
+    width: min(35rem, 64vw);
+  }
+
+  .depth-controller {
+    grid-template-columns: minmax(0, .55fr) minmax(0, 2fr);
+  }
+
+  .pressure-lens-control {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, .55fr) minmax(0, 2fr);
+    grid-template-rows: 1fr;
+    border-top: 1px solid rgba(20,35,39,.22);
+    border-left: 0;
+  }
+
+  .pressure-lens-control > span {
+    display: grid;
+    align-items: center;
+    border-right: 1px solid rgba(20,35,39,.22);
+    border-bottom: 0;
+  }
+
+  .accession-story,
+  .textile-evidence {
+    grid-template-columns: 1fr;
+  }
+
+  .specimen-figure,
+  .textile-evidence figure {
+    min-height: 520px;
+  }
+
+  .layer-map {
+    grid-template-columns: 1fr;
+  }
+
+  .layer-map__heading {
+    border-right: 0;
+    border-bottom: 1px solid rgba(20,35,40,.2);
+  }
+
+  .glass-principles {
+    grid-template-columns: .75fr 1.25fr;
+  }
+
+  .construction-sequence ol {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .construction-sequence li:nth-child(2) {
+    border-right: 0;
+  }
+
+  .construction-sequence li:nth-child(n+3) {
+    border-top: 1px solid rgba(237,240,235,.35);
+  }
+}
+
+@media (max-width: 620px) {
+  .study-footer__identity {
+    min-height: 6rem;
+    padding: 1rem;
+  }
+
+  .study-footer__identity strong {
+    font-size: 1.65rem;
+  }
+
+  .study-footer__motion {
+    min-width: 46px;
+    width: 46px;
+    min-height: 46px;
+    font-size: .62rem;
+  }
+
+  .study-footer--glass .study-footer__motion,
+  .study-footer--cloth .study-footer__motion {
+    top: 5.5rem;
+    transform: none;
+  }
+
+  .study-footer--glass .study-footer__motion {
+    right: auto;
+    left: 5px;
+  }
+
+  .study-footer--cloth .study-footer__motion {
+    right: 5px;
+    left: auto;
+  }
+
+  .study-footer--glass .study-footer__motion span:last-child,
+  .study-footer--cloth .study-footer__motion span:last-child {
+    right: calc(100% + .55rem);
+    left: auto;
+  }
+
+  .study-footer__routes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .study-footer__routes a {
+    min-height: 5.6rem;
+    padding: .85rem;
+    border-bottom: 1px solid rgba(234, 241, 238, .22);
+  }
+
+  .material-index {
+    padding: .85rem .85rem 5.5rem;
+  }
+
+  .material-index__header span:last-child {
+    display: none;
+  }
+
+  .material-index__intro {
+    min-height: 58vh;
+  }
+
+  .material-index__intro h1 {
+    font-size: clamp(3.2rem, 16vw, 5.4rem);
+  }
+
+  .index-orb {
+    width: 82vw;
+  }
+
+  .material-index__footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pressure-masthead {
+    min-height: 58px;
+    padding: .4rem .8rem;
+  }
+
+  .brand-lockup {
+    font-size: .65rem;
+  }
+
+  .text-action {
+    font-size: .62rem;
+  }
+
+  .pressure-hero {
+    min-height: 790px;
+  }
+
+  .pressure-hero::before {
+    background: linear-gradient(180deg, #f1f5f2 0%, rgba(241,245,242,.94) 37%, rgba(241,245,242,.2) 70%, transparent 100%);
+  }
+
+  .pressure-hero__copy {
+    width: 100%;
+    min-width: 0;
+    padding: 2.2rem .9rem;
+  }
+
+  .pressure-hero h1 {
+    max-width: 100%;
+    min-width: 0;
+    font-size: clamp(3rem, 16vw, 6rem);
+  }
+
+  .pressure-hero__copy .kicker,
+  .pressure-hero__copy .hero-deck {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-deck {
+    max-width: 34ch;
+    font-size: .9rem;
+  }
+
+  .pressure-visual {
+    inset: 230px -30% 0 -55%;
+  }
+
+  .depth-readout {
+    right: .85rem;
+    bottom: .85rem;
+  }
+
+  .transect-instrument {
+    top: 29rem;
+    right: .85rem;
+    width: 10.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  .transect-instrument p {
+    grid-template-columns: 3.3rem 1fr;
+    gap: .5rem;
+    padding: .35rem .5rem;
+    border-right: 0;
+    border-bottom: 1px solid rgba(238, 244, 241, .22);
+  }
+
+  .transect-instrument p:last-child {
+    border-bottom: 0;
+  }
+
+  .graphics-fallback--pressure svg {
+    right: -43%;
+    top: 67%;
+    width: 122%;
+    height: 58%;
+  }
+
+  .graphics-fallback--pressure .graphics-fallback__copy {
+    right: .85rem;
+    bottom: 4.8rem;
+    left: auto;
+    max-width: 13rem;
+  }
+
+  .depth-controller {
+    grid-template-columns: 1fr;
+  }
+
+  .depth-controller > p {
+    border-right: 0;
+    border-bottom: 1px solid rgba(20,35,39,.22);
+  }
+
+  .depth-controller__track {
+    overflow-x: auto;
+    grid-template-columns: repeat(4, minmax(92px, 1fr));
+  }
+
+  .depth-controller button {
+    min-height: 82px;
+  }
+
+  .pressure-lens-control {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .pressure-lens-control > span {
+    border-right: 0;
+    border-bottom: 1px solid rgba(20,35,39,.22);
+  }
+
+  .pressure-lens-control button {
+    min-height: 54px;
+  }
+
+  .accession-story {
+    min-height: auto;
+  }
+
+  .specimen-figure {
+    min-height: 410px;
+  }
+
+  .specimen-figure::after {
+    background: linear-gradient(180deg, transparent 60%, rgba(7,29,45,.6));
+  }
+
+  .accession-copy {
+    padding: 2.3rem 1rem 4rem;
+  }
+
+  .accession-copy h2,
+  .pressure-coda h2 {
+    font-size: 3.1rem;
+  }
+
+  .pressure-coda {
+    min-height: 70vh;
+  }
+
+  .vitreum-rail,
+  .selvedge-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 58px;
+    height: auto;
+    flex-direction: row;
+    padding: 1rem 0;
+    writing-mode: vertical-rl;
+  }
+
+  .vitreum-rail {
+    right: auto;
+    left: 0;
+    border: 0;
+    border-right: 1px solid rgba(20,35,40,.2);
+  }
+
+  .selvedge-rail {
+    right: 0;
+    left: auto;
+    border: 0;
+    border-left: 1px dashed rgba(237,240,235,.38);
+  }
+
+  .vitreum-hero,
+  .layer-map,
+  .glass-principles {
+    margin-right: 0;
+    margin-left: 58px;
+  }
+
+  .foldline-hero,
+  .textile-evidence,
+  .construction-sequence {
+    margin-right: 58px;
+    margin-left: 0;
+  }
+
+  .study-footer--cloth {
+    margin-right: 58px;
+  }
+
+  .vitreum-hero {
+    min-height: 844px;
+  }
+
+  .vitreum-hero > .vitreum-overline {
+    top: 7rem;
+    font-size: .59rem;
+  }
+
+  .vitreum-hero h1 {
+    top: 9.35rem;
+    font-size: clamp(3rem, 14.5vw, 5rem);
+    line-height: .8;
+  }
+
+  .vitreum-hero h1 span:last-child {
+    margin-top: .08em;
+  }
+
+  .vitreum-visual {
+    inset: 145px -25% 100px;
+  }
+
+  .vitreum-deck {
+    left: .85rem;
+    bottom: 4.9rem;
+    max-width: 27ch;
+  }
+
+  .vitreum-hero > .vitreum-action {
+    right: .85rem;
+    bottom: .8rem;
+  }
+
+  .vitreum-callouts {
+    top: 26rem;
+    right: .7rem;
+    gap: .25rem;
+  }
+
+  .vitreum-callouts span {
+    padding: .35rem .45rem;
+    font-size: .49rem;
+  }
+
+  .vitreum-callouts span::before {
+    width: .85rem;
+  }
+
+  .graphics-fallback--glass svg {
+    top: 54%;
+    width: 128%;
+    height: 62%;
+  }
+
+  .graphics-fallback--glass .graphics-fallback__copy {
+    right: .85rem;
+    bottom: 5.5rem;
+    max-width: 13rem;
+  }
+
+  .layer-map__heading,
+  .glass-principles {
+    padding: 2.4rem 1rem;
+  }
+
+  .layer-map__heading h2,
+  .glass-principles h2 {
+    font-size: 3.3rem;
+  }
+
+  .layer-selector button {
+    grid-template-columns: 2rem 1fr;
+    min-height: 140px;
+    padding: 1rem;
+  }
+
+  .layer-selector button small {
+    grid-column: 2;
+  }
+
+  .glass-principles {
+    grid-template-columns: 1fr;
+  }
+
+  .glass-principles__lens {
+    width: min(100%, 25rem);
+    justify-self: center;
+  }
+
+  .foldline-hero {
+    min-height: 900px;
+  }
+
+  .foldline-hero::before {
+    background: linear-gradient(180deg, rgba(19,29,35,.92) 0%, rgba(19,29,35,.38) 52%, transparent 78%);
+  }
+
+  .foldline-visual {
+    inset: 180px -70% 120px -22%;
+  }
+
+  .foldline-hero__copy {
+    width: 100%;
+    align-content: start;
+    min-height: 850px;
+    padding: 6.2rem .9rem 13rem;
+  }
+
+  .foldline-hero h1 {
+    font-size: clamp(3rem, 14vw, 4.7rem);
+  }
+
+  .foldline-hero h1 span:last-child {
+    margin-left: .5em;
+  }
+
+  .foldline-hero__copy > p:not(.foldline-overline) {
+    max-width: 29ch;
+    font-size: .85rem;
+  }
+
+  .cloth-console {
+    left: .85rem;
+    right: .85rem;
+    bottom: .85rem;
+    width: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .cloth-console__label {
+    display: none;
+  }
+
+  .cloth-state-status {
+    grid-column: 1;
+  }
+
+  .graphics-fallback--cloth svg {
+    right: -38%;
+    top: 62%;
+    width: 145%;
+    height: 63%;
+  }
+
+  .graphics-fallback--cloth .graphics-fallback__copy {
+    top: 6.3rem;
+    left: .9rem;
+    max-width: 13rem;
+  }
+
+  .textile-evidence__copy {
+    padding: 2.8rem 1rem;
+  }
+
+  .textile-evidence h2,
+  .construction-sequence h2 {
+    font-size: 3.2rem;
+  }
+
+  .textile-evidence figure {
+    min-height: 460px;
+  }
+
+  .construction-sequence {
+    padding: 3rem 1rem 5rem;
+  }
+
+  .construction-sequence ol {
+    grid-template-columns: 1fr;
+    margin: 2.5rem 0;
+  }
+
+  .construction-sequence li {
+    min-height: 160px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(237,240,235,.35);
+  }
+}
+
+@media (max-width: 360px) {
+  .pressure-hero h1,
+  .vitreum-hero h1,
+  .foldline-hero h1 {
+    overflow-wrap: normal;
+  }
+
+  .brand-lockup .brand-mark {
+    display: none;
+  }
+
+  .depth-controller__track {
+    grid-template-columns: repeat(4, 88px);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}

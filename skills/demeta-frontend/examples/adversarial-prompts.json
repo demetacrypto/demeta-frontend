@@ -1,0 +1,78 @@
+{
+  "version": "1.0.0",
+  "purpose": "Public regression briefs for capability and failure-mode testing. Oracles are expectations, not design templates.",
+  "prompts": [
+    {
+      "id": "fluid-pressure-atlas",
+      "brief": "Build a public deep-ocean archive experience whose pressure lens reveals collection evidence through refractive water flow.",
+      "stress": ["Three.js or WebGL", "fluid/refraction", "no decorative particles", "no-WebGL fallback", "reduced motion"],
+      "mustNotBecome": "generic science dashboard"
+    },
+    {
+      "id": "transparent-device-cutaway",
+      "brief": "Launch an original transparent modular handset whose optical glass reveals repairable internal layers without copying any existing phone trade dress.",
+      "stress": ["Three.js", "transmission and refraction", "see-through product evidence", "low-power opaque fallback"],
+      "mustNotBecome": "phone render beside a giant headline"
+    },
+    {
+      "id": "cloth-couture-archive",
+      "brief": "Create a couture archive in which a fabric page folds, drapes, and exposes garment provenance.",
+      "stress": ["cloth or Verlet deformation", "keyboard state controls", "reduced motion discrete folds", "320px"],
+      "mustNotBecome": "fashion photo wallpaper"
+    },
+    {
+      "id": "regulated-rtl-tenancy",
+      "brief": "Build an Arabic RTL emergency tenancy-advice page in an existing charcoal-and-amber design system. Do not invent legal outcomes or partner proof.",
+      "stress": ["RTL", "regulated claims", "existing design system", "320px", "long copy", "keyboard only"],
+      "mustNotBecome": "light-mode English template"
+    },
+    {
+      "id": "reduced-motion-organ",
+      "brief": "Explain heritage pipe-organ airflow through a cutaway instrument and invite a condition survey.",
+      "stress": ["Three.js", "Web Audio opt-in", "reduced motion", "pause control", "semantic process alternative"],
+      "mustNotBecome": "autoplaying audiovisual demo"
+    },
+    {
+      "id": "webgl-disabled-biotech",
+      "brief": "Visualize an assay decision path as a spatial specimen atlas.",
+      "stress": ["WebGL unavailable", "asset failure", "scientific claim ledger", "accessible DOM equivalent"],
+      "mustNotBecome": "empty canvas or stock lab photo"
+    },
+    {
+      "id": "existing-dark-observability",
+      "brief": "Extend an existing dark observability product system with a release narrative and preserve its tokens/components.",
+      "stress": ["existing design system", "brand invariants", "fingerprint novelty", "performance budget"],
+      "mustNotBecome": "forced light mode or unrelated redesign"
+    },
+    {
+      "id": "no-image-generator-rope",
+      "brief": "Teach a bowline inspection ritual for a rigging workshop without raster assets or an image generator.",
+      "stress": ["Canvas 2D", "keyboard interaction", "code-native graphics", "reduced motion", "mobile targets"],
+      "mustNotBecome": "cards with rope icons"
+    },
+    {
+      "id": "german-long-copy-hospitality",
+      "brief": "Create a German-language quiet-retreat booking experience with legally supplied policies and deliberately long copy.",
+      "stress": ["long copy", "localization expansion", "form errors", "400% reflow", "asset provenance"],
+      "mustNotBecome": "cropped typography or invented reviews"
+    },
+    {
+      "id": "reference-adaptation-trap",
+      "brief": "Use a supplied conventional SaaS screenshot only as spacing evidence, then create an unrelated civic-water-monitoring experience.",
+      "stress": ["reference adaptation", "no cloning", "source provenance", "non-dashboard architecture"],
+      "mustNotBecome": "the reference with different colors"
+    },
+    {
+      "id": "forced-colors-cultural-map",
+      "brief": "Build a cultural walking-route archive with a tactile map and accessible event details.",
+      "stress": ["forced colors", "keyboard map alternative", "focus not obscured", "no fabricated cultural claims"],
+      "mustNotBecome": "decorative map with inaccessible pins"
+    },
+    {
+      "id": "low-power-ev-thermal",
+      "brief": "Explain an EV battery thermal inspection through an authored heat field and invite a diagnostic booking.",
+      "stress": ["Canvas or shader field", "low-power path", "DPR cap", "context loss", "specific CTA"],
+      "mustNotBecome": "generic car beauty shot"
+    }
+  ]
+}

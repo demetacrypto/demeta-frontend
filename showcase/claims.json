@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "claims": [
+    {
+      "id": "pressure-fictional",
+      "text": "Pressure Atlas, dive 47, its route, and specimen are fictional demonstration material.",
+      "status": "verified",
+      "source": "src/pages/PressureAtlas.tsx",
+      "sourceType": "first-party-document",
+      "scope": "Pressure Atlas example"
+    },
+    {
+      "id": "vitreum-fictional",
+      "text": "Vitreum is an original fictional concept device and not an existing phone product.",
+      "status": "verified",
+      "source": "src/pages/Vitreum.tsx",
+      "sourceType": "first-party-document",
+      "scope": "Vitreum example"
+    },
+    {
+      "id": "foldline-fictional",
+      "text": "Foldline is a fictional material archive demonstration.",
+      "status": "verified",
+      "source": "src/pages/Foldline.tsx",
+      "sourceType": "first-party-document",
+      "scope": "Foldline example"
+    }
+  ]
+}

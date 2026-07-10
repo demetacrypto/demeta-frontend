@@ -1,0 +1,350 @@
+/* Vitreum */
+
+.vitreum-page {
+  color: #142328;
+  background: #e9f0ee;
+}
+
+.vitreum-rail {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-right: 1px solid rgba(20,35,40,.2);
+  background: rgba(233,240,238,.96);
+  writing-mode: vertical-rl;
+}
+
+.vitreum-rail a,
+.vitreum-rail span {
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: .67rem;
+  text-decoration: none;
+}
+
+.vitreum-wordmark {
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+
+.vitreum-hero {
+  position: relative;
+  min-height: 100vh;
+  margin-left: 58px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.vitreum-hero::before,
+.vitreum-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.vitreum-hero::before {
+  width: 32vw;
+  height: 32vw;
+  right: -8vw;
+  top: 8vh;
+  border: 1px solid rgba(240,93,63,.5);
+}
+
+.vitreum-hero::after {
+  width: 22vw;
+  height: 22vw;
+  left: 6vw;
+  bottom: 7vh;
+  background: rgba(80,159,161,.16);
+  box-shadow: inset 20px 20px 60px rgba(255,255,255,.72);
+}
+
+.vitreum-overline {
+  margin: 0;
+}
+
+.vitreum-hero > .vitreum-overline {
+  position: absolute;
+  z-index: 4;
+  top: 1.2rem;
+  left: 1.2rem;
+}
+
+.vitreum-hero h1 {
+  position: absolute;
+  z-index: 4;
+  inset: 7.4vh 1.2rem auto;
+  margin: 0;
+  pointer-events: none;
+  font-family: "Arial Narrow", "Avenir Next Condensed", sans-serif;
+  font-size: clamp(4rem, 7.9vw, 9.2rem);
+  font-stretch: condensed;
+  font-weight: 700;
+  line-height: .8;
+  letter-spacing: -.07em;
+  text-transform: uppercase;
+}
+
+.vitreum-hero h1 span {
+  display: block;
+  width: fit-content;
+  padding: .035em .08em .06em;
+  background: rgba(238, 245, 243, .94);
+  box-shadow: 0 0 0 1px rgba(20,35,40,.08), 0 .08em .28em rgba(233,240,238,.88);
+}
+
+.vitreum-hero h1 span:last-child {
+  margin-top: .08em;
+  margin-left: auto;
+  text-align: right;
+}
+
+.vitreum-visual {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  color: #2c7481;
+}
+
+.vitreum-visual canvas {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.vitreum-deck {
+  position: absolute;
+  z-index: 5;
+  left: 1.2rem;
+  bottom: 1.3rem;
+  max-width: 32ch;
+  margin: 0;
+  padding: .75rem .85rem;
+  border-left: 2px solid #e8553e;
+  background: rgba(233,240,238,.97);
+  box-shadow: 0 10px 34px rgba(20,35,40,.09);
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+.vitreum-action {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: .8rem 1rem;
+  border-bottom: 2px solid currentColor;
+  font-size: .73rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: gap .35s var(--ease), color .25s var(--ease);
+}
+
+.vitreum-action:hover {
+  gap: 3.2rem;
+  color: #e8553e;
+}
+
+.vitreum-hero > .vitreum-action {
+  position: absolute;
+  z-index: 5;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  color: #f6fbf8;
+  border: 1px solid #142328;
+  background: #142328;
+  box-shadow: 0 12px 32px rgba(20,35,40,.2);
+}
+
+.vitreum-hero > .vitreum-action:hover {
+  color: #142328;
+  background: #f6fbf8;
+}
+
+.vitreum-callouts {
+  position: absolute;
+  z-index: 4;
+  top: 44%;
+  right: 1.2rem;
+  display: grid;
+  gap: .65rem;
+  justify-items: end;
+  pointer-events: none;
+}
+
+.vitreum-callouts span {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .48rem .62rem;
+  color: #f5faf8;
+  background: rgba(20, 35, 40, .94);
+  font-family: ui-monospace, monospace;
+  font-size: .56rem;
+  letter-spacing: .04em;
+}
+
+.vitreum-callouts span::before {
+  content: "";
+  width: 1.9rem;
+  height: 1px;
+  background: #f06449;
+}
+
+.layer-map {
+  margin-left: 58px;
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.5fr);
+  min-height: 86vh;
+  border-top: 1px solid rgba(20,35,40,.2);
+  background: #dce7e4;
+}
+
+.layer-map__heading {
+  display: grid;
+  align-content: start;
+  gap: 1.1rem;
+  padding: clamp(2rem, 5vw, 5rem);
+  border-right: 1px solid rgba(20,35,40,.2);
+  min-width: 0;
+}
+
+.layer-map__heading p {
+  margin: 0;
+  font-family: ui-monospace, monospace;
+  font-size: .68rem;
+}
+
+.layer-map__heading h2,
+.glass-principles h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(3rem, 6vw, 7rem);
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.06em;
+  overflow-wrap: anywhere;
+}
+
+.layer-map__heading h2 {
+  font-size: clamp(2.7rem, 3.8vw, 5.5rem);
+}
+
+.layer-selector {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  min-width: 0;
+}
+
+.layer-selector button {
+  display: grid;
+  grid-template-columns: minmax(2.5rem, .2fr) minmax(0, .8fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  min-height: 130px;
+  padding: 1.4rem;
+  border: 0;
+  border-bottom: 1px solid rgba(20,35,40,.2);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: color .3s var(--ease), background .3s var(--ease), padding .4s var(--ease);
+  min-width: 0;
+}
+
+.layer-selector button:hover,
+.layer-selector button[aria-pressed="true"] {
+  padding-left: 2rem;
+  color: #f6fbf8;
+  background: #142328;
+}
+
+.layer-selector button span {
+  font-family: ui-monospace, monospace;
+  font-size: .67rem;
+}
+
+.layer-selector button strong {
+  font-family: Georgia, serif;
+  font-size: clamp(1.7rem, 3vw, 3.8rem);
+  font-weight: 400;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.layer-selector button small {
+  max-width: 38ch;
+  font-size: .75rem;
+  line-height: 1.5;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.layer-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+}
+
+.glass-principles {
+  margin-left: 58px;
+  min-height: 76vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 7vw, 8rem);
+  padding: clamp(2.5rem, 7vw, 7rem);
+  color: #f5faf8;
+  background: #142328;
+}
+
+.glass-principles__lens {
+  width: min(42vw, 31rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border: 1px solid rgba(221,250,247,.5);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 26%, rgba(255,255,255,.28), transparent 20%), rgba(107,198,191,.08);
+  box-shadow: inset 26px 30px 70px rgba(214,255,251,.08), 0 0 0 2rem rgba(107,198,191,.03);
+}
+
+.glass-principles__lens span {
+  font-family: Georgia, serif;
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: .8;
+}
+
+.glass-principles__lens small {
+  margin-top: 1.2rem;
+  font-family: ui-monospace, monospace;
+}
+
+.glass-principles > div:last-child {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.glass-principles p:not(.vitreum-overline) {
+  max-width: 46ch;
+  line-height: 1.65;
+}
+
+.vitreum-action--dark {
+  width: fit-content;
+  color: #a9d6cf;
+}

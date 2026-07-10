@@ -1,0 +1,340 @@
+/* Foldline */
+
+.foldline-page {
+  color: #edf0eb;
+  background: #131d23;
+}
+
+.selvedge-rail {
+  position: fixed;
+  z-index: 11;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-left: 1px dashed rgba(237,240,235,.38);
+  background: rgba(19,29,35,.7);
+  writing-mode: vertical-rl;
+  backdrop-filter: blur(11px);
+}
+
+.selvedge-rail a,
+.selvedge-rail span {
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  font-family: ui-monospace, monospace;
+  font-size: .67rem;
+  text-decoration: none;
+}
+
+.foldline-hero {
+  position: relative;
+  min-height: 100vh;
+  margin-right: 62px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.foldline-hero::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(19,29,35,.97) 0%, rgba(19,29,35,.82) 28%, rgba(19,29,35,.18) 58%, transparent 76%);
+}
+
+.foldline-visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  color: #d9ded8;
+  background: #131d23;
+}
+
+.foldline-visual canvas {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.foldline-hero__copy {
+  position: relative;
+  z-index: 4;
+  width: min(47vw, 40rem);
+  display: grid;
+  align-content: center;
+  min-height: 100vh;
+  padding: 3.5rem clamp(1.2rem, 5vw, 5rem) 10rem;
+  pointer-events: none;
+}
+
+.foldline-overline {
+  margin: 0 0 1.2rem;
+  color: #f06a50;
+}
+
+.foldline-hero h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.2rem, 5.7vw, 6.8rem);
+  font-weight: 400;
+  line-height: .84;
+  letter-spacing: -.055em;
+}
+
+.foldline-hero h1 span,
+.foldline-hero h1 em {
+  display: block;
+}
+
+.foldline-hero h1 span:first-child {
+  font-size: .55em;
+  line-height: 1;
+  letter-spacing: -.025em;
+}
+
+.foldline-hero h1 em {
+  margin-left: .18em;
+  color: #f4f1e9;
+  font-size: 1.35em;
+  font-weight: 400;
+  line-height: .82;
+}
+
+.foldline-hero h1 span:last-child {
+  max-width: 7.6ch;
+  margin-left: .82em;
+  color: #cad2ce;
+  font-size: .82em;
+  line-height: .9;
+}
+
+.foldline-hero__copy > p:not(.foldline-overline) {
+  max-width: 35ch;
+  margin: 1.6rem 0;
+  line-height: 1.58;
+}
+
+.foldline-action {
+  min-height: 48px;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  padding: .8rem 1rem;
+  border: 1px solid #f06a50;
+  color: #fff;
+  background: #db4b35;
+  font-size: .74rem;
+  font-weight: 800;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: color .3s var(--ease), background .3s var(--ease), transform .3s var(--ease);
+}
+
+.foldline-action:hover {
+  color: #db4b35;
+  background: #edf0eb;
+  transform: translateY(-3px);
+}
+
+.cloth-console {
+  position: absolute;
+  z-index: 5;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  width: min(39rem, 52vw);
+  display: grid;
+  grid-template-columns: 1fr minmax(15rem, 1.4fr);
+  border: 1px solid rgba(237,240,235,.4);
+  color: #edf0eb;
+  background: rgba(15, 25, 31, .88);
+  backdrop-filter: blur(12px);
+}
+
+.cloth-console__label {
+  display: flex;
+  align-items: center;
+  padding: .65rem .8rem;
+  border-right: 1px solid rgba(237,240,235,.25);
+  font-family: ui-monospace, monospace;
+  font-size: .58rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.cloth-state-control {
+  display: flex;
+}
+
+.cloth-state-control button {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: .7rem 1rem;
+  border: 0;
+  border-right: 1px solid rgba(237,240,235,.4);
+  color: #edf0eb;
+  background: transparent;
+  cursor: pointer;
+  font-size: .69rem;
+  transition: color .25s var(--ease), background .25s var(--ease);
+}
+
+.cloth-state-control button:hover,
+.cloth-state-control button[aria-pressed="true"] {
+  color: #172128;
+  background: #edf0eb;
+}
+
+.cloth-state-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: .7rem .8rem;
+  border-top: 1px solid rgba(237,240,235,.25);
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.textile-evidence {
+  margin-right: 62px;
+  display: grid;
+  grid-template-columns: .72fr 1.28fr;
+  min-height: 790px;
+  color: #172128;
+  background: #d9ded8;
+}
+
+.textile-evidence__copy {
+  display: grid;
+  align-content: center;
+  gap: 1.2rem;
+  padding: clamp(2rem, 6vw, 6rem);
+}
+
+.textile-evidence .foldline-overline {
+  color: #8f2c20;
+}
+
+.textile-evidence h2,
+.construction-sequence h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(3rem, 6.2vw, 7.3rem);
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.06em;
+}
+
+.textile-evidence__copy > p:not(.foldline-overline) {
+  max-width: 44ch;
+  line-height: 1.65;
+}
+
+.textile-evidence dl {
+  margin: 1rem 0 0;
+  border-top: 1px solid rgba(23,33,40,.28);
+}
+
+.textile-evidence dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .85rem 0;
+  border-bottom: 1px solid rgba(23,33,40,.28);
+  font-family: ui-monospace, monospace;
+  font-size: .68rem;
+}
+
+.textile-evidence dd {
+  margin: 0;
+}
+
+.textile-evidence figure {
+  position: relative;
+  min-height: 650px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.textile-evidence figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.textile-evidence figcaption {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: .7rem;
+  color: #edf0eb;
+  background: rgba(19,29,35,.84);
+  font-family: ui-monospace, monospace;
+  font-size: .64rem;
+}
+
+.construction-sequence {
+  min-height: 82vh;
+  margin-right: 62px;
+  padding: clamp(3rem, 7vw, 7rem);
+  color: #edf0eb;
+  background: #131d23;
+}
+
+.construction-sequence > .foldline-overline {
+  margin-bottom: 1.4rem;
+}
+
+.construction-sequence h2 {
+  max-width: 11ch;
+}
+
+.construction-sequence ol {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 4rem 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(237,240,235,.35);
+}
+
+.construction-sequence li {
+  min-height: 220px;
+  display: grid;
+  align-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-right: 1px solid rgba(237,240,235,.35);
+}
+
+.construction-sequence li span {
+  color: #f06a50;
+  font-family: ui-monospace, monospace;
+  font-size: .68rem;
+}
+
+.construction-sequence li strong {
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.construction-sequence li p {
+  max-width: 22ch;
+  margin: 0;
+  font-size: .74rem;
+  line-height: 1.5;
+}
+
+.foldline-action--light {
+  color: #172128;
+  border-color: #edf0eb;
+  background: #edf0eb;
+}

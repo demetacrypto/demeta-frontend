@@ -1,0 +1,4 @@
+interface:
+  display_name: "DEMETA Frontend"
+  short_description: "Build extraordinary, evidence-gated web experiences."
+  default_prompt: "Use $demeta-frontend to art-direct and build a flagship frontend with a justified expressive medium, semantic fallbacks, measured performance, and browser-verified evidence."

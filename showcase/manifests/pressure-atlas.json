@@ -1,0 +1,235 @@
+{
+  "$schema": "../../skills/demeta-frontend/references/design-manifest.schema.json",
+  "version": "2.0.0",
+  "stage": "verified",
+  "project": {
+    "name": "Pressure Atlas",
+    "niche": "fictional deep-ocean expedition archive",
+    "audience": "museum visitors, marine-science students, and public-research supporters",
+    "singleJob": "Open and understand annotated dive 47",
+    "ambition": "flagship",
+    "locale": "en-AU"
+  },
+  "thesis": {
+    "concept": "Physical depth pulls a pale accession catalog into cobalt while a pressure lens exposes how one sample was collected.",
+    "signature": "A position-selectable pressure lens compares natural interpretation with sonar topology over a procedural trench.",
+    "aestheticRisk": "The opening frame changes material and color with measured depth instead of presenting the archive as dashboard cards.",
+    "restraint": "No particles, decorative metrics, floating cards, or post-processing glow."
+  },
+  "nicheIntelligence": {
+    "artifacts": ["bathymetric transect", "sample vial", "dive route", "accession marker"],
+    "rituals": ["descend", "observe", "collect", "catalog"],
+    "proofSignals": ["collection method", "depth", "route uncertainty"],
+    "sensoryCues": ["pressure", "mineral texture", "light loss"],
+    "conversionAction": "Open dive 47"
+  },
+  "concepts": [
+    {
+      "id": "transect-tabletop",
+      "mode": "commercially-safe",
+      "name": "Transect Tabletop",
+      "signatureInteraction": "Choose a depth and lens position to compare one oblique terrain specimen.",
+      "medium": "three-webgl-glsl",
+      "domainAnchor": "A bathymetric transect, depth states, and accession markers determine the visual states and controls.",
+      "conversionHypothesis": "Connecting the collection method to a marked location makes opening the full fictional dive feel consequential.",
+      "tradeoff": "The restrained single-scene system gives up broad content density and continuous geographic navigation.",
+      "rejectionRisk": "Reject if the lens reads as decoration rather than a comparison instrument.",
+      "fingerprint": {
+        "heroArchetype": "map",
+        "composition": "oblique-tabletop",
+        "palette": "porcelain-to-cobalt",
+        "geometry": "terrain-cutaway",
+        "primaryVisual": "procedural-3d-terrain",
+        "motionSignature": "lens-comparison",
+        "typography": "humanist-catalog",
+        "sectionRhythm": "terrain-to-accession-record",
+        "headerArchitecture": "bottom-depth-ruler",
+        "heroFrame": "no-visible-frame",
+        "scrollDepthSystem": "semantic-record-coda"
+      }
+    },
+    {
+      "id": "sample-drawer",
+      "mode": "niche-native",
+      "name": "Accession Drawer",
+      "signatureInteraction": "Pull open a physical sample drawer to reveal collection evidence.",
+      "medium": "svg-dom",
+      "domainAnchor": "Museum accession drawers and specimen labels define the composition and information order.",
+      "conversionHypothesis": "A familiar catalog ritual reduces friction for evidence-first archive visitors.",
+      "tradeoff": "The drawer metaphor is less spatially expressive than the trench and separates depth from location.",
+      "rejectionRisk": "Reject if the interface resembles a generic accordion or card stack.",
+      "fingerprint": {
+        "heroArchetype": "object-stage",
+        "composition": "vertical-drawer-stack",
+        "palette": "oxide-coral-on-paper",
+        "geometry": "specimen-silhouettes",
+        "primaryVisual": "macro-photo-collage",
+        "motionSignature": "drawer-physics",
+        "typography": "mono-accession",
+        "sectionRhythm": "catalog-drawers",
+        "headerArchitecture": "side-accession-index",
+        "heroFrame": "museum-case",
+        "scrollDepthSystem": "horizontal-sample-strip"
+      }
+    },
+    {
+      "id": "sonar-score",
+      "mode": "visually-ambitious",
+      "name": "Sonar Score",
+      "signatureInteraction": "Scrub a silent scientific score assembled from a fictional dive route.",
+      "medium": "webgpu-tsl",
+      "domainAnchor": "Sonar return bands and dive timecodes determine rhythm, geometry, and annotation.",
+      "conversionHypothesis": "A scrubbed signal makes route uncertainty legible before the archive opens.",
+      "tradeoff": "The signal abstraction needs more onboarding and a stronger static explanation than a terrain view.",
+      "rejectionRisk": "Reject if it becomes an audiovisual equalizer with no scientific reading.",
+      "fingerprint": {
+        "heroArchetype": "process",
+        "composition": "diagonal-sonar-score",
+        "palette": "graphite-seaglass-coral",
+        "geometry": "signal-bands",
+        "primaryVisual": "shader-sonogram",
+        "motionSignature": "scrubbed-signal-reveal",
+        "typography": "condensed-instrument",
+        "sectionRhythm": "measured-signal-chapters",
+        "headerArchitecture": "floating-timecode-strip",
+        "heroFrame": "diagonal-viewport-slice",
+        "scrollDepthSystem": "scroll-scrubbed-sonogram"
+      }
+    }
+  ],
+  "selectedConcept": "transect-tabletop",
+  "selectionRationale": "Transect Tabletop ties the strongest conversion action to a legible domain object, keeps every explanatory fact in the DOM, and retains credible static, keyboard, and low-power alternatives.",
+  "system": {
+    "colors": [
+      { "name": "Porcelain", "value": "#F1F5F2", "role": "page ground" },
+      { "name": "Archive ink", "value": "#142327", "role": "primary text" },
+      { "name": "Sea glass", "value": "#A9D6CF", "role": "shallow data" },
+      { "name": "Pressure cobalt", "value": "#173D82", "role": "depth transition" },
+      { "name": "Sample coral", "value": "#F06449", "role": "action and accession" }
+    ],
+    "typography": {
+      "display": "Georgia / Times New Roman",
+      "body": "Avenir Next / Helvetica Neue / Arial",
+      "utility": "ui-monospace / SFMono-Regular / Consolas"
+    },
+    "geometry": "bathymetric surfaces, circular lens, sparse accession pins",
+    "material": "museum paper, mineral terrain, etched instrument marks"
+  },
+  "architecture": {
+    "header": "A three-part archive masthead precedes the hero; a reserved fixed left rail keeps the pause or resume control outside semantic content, and the study footer preserves that gutter while exposing index and study routes.",
+    "heroFrame": "A full-viewport oblique terrain sits behind the headline, transect instrument, and depth readout; the semantic depth and lens control strip immediately follows the hero.",
+    "sections": ["interactive terrain hero and control strip", "specimen accession record", "archive sequence coda", "shared material-study footer"],
+    "scrollDepth": "Scrolling moves from the terrain instrument and controls to a photographic accession record, a text-only return action, and the shared study-route footer.",
+    "mobileMutation": "The masthead hides its middle descriptor, the reserved control rail stays vertical, the same four depth buttons and three lens-position buttons drive a lower-density one-shot scene, and the footer becomes a two-column route grid without covering content."
+  },
+  "graphics": {
+    "primaryMedium": "three-webgl-glsl",
+    "justification": "A displaced terrain shader and comparison lens explain bathymetry and collection depth more directly than cards or a decorative video.",
+    "criticalContentInDom": true,
+    "fallbacks": {
+      "noWebGL": "An authored SVG transect replaces the canvas while the depth controls, specimen record, and actions remain semantic HTML.",
+      "reducedMotion": "The terrain renders discrete static states; depth and lens buttons update without continuous shader motion or interpolation.",
+      "lowPower": "The Three.js path uses reduced terrain segments, a capped render budget, and one-shot rendering instead of an animation loop.",
+      "assetFailure": "The specimen description, collection method, depth controls, and actions remain in the DOM if enhanced media fails."
+    },
+    "runtime": {
+      "lazyLoaded": true,
+      "pauseWhenHidden": true,
+      "pauseControl": true,
+      "disposeOnUnmount": true,
+      "handlesContextLoss": true
+    }
+  },
+  "motion": {
+    "entrance": "Semantic copy and controls render before the lazy terrain enhancement.",
+    "nicheMoment": "Depth and lens controls reposition a comparison instrument over the fictional collection route.",
+    "reducedMotionStrategy": "Snap the terrain and lens to labeled states, remove time-driven shader movement, and preserve the authored SVG no-WebGL path.",
+    "autoMotionOverFiveSeconds": true,
+    "pauseControl": true
+  },
+  "accessibility": {
+    "target": "WCAG 2.2 AA",
+    "semanticDom": true,
+    "keyboardComplete": true,
+    "visibleFocus": true,
+    "contrastChecked": true,
+    "zoomAndReflowChecked": true,
+    "reducedMotion": true,
+    "canvasAlternative": true,
+    "nonDragAlternative": true,
+    "targetSizeChecked": true,
+    "errorsAnnounced": true
+  },
+  "performanceBudget": {
+    "initialJsKbGzip": 95,
+    "routeJsKbGzip": 290,
+    "mediaMbDesktop": 1.5,
+    "mediaMbMobile": 0.65,
+    "maxDprDesktop": 1.5,
+    "maxDprMobile": 1.25,
+    "maxDrawCalls": 24,
+    "maxTriangles": 90000,
+    "lcpMs": 2500,
+    "cls": 0.1,
+    "tbtMs": 200
+  },
+  "claims": [
+    {
+      "id": "fictional-status-label",
+      "text": "The Pressure Atlas page labels its archive record as a fictional demonstration.",
+      "status": "verified",
+      "source": "src/pages/PressureAtlas.tsx",
+      "sourceType": "first-party-document",
+      "scope": "The claim verifies the page label only; it does not validate scientific data."
+    }
+  ],
+  "assets": [
+    {
+      "id": "pressure-atlas-scene",
+      "type": "procedural-threejs-glsl",
+      "source": "original-code",
+      "creator": "DEMETA showcase team",
+      "license": "MIT",
+      "path": "src/scenes/PressureAtlasScene.tsx",
+      "sha256": "27f1ab35a81debd18fc5bd91b2af1c8766d4094f76f67a864285fbee75798af3"
+    },
+    {
+      "id": "pressure-atlas-specimen",
+      "type": "generated-raster",
+      "source": "generated",
+      "creator": "DEMETA showcase team",
+      "license": "CC0-1.0",
+      "path": "public/assets/pressure-atlas-specimen.webp",
+      "sha256": "c983836ecd61fea940ad96eed2fdb85019d6334062443e583e3e334eb232a9a7",
+      "prompt": "A photorealistic scientific accession photograph of one fictional translucent abyssal shell-like specimen in a circular glass sample dish on a pale porcelain museum table. Fine mineral ridges, subtle coral internal tissue, diffuse skylight, cobalt shadow, one specimen pin, wide crop with clean annotation space. Clearly fictional demonstration specimen. No labels, logos, watermark, people, microscope, stock-lab composition, neon, or duplicated organisms.",
+      "generator": "built-in image generation",
+      "generatedAt": "2026-07-10"
+    }
+  ],
+  "evidence": {
+    "status": "collected",
+    "buildCommand": "npm run build",
+    "viewports": ["1440x900", "1280x720", "390x844", "320x720"],
+    "screenshots": [
+      { "id": "pressure-desktop", "kind": "desktop", "path": "public/screenshots/pressure-atlas-desktop.png", "sha256": "7a6dc30dff1dccc25fd0a82b383fd715b3ee50280264da6194c1830227dfe84d", "viewport": "1440x900" },
+      { "id": "pressure-interaction", "kind": "interaction", "path": "public/screenshots/pressure-atlas-interaction.png", "sha256": "a609a41f2c757e253898b5248f9262aaa6acf04775937fef6fccde67e5c73c06", "viewport": "1440x900" },
+      { "id": "pressure-below-hero", "kind": "manual-review", "path": "public/screenshots/pressure-atlas-below-hero.png", "sha256": "2720b610691c2bbce6c2a1db3ffec17bd87daae6cfe8636d241efe9eab35d2ae", "viewport": "1440x900" },
+      { "id": "pressure-mobile", "kind": "mobile", "path": "public/screenshots/pressure-atlas-mobile.png", "sha256": "54ed059d4bf4436889c4ed736f1627d65a2fe9d8c576f3a765b023bdb865eac9", "viewport": "390x844" },
+      { "id": "pressure-reduced", "kind": "reduced-motion", "path": "public/screenshots/pressure-atlas-reduced-motion.png", "sha256": "dc401a87bf9656b95f8118029bd18cbed370d37482255616b983bc49c8116ff8", "viewport": "1280x720" },
+      { "id": "pressure-no-webgl", "kind": "no-webgl", "path": "public/screenshots/pressure-atlas-no-webgl.png", "sha256": "3dbb01982273268f052a50e6e5f1cb7427cff594ec2d4c560b6e765e22944756", "viewport": "1280x720" }
+    ],
+    "reports": [
+      { "id": "pressure-build", "kind": "build", "path": "evidence/build.json", "sha256": "a41060898dd3eea8f95c5ba04a695b0e1a9ddb20ba43def4eede723db3e9e3d4" },
+      { "id": "pressure-lighthouse", "kind": "performance", "path": "evidence/lighthouse.json", "sha256": "77dbc394311edc56690ffe62263ccfd3bc2d2f69f5f05ec058ed9cb39311ac75", "notes": "Three desktop runs per route; the release gate recomputes median LCP, CLS, and TBT against this exact build." },
+      { "id": "pressure-keyboard", "kind": "keyboard", "path": "evidence/browser.json", "sha256": "bbcc4bbb529046d7e2746e2d3734299ca80e1f0b653635f1aa10a0323d642a5c", "notes": "The browser report records complete tab order, every state-control family, pause/resume, CTA activation, visible focus, and 24-by-24-pixel minimum targets." },
+      { "id": "pressure-console", "kind": "console", "path": "evidence/browser.json", "sha256": "bbcc4bbb529046d7e2746e2d3734299ca80e1f0b653635f1aa10a0323d642a5c", "notes": "The browser report records console and page errors for every route/profile pair." },
+      { "id": "pressure-accessibility", "kind": "axe", "path": "evidence/accessibility.json", "sha256": "25dee6c46b0437413c6d38d331de4322bc6b3ae86973c25a476e6c417c42f286" },
+      { "id": "pressure-manual-review", "kind": "manual-review", "path": "evidence/manual-review.json", "sha256": "2947203050d4ccfe242c97931a5b879d3caf79acde3c281d3ef239cbd90aaaf9" }
+    ],
+    "keyboardFlow": true,
+    "webglFallback": true,
+    "reducedMotionRun": true,
+    "consoleErrors": 0,
+    "axe": { "critical": 0, "serious": 0 }
+  }
+}

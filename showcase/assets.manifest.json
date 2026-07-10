@@ -1,0 +1,56 @@
+{
+  "version": "1.0.0",
+  "assets": [
+    {
+      "id": "pressure-atlas-specimen",
+      "type": "generated-raster",
+      "source": "generated",
+      "creator": "DEMETA showcase team",
+      "path": "public/assets/pressure-atlas-specimen.webp",
+      "license": "CC0-1.0",
+      "tool": "built-in image generation",
+      "createdAt": "2026-07-10",
+      "sha256": "c983836ecd61fea940ad96eed2fdb85019d6334062443e583e3e334eb232a9a7",
+      "prompt": "A photorealistic scientific accession photograph of one fictional translucent abyssal shell-like specimen in a circular glass sample dish on a pale porcelain museum table. Fine mineral ridges, subtle coral internal tissue, diffuse skylight, cobalt shadow, one specimen pin, wide crop with clean annotation space. Clearly fictional demonstration specimen. No labels, logos, watermark, people, microscope, stock-lab composition, neon, or duplicated organisms."
+    },
+    {
+      "id": "foldline-textile",
+      "type": "generated-raster",
+      "source": "generated",
+      "creator": "DEMETA showcase team",
+      "path": "public/assets/foldline-textile.webp",
+      "license": "CC0-1.0",
+      "tool": "built-in image generation",
+      "createdAt": "2026-07-10",
+      "sha256": "5c9dac0bcab24e5629f4ea2c18e796c1c1c931c3270326117ede3c13dd979831",
+      "prompt": "A photorealistic museum macro photograph of one unbranded translucent gray organza sample forming a precise soft fold. Show warp and weft, hand-finished selvedge, stitch holes, and one short vermilion basting line against a mineral-gray table and ink-blue field. Raking side light, wide crop, no person, garment, mannequin, logos, text, glitter, copied designer pattern, or glamour styling."
+    },
+    {
+      "id": "pressure-atlas-scene",
+      "type": "procedural-threejs-glsl",
+      "source": "original-code",
+      "creator": "DEMETA showcase team",
+      "path": "src/scenes/PressureAtlasScene.tsx",
+      "license": "MIT",
+      "sha256": "27f1ab35a81debd18fc5bd91b2af1c8766d4094f76f67a864285fbee75798af3"
+    },
+    {
+      "id": "vitreum-device-scene",
+      "type": "procedural-threejs-custom-glsl-fresnel",
+      "source": "original-code",
+      "creator": "DEMETA showcase team",
+      "path": "src/scenes/VitreumScene.tsx",
+      "license": "MIT",
+      "sha256": "cd0078652c1de398753b40eb0b3aba2affaaf971547b02a8e54dfa26a14e82a5"
+    },
+    {
+      "id": "foldline-cloth-scene",
+      "type": "procedural-threejs-verlet",
+      "source": "original-code",
+      "creator": "DEMETA showcase team",
+      "path": "src/scenes/FoldlineScene.tsx",
+      "license": "MIT",
+      "sha256": "409d9b184ee91aa3d2ef6d0cfc2a2cce1b6d0a365b6c05cdf56496bb1a26466b"
+    }
+  ]
+}

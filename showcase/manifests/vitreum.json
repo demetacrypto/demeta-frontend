@@ -1,0 +1,223 @@
+{
+  "$schema": "../../skills/demeta-frontend/references/design-manifest.schema.json",
+  "version": "2.0.0",
+  "stage": "verified",
+  "project": {
+    "name": "Vitreum",
+    "niche": "fictional transparent modular handset launch",
+    "audience": "industrial-design students and repairability advocates",
+    "singleJob": "Inspect the three repair layers",
+    "ambition": "flagship",
+    "locale": "en-AU"
+  },
+  "thesis": {
+    "concept": "Optical glass exposes shell, logic, and power as one readable repair sequence.",
+    "signature": "An original transmissive handset study rotates around a central repair axis while semantic controls isolate each internal layer.",
+    "aestheticRisk": "The object intersects the headline instead of occupying a conventional product card.",
+    "restraint": "One optical object, one coral repair axis, no dashboard cards, badges, or glow field."
+  },
+  "nicheIntelligence": {
+    "artifacts": ["optical shell", "logic plane", "replaceable power cell", "central lens"],
+    "rituals": ["inspect", "open", "replace", "reassemble"],
+    "proofSignals": ["visible internal separation", "layer-specific explanation", "static cutaway fallback"],
+    "sensoryCues": ["transmission", "thickness", "refraction", "cool glass"],
+    "conversionAction": "Inspect the three repair layers"
+  },
+  "concepts": [
+    {
+      "id": "optical-axis",
+      "mode": "commercially-safe",
+      "name": "Optical Repair Axis",
+      "signatureInteraction": "Choose shell, logic, or power while one centered transparent object reveals the selected layer.",
+      "medium": "three-webgl-custom-glsl-fresnel",
+      "domainAnchor": "Shell, logic, power, fastener access, and optical thickness determine the object hierarchy and layer controls.",
+      "conversionHypothesis": "Seeing each repair layer in place makes the layer map more understandable than an exploded marketing render alone.",
+      "tradeoff": "A single optical body prioritises spatial comprehension over exhaustive component documentation.",
+      "rejectionRisk": "Reject if the transmissive handset resembles an existing product or if refraction makes the controls harder to read.",
+      "fingerprint": {
+        "heroArchetype": "object-stage",
+        "composition": "centered-vertical-intersection",
+        "palette": "porcelain-coral-seaglass",
+        "geometry": "rounded-optical-volume",
+        "primaryVisual": "transparent-fictional-handset",
+        "motionSignature": "layer-isolation-and-object-parallax",
+        "typography": "condensed-industrial",
+        "sectionRhythm": "hero-object-to-layer-ledger",
+        "headerArchitecture": "vertical-product-rail",
+        "heroFrame": "no-visible-frame",
+        "scrollDepthSystem": "material-to-semantic-layer-map"
+      }
+    },
+    {
+      "id": "repair-ledger",
+      "mode": "niche-native",
+      "name": "Repair Ledger",
+      "signatureInteraction": "Step through a horizontal exploded diagram that connects each part to a repair note.",
+      "medium": "svg-dom",
+      "domainAnchor": "Repair-manual callouts, disassembly order, and fastener locations govern the information architecture.",
+      "conversionHypothesis": "A familiar manual sequence lowers the interpretation cost for repair-focused visitors.",
+      "tradeoff": "The ledger is clearer as documentation but gives up the optical material experience.",
+      "rejectionRisk": "Reject if it becomes a generic feature timeline with decorative connector lines.",
+      "fingerprint": {
+        "heroArchetype": "process",
+        "composition": "horizontal-exploded-sequence",
+        "palette": "graphite-amber-paper",
+        "geometry": "separated-layer-plates",
+        "primaryVisual": "annotated-svg-cutaway",
+        "motionSignature": "keyboard-step-reassembly",
+        "typography": "humanist-repair-manual",
+        "sectionRhythm": "ledger-rows",
+        "headerArchitecture": "bottom-part-index",
+        "heroFrame": "technical-sheet",
+        "scrollDepthSystem": "horizontal-repair-strip"
+      }
+    },
+    {
+      "id": "refraction-scan",
+      "mode": "visually-ambitious",
+      "name": "Refraction Scan",
+      "signatureInteraction": "Scrub a narrow optical scan through five material depths without moving the page copy.",
+      "medium": "webgpu-tsl",
+      "domainAnchor": "Material thickness, refractive index, and internal layer depth determine the scan states.",
+      "conversionHypothesis": "A controlled cross-section makes the difference between surface styling and repair access visible.",
+      "tradeoff": "The scan requires more explanation and a carefully authored fallback on unsupported hardware.",
+      "rejectionRisk": "Reject if the effect reads as an abstract liquid shader rather than a repair instrument.",
+      "fingerprint": {
+        "heroArchetype": "instrument",
+        "composition": "diagonal-scan-field",
+        "palette": "cobalt-silver-vermilion",
+        "geometry": "refractive-slices",
+        "primaryVisual": "shader-material-cross-section",
+        "motionSignature": "scrubbed-optical-scan",
+        "typography": "mono-metrology",
+        "sectionRhythm": "measured-depth-chapters",
+        "headerArchitecture": "floating-thickness-scale",
+        "heroFrame": "diagonal-viewport-slice",
+        "scrollDepthSystem": "pinned-thickness-scan"
+      }
+    }
+  ],
+  "selectedConcept": "optical-axis",
+  "selectionRationale": "Optical Repair Axis preserves the user's see-through material ambition while anchoring every visual layer to a repair concept, keeping copy and controls outside the canvas, and retaining a meaningful SVG cutaway fallback.",
+  "system": {
+    "colors": [
+      { "name": "Optical porcelain", "value": "#E9F0EE", "role": "ground" },
+      { "name": "Repair ink", "value": "#142328", "role": "text and dark section" },
+      { "name": "Signal glass", "value": "#B5DFDD", "role": "transmission cue" },
+      { "name": "Logic cyan", "value": "#2C7481", "role": "logic layer" },
+      { "name": "Power coral", "value": "#E8553E", "role": "action and power layer" }
+    ],
+    "typography": {
+      "display": "Arial Narrow / Avenir Next Condensed for the hero; Georgia for editorial sections",
+      "body": "Avenir Next / Helvetica Neue / Arial",
+      "utility": "ui-monospace / SFMono-Regular / Consolas"
+    },
+    "geometry": "one tall optical volume, central repair axis, and circular refractive measures",
+    "material": "a custom double-sided GLSL Fresnel alpha shell, flat internal plates, exposed fasteners, dashed connector, coral halo, and warm power block"
+  },
+  "architecture": {
+    "header": "A fixed vertical product rail persists across desktop and mobile; the fixed pause or resume control and aligned study footer occupy that reserved gutter outside the object stage.",
+    "heroFrame": "A full-viewport object stage lets the transmissive body intersect display typography without containing semantic copy.",
+    "sections": ["optical object hero", "three-layer semantic ledger", "refraction principle and return action", "shared material-study footer"],
+    "scrollDepth": "The spatial object resolves into an explicit layer selector, live layer description, text-led material principle, and the shared study-route footer.",
+    "mobileMutation": "The rail narrows but remains vertical, the same layer buttons drive a reduced-tessellation one-shot object, and the study footer becomes a two-column route grid inside the remaining content width."
+  },
+  "graphics": {
+    "primaryMedium": "three-webgl-custom-glsl-fresnel",
+    "justification": "A custom double-sided GLSL shell uses view-dependent Fresnel colour and alpha to keep the fictional fasteners, connector, logic plane, power cell, and lens legible through a stylised transparent body.",
+    "criticalContentInDom": true,
+    "fallbacks": {
+      "noWebGL": "An authored SVG cutaway replaces the canvas and labels shell, logic plane, and power cell through adjacent semantic copy.",
+      "reducedMotion": "The object renders a static optical angle; layer buttons update discrete internal emphasis without ambient rotation or float.",
+      "lowPower": "The Three.js path uses lower curve segments, a capped render budget, and one-shot rendering while preserving the same semantic layer controls.",
+      "assetFailure": "The complete layer selector, live text description, material principle, and actions remain usable without the optical object."
+    },
+    "runtime": {
+      "lazyLoaded": true,
+      "pauseWhenHidden": true,
+      "pauseControl": true,
+      "disposeOnUnmount": true,
+      "handlesContextLoss": true
+    }
+  },
+  "motion": {
+    "entrance": "The semantic headline, explanation, and action render before the lazy optical object.",
+    "nicheMoment": "Layer buttons isolate shell, logic, and power inside the same transmissive body while pointer parallax remains optional.",
+    "reducedMotionStrategy": "Snap to one optical angle, remove ambient float and rotation, and retain instant button-driven layer states.",
+    "autoMotionOverFiveSeconds": true,
+    "pauseControl": true
+  },
+  "accessibility": {
+    "target": "WCAG 2.2 AA",
+    "semanticDom": true,
+    "keyboardComplete": true,
+    "visibleFocus": true,
+    "contrastChecked": true,
+    "zoomAndReflowChecked": true,
+    "reducedMotion": true,
+    "canvasAlternative": true,
+    "nonDragAlternative": true,
+    "targetSizeChecked": true,
+    "errorsAnnounced": true
+  },
+  "performanceBudget": {
+    "initialJsKbGzip": 70,
+    "routeJsKbGzip": 230,
+    "mediaMbDesktop": 0.2,
+    "mediaMbMobile": 0.1,
+    "maxDprDesktop": 1.5,
+    "maxDprMobile": 1.25,
+    "maxDrawCalls": 40,
+    "maxTriangles": 75000,
+    "lcpMs": 2500,
+    "cls": 0.1,
+    "tbtMs": 200
+  },
+  "claims": [
+    {
+      "id": "fictional-device-label",
+      "text": "The Vitreum page labels the handset study as a fictional original concept and not an existing product.",
+      "status": "verified",
+      "source": "src/pages/Vitreum.tsx",
+      "sourceType": "first-party-document",
+      "scope": "The claim verifies the page's disclosure language only; it is not an external novelty or product-search finding."
+    }
+  ],
+  "assets": [
+    {
+      "id": "vitreum-device-scene",
+      "type": "procedural-threejs-glsl-fresnel",
+      "source": "original-code",
+      "creator": "DEMETA showcase team",
+      "license": "MIT",
+      "path": "src/scenes/VitreumScene.tsx",
+      "sha256": "cd0078652c1de398753b40eb0b3aba2affaaf971547b02a8e54dfa26a14e82a5"
+    }
+  ],
+  "evidence": {
+    "status": "collected",
+    "buildCommand": "npm run build",
+    "viewports": ["1440x900", "1280x720", "390x844", "320x720"],
+    "screenshots": [
+      { "id": "vitreum-desktop", "kind": "desktop", "path": "public/screenshots/vitreum-desktop.png", "sha256": "833406c1b6faed4f216b975bd3ec8aa723a3d5a2bc6083b740b502f768961768", "viewport": "1440x900" },
+      { "id": "vitreum-interaction", "kind": "interaction", "path": "public/screenshots/vitreum-interaction.png", "sha256": "a03aff17d0ed057ecce0190feff63848f6e04806faa69f39236021b40065634b", "viewport": "1440x900" },
+      { "id": "vitreum-below-hero", "kind": "manual-review", "path": "public/screenshots/vitreum-below-hero.png", "sha256": "9ba8a8effdb713c929d8aed86f3fe68b9fab62fab9045ba61a956b23d5c02421", "viewport": "1440x900" },
+      { "id": "vitreum-mobile", "kind": "mobile", "path": "public/screenshots/vitreum-mobile.png", "sha256": "1da3f9aa9f77ff5ff8ab5345c4fe5fe5de9a798d410b5be2210b8f3686647afd", "viewport": "390x844" },
+      { "id": "vitreum-reduced", "kind": "reduced-motion", "path": "public/screenshots/vitreum-reduced-motion.png", "sha256": "1667fb1b33b865e6a781a417464a8cfa906352f91d249a0d71053db49de96e22", "viewport": "1280x720" },
+      { "id": "vitreum-no-webgl", "kind": "no-webgl", "path": "public/screenshots/vitreum-no-webgl.png", "sha256": "d6751242ec212e9fa33f8be1e30675658233a863497822db8759173eff51b94d", "viewport": "1280x720" }
+    ],
+    "reports": [
+      { "id": "vitreum-build", "kind": "build", "path": "evidence/build.json", "sha256": "a41060898dd3eea8f95c5ba04a695b0e1a9ddb20ba43def4eede723db3e9e3d4" },
+      { "id": "vitreum-lighthouse", "kind": "performance", "path": "evidence/lighthouse.json", "sha256": "77dbc394311edc56690ffe62263ccfd3bc2d2f69f5f05ec058ed9cb39311ac75", "notes": "Three desktop runs per route; the release gate recomputes median LCP, CLS, and TBT against this exact build." },
+      { "id": "vitreum-keyboard", "kind": "keyboard", "path": "evidence/browser.json", "sha256": "bbcc4bbb529046d7e2746e2d3734299ca80e1f0b653635f1aa10a0323d642a5c", "notes": "The browser report records complete tab order, every state-control family, pause/resume, CTA activation, visible focus, and 24-by-24-pixel minimum targets." },
+      { "id": "vitreum-console", "kind": "console", "path": "evidence/browser.json", "sha256": "bbcc4bbb529046d7e2746e2d3734299ca80e1f0b653635f1aa10a0323d642a5c", "notes": "The browser report records console and page errors for every route/profile pair." },
+      { "id": "vitreum-accessibility", "kind": "axe", "path": "evidence/accessibility.json", "sha256": "25dee6c46b0437413c6d38d331de4322bc6b3ae86973c25a476e6c417c42f286" },
+      { "id": "vitreum-manual-review", "kind": "manual-review", "path": "evidence/manual-review.json", "sha256": "2947203050d4ccfe242c97931a5b879d3caf79acde3c281d3ef239cbd90aaaf9" }
+    ],
+    "keyboardFlow": true,
+    "webglFallback": true,
+    "reducedMotionRun": true,
+    "consoleErrors": 0,
+    "axe": { "critical": 0, "serious": 0 }
+  }
+}

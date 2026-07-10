@@ -1,0 +1,455 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://demeta.dev/schemas/design-manifest-2.0.0.json",
+  "title": "DEMETA design manifest",
+  "description": "A planning and evidence ledger. Schema validity is not browser, accessibility, performance, ownership, or aesthetic verification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "stage",
+    "project",
+    "thesis",
+    "nicheIntelligence",
+    "concepts",
+    "selectedConcept",
+    "selectionRationale",
+    "system",
+    "architecture",
+    "graphics",
+    "motion",
+    "accessibility",
+    "performanceBudget",
+    "claims",
+    "assets",
+    "evidence"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "version": { "const": "2.0.0" },
+    "stage": { "enum": ["plan", "draft", "production", "verified"] },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "niche", "audience", "singleJob", "ambition", "locale"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nonEmpty" },
+        "niche": { "$ref": "#/$defs/nonEmpty" },
+        "audience": { "$ref": "#/$defs/nonEmpty" },
+        "singleJob": { "$ref": "#/$defs/nonEmpty" },
+        "ambition": { "enum": ["flagship", "experimental", "campaign"] },
+        "locale": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "thesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["concept", "signature", "aestheticRisk", "restraint"],
+      "properties": {
+        "concept": { "$ref": "#/$defs/nonEmpty" },
+        "signature": { "$ref": "#/$defs/nonEmpty" },
+        "aestheticRisk": { "$ref": "#/$defs/nonEmpty" },
+        "restraint": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "nicheIntelligence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifacts", "rituals", "proofSignals", "sensoryCues", "conversionAction"],
+      "properties": {
+        "artifacts": { "$ref": "#/$defs/threeStrings" },
+        "rituals": { "$ref": "#/$defs/twoStrings" },
+        "proofSignals": { "$ref": "#/$defs/twoStrings" },
+        "sensoryCues": { "$ref": "#/$defs/twoStrings" },
+        "conversionAction": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "concepts": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/concept" }
+    },
+    "selectedConcept": { "$ref": "#/$defs/id" },
+    "selectionRationale": { "$ref": "#/$defs/nonEmpty" },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["colors", "typography", "geometry", "material"],
+      "properties": {
+        "colors": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 7,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "value", "role"],
+            "properties": {
+              "name": { "$ref": "#/$defs/nonEmpty" },
+              "value": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+              "role": { "$ref": "#/$defs/nonEmpty" }
+            }
+          }
+        },
+        "typography": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["display", "body", "utility"],
+          "properties": {
+            "display": { "$ref": "#/$defs/nonEmpty" },
+            "body": { "$ref": "#/$defs/nonEmpty" },
+            "utility": { "$ref": "#/$defs/nonEmpty" }
+          }
+        },
+        "geometry": { "$ref": "#/$defs/nonEmpty" },
+        "material": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "architecture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["header", "heroFrame", "sections", "scrollDepth", "mobileMutation"],
+      "properties": {
+        "header": { "$ref": "#/$defs/nonEmpty" },
+        "heroFrame": { "$ref": "#/$defs/nonEmpty" },
+        "sections": { "$ref": "#/$defs/threeStrings" },
+        "scrollDepth": { "$ref": "#/$defs/nonEmpty" },
+        "mobileMutation": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "graphics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primaryMedium", "justification", "criticalContentInDom", "fallbacks", "runtime"],
+      "properties": {
+        "primaryMedium": { "$ref": "#/$defs/nonEmpty" },
+        "justification": { "$ref": "#/$defs/nonEmpty" },
+        "criticalContentInDom": { "type": "boolean" },
+        "fallbacks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["noWebGL", "reducedMotion", "lowPower", "assetFailure"],
+          "properties": {
+            "noWebGL": { "$ref": "#/$defs/nonEmpty" },
+            "reducedMotion": { "$ref": "#/$defs/nonEmpty" },
+            "lowPower": { "$ref": "#/$defs/nonEmpty" },
+            "assetFailure": { "$ref": "#/$defs/nonEmpty" }
+          }
+        },
+        "runtime": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["lazyLoaded", "pauseWhenHidden", "pauseControl", "disposeOnUnmount", "handlesContextLoss"],
+          "properties": {
+            "lazyLoaded": { "type": "boolean" },
+            "pauseWhenHidden": { "type": "boolean" },
+            "pauseControl": { "type": "boolean" },
+            "disposeOnUnmount": { "type": "boolean" },
+            "handlesContextLoss": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entrance", "nicheMoment", "reducedMotionStrategy", "autoMotionOverFiveSeconds", "pauseControl"],
+      "properties": {
+        "entrance": { "$ref": "#/$defs/nonEmpty" },
+        "nicheMoment": { "$ref": "#/$defs/nonEmpty" },
+        "reducedMotionStrategy": { "$ref": "#/$defs/nonEmpty" },
+        "autoMotionOverFiveSeconds": { "type": "boolean" },
+        "pauseControl": { "type": "boolean" }
+      }
+    },
+    "accessibility": { "$ref": "#/$defs/accessibility" },
+    "performanceBudget": { "$ref": "#/$defs/performance" },
+    "claims": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim" }
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "evidence": { "$ref": "#/$defs/evidence" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "stage": { "enum": ["production", "verified"] } },
+        "required": ["stage"]
+      },
+      "then": {
+        "properties": {
+          "claims": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                { "$ref": "#/$defs/claim" },
+                { "type": "object", "properties": { "status": { "enum": ["verified", "user_supplied"] } } }
+              ]
+            }
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                { "$ref": "#/$defs/asset" },
+                { "type": "object", "required": ["sha256"] }
+              ]
+            }
+          },
+          "evidence": {
+            "type": "object",
+            "$ref": "#/$defs/collectedEvidence"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nonEmpty": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+    },
+    "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+    "spdxLicense": {
+      "type": "string",
+      "pattern": "^(?:MIT|Apache-2\\.0|BSD-2-Clause|BSD-3-Clause|CC0-1\\.0|CC-BY-4\\.0|CC-BY-SA-4\\.0|ISC|MPL-2\\.0|OFL-1\\.1|Unlicense|LicenseRef-[A-Za-z0-9.-]+)$"
+    },
+    "twoStrings": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/nonEmpty" }
+    },
+    "threeStrings": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/nonEmpty" }
+    },
+    "fingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["heroArchetype", "composition", "palette", "geometry", "primaryVisual", "motionSignature", "typography", "sectionRhythm", "headerArchitecture", "heroFrame", "scrollDepthSystem"],
+      "properties": {
+        "heroArchetype": { "$ref": "#/$defs/nonEmpty" },
+        "composition": { "$ref": "#/$defs/nonEmpty" },
+        "palette": { "$ref": "#/$defs/nonEmpty" },
+        "geometry": { "$ref": "#/$defs/nonEmpty" },
+        "primaryVisual": { "$ref": "#/$defs/nonEmpty" },
+        "motionSignature": { "$ref": "#/$defs/nonEmpty" },
+        "typography": { "$ref": "#/$defs/nonEmpty" },
+        "sectionRhythm": { "$ref": "#/$defs/nonEmpty" },
+        "headerArchitecture": { "$ref": "#/$defs/nonEmpty" },
+        "heroFrame": { "$ref": "#/$defs/nonEmpty" },
+        "scrollDepthSystem": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "concept": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "mode", "name", "signatureInteraction", "medium", "domainAnchor", "conversionHypothesis", "tradeoff", "rejectionRisk", "fingerprint"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "mode": { "enum": ["commercially-safe", "visually-ambitious", "niche-native", "counterfactual"] },
+        "name": { "$ref": "#/$defs/nonEmpty" },
+        "signatureInteraction": { "$ref": "#/$defs/nonEmpty" },
+        "medium": { "$ref": "#/$defs/nonEmpty" },
+        "domainAnchor": { "$ref": "#/$defs/nonEmpty" },
+        "conversionHypothesis": { "$ref": "#/$defs/nonEmpty" },
+        "tradeoff": { "$ref": "#/$defs/nonEmpty" },
+        "rejectionRisk": { "$ref": "#/$defs/nonEmpty" },
+        "fingerprint": { "$ref": "#/$defs/fingerprint" }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "semanticDom", "keyboardComplete", "visibleFocus", "contrastChecked", "zoomAndReflowChecked", "reducedMotion", "canvasAlternative", "nonDragAlternative", "targetSizeChecked", "errorsAnnounced"],
+      "properties": {
+        "target": { "const": "WCAG 2.2 AA" },
+        "semanticDom": { "type": "boolean" },
+        "keyboardComplete": { "type": "boolean" },
+        "visibleFocus": { "type": "boolean" },
+        "contrastChecked": { "type": "boolean" },
+        "zoomAndReflowChecked": { "type": "boolean" },
+        "reducedMotion": { "type": "boolean" },
+        "canvasAlternative": { "type": "boolean" },
+        "nonDragAlternative": { "type": "boolean" },
+        "targetSizeChecked": { "type": "boolean" },
+        "errorsAnnounced": { "type": "boolean" }
+      }
+    },
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initialJsKbGzip", "routeJsKbGzip", "mediaMbDesktop", "mediaMbMobile", "maxDprDesktop", "maxDprMobile", "maxDrawCalls", "maxTriangles", "lcpMs", "cls", "tbtMs"],
+      "properties": {
+        "initialJsKbGzip": { "type": "number", "minimum": 0, "maximum": 250 },
+        "routeJsKbGzip": { "type": "number", "minimum": 0, "maximum": 450 },
+        "mediaMbDesktop": { "type": "number", "minimum": 0, "maximum": 6 },
+        "mediaMbMobile": { "type": "number", "minimum": 0, "maximum": 2 },
+        "maxDprDesktop": { "type": "number", "minimum": 0, "maximum": 2 },
+        "maxDprMobile": { "type": "number", "minimum": 0, "maximum": 1.5 },
+        "maxDrawCalls": { "type": "number", "minimum": 0, "maximum": 120 },
+        "maxTriangles": { "type": "number", "minimum": 0, "maximum": 250000 },
+        "lcpMs": { "type": "number", "minimum": 0, "maximum": 2500 },
+        "cls": { "type": "number", "minimum": 0, "maximum": 0.1 },
+        "tbtMs": { "type": "number", "minimum": 0, "maximum": 200 }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "text": { "$ref": "#/$defs/nonEmpty" },
+        "status": { "enum": ["verified", "user_supplied", "placeholder"] },
+        "source": { "$ref": "#/$defs/nonEmpty" },
+        "sourceType": { "enum": ["authoritative-url", "first-party-document", "first-party-data", "user-brief"] },
+        "scope": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "verified" } }, "required": ["status"] },
+          "then": { "required": ["source", "sourceType"] }
+        },
+        {
+          "if": { "properties": { "status": { "const": "user_supplied" } }, "required": ["status"] },
+          "then": {
+            "required": ["source", "sourceType"],
+            "properties": { "sourceType": { "const": "user-brief" } }
+          }
+        }
+      ]
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "source", "creator", "license", "path"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "$ref": "#/$defs/nonEmpty" },
+        "source": { "enum": ["generated", "original-code", "licensed", "owned"] },
+        "creator": { "$ref": "#/$defs/nonEmpty" },
+        "license": { "$ref": "#/$defs/spdxLicense" },
+        "path": { "$ref": "#/$defs/relativePath" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "prompt": { "$ref": "#/$defs/nonEmpty" },
+        "generator": { "$ref": "#/$defs/nonEmpty" },
+        "generatedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "sourceUrl": { "type": "string", "pattern": "^https://" },
+        "licenseUrl": { "type": "string", "pattern": "^https://" },
+        "attribution": { "$ref": "#/$defs/nonEmpty" },
+        "ownershipNote": { "$ref": "#/$defs/nonEmpty" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "source": { "const": "generated" } }, "required": ["source"] },
+          "then": { "required": ["prompt", "generator", "generatedAt"] }
+        },
+        {
+          "if": { "properties": { "source": { "const": "licensed" } }, "required": ["source"] },
+          "then": { "required": ["sourceUrl", "licenseUrl", "attribution"] }
+        },
+        {
+          "if": { "properties": { "source": { "const": "owned" } }, "required": ["source"] },
+          "then": { "required": ["ownershipNote"] }
+        }
+      ]
+    },
+    "evidenceFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "path", "sha256"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["desktop", "mobile", "reduced-motion", "no-webgl", "interaction", "build", "keyboard", "axe", "performance", "console", "manual-review"] },
+        "path": { "$ref": "#/$defs/relativePath" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "viewport": { "type": "string", "pattern": "^[0-9]+x[0-9]+$" },
+        "notes": { "type": "string" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "buildCommand", "viewports", "screenshots", "reports", "keyboardFlow", "webglFallback", "reducedMotionRun", "consoleErrors", "axe"],
+      "properties": {
+        "status": { "enum": ["planned", "collected"] },
+        "buildCommand": { "$ref": "#/$defs/nonEmpty" },
+        "viewports": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[0-9]+x[0-9]+$" }
+        },
+        "screenshots": { "type": "array", "items": { "$ref": "#/$defs/evidenceFile" } },
+        "reports": { "type": "array", "items": { "$ref": "#/$defs/evidenceFile" } },
+        "keyboardFlow": { "type": "boolean" },
+        "webglFallback": { "type": "boolean" },
+        "reducedMotionRun": { "type": "boolean" },
+        "consoleErrors": { "type": "integer", "minimum": 0 },
+        "axe": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["critical", "serious"],
+          "properties": {
+            "critical": { "type": "integer", "minimum": 0 },
+            "serious": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "collectedEvidence": {
+      "allOf": [
+        { "$ref": "#/$defs/evidence" },
+        {
+          "type": "object",
+          "properties": {
+            "status": { "const": "collected" },
+            "viewports": {
+              "type": "array",
+              "minItems": 2,
+              "allOf": [
+                { "contains": { "type": "string", "pattern": "^(?:1[2-9][0-9]{2}|[2-9][0-9]{3,})x" }, "minContains": 1 },
+                { "contains": { "type": "string", "pattern": "^(?:320|360|375|390|412|430)x" }, "minContains": 1 }
+              ]
+            },
+            "screenshots": {
+              "type": "array",
+              "minItems": 4,
+              "allOf": [
+                { "contains": { "type": "object", "properties": { "kind": { "const": "desktop" } }, "required": ["kind"] }, "minContains": 1 },
+                { "contains": { "type": "object", "properties": { "kind": { "const": "mobile" } }, "required": ["kind"] }, "minContains": 1 },
+                { "contains": { "type": "object", "properties": { "kind": { "const": "reduced-motion" } }, "required": ["kind"] }, "minContains": 1 },
+                { "contains": { "type": "object", "properties": { "kind": { "const": "no-webgl" } }, "required": ["kind"] }, "minContains": 1 }
+              ]
+            },
+            "reports": { "type": "array", "minItems": 3 },
+            "keyboardFlow": { "const": true },
+            "webglFallback": { "const": true },
+            "reducedMotionRun": { "const": true },
+            "consoleErrors": { "const": 0 },
+            "axe": {
+              "type": "object",
+              "properties": {
+                "critical": { "const": 0 },
+                "serious": { "const": 0 }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+node_modules/
+showcase/dist/
+showcase/test-results/
+showcase/playwright-report/
+test-results/
+.DS_Store
+*.log
+*.tsbuildinfo

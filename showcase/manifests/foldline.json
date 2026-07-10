@@ -1,0 +1,235 @@
+{
+  "$schema": "../../skills/demeta-frontend/references/design-manifest.schema.json",
+  "version": "2.0.0",
+  "stage": "verified",
+  "project": {
+    "name": "Foldline",
+    "niche": "fictional textile construction archive",
+    "audience": "fashion students, textile conservators, and material designers",
+    "singleJob": "Open the construction notes",
+    "ambition": "flagship",
+    "locale": "en-AU"
+  },
+  "thesis": {
+    "concept": "The page behaves like cloth: it drapes, folds, rests, and finally exposes construction evidence.",
+    "signature": "A Verlet textile surface becomes the hero frame and responds to three semantic construction states.",
+    "aestheticRisk": "The moving textile cuts across a solid editorial serif composition while all readable copy remains outside the canvas.",
+    "restraint": "One fabric, one red seam, no garment model, fashion wallpaper, cards, or ornamental particles."
+  },
+  "nicheIntelligence": {
+    "artifacts": ["organza sample", "selvedge", "basting stitch", "construction record"],
+    "rituals": ["drape", "fold", "set", "inspect"],
+    "proofSignals": ["weave density", "finished edge", "static specimen photograph"],
+    "sensoryCues": ["tension", "softness", "translucency", "weight"],
+    "conversionAction": "Open the construction notes"
+  },
+  "concepts": [
+    {
+      "id": "draped-page",
+      "mode": "commercially-safe",
+      "name": "Draped Page",
+      "signatureInteraction": "Choose drape, fold, or inspect while one textile surface changes construction state.",
+      "medium": "three-webgl-verlet",
+      "domainAnchor": "A pinned selvedge, cloth tension, gravity, weave, and basting define both the simulation and content hierarchy.",
+      "conversionHypothesis": "Letting the page perform construction states makes the notes feel like evidence of a material process rather than a detached article.",
+      "tradeoff": "The hero prioritises one cloth sample and cannot represent a broad textile catalogue at once.",
+      "rejectionRisk": "Reject if the cloth behaves like liquid, obscures readable copy, or becomes a decorative flag animation.",
+      "fingerprint": {
+        "heroArchetype": "material-stage",
+        "composition": "layered-full-bleed-cloth",
+        "palette": "graphite-chalk-vermilion",
+        "geometry": "deformable-fabric-surface",
+        "primaryVisual": "verlet-cloth-mesh",
+        "motionSignature": "tension-and-drape",
+        "typography": "editorial-serif-italic-scale-shift",
+        "sectionRhythm": "hero-cloth-to-specimen-evidence",
+        "headerArchitecture": "vertical-selvedge-rail",
+        "heroFrame": "cloth-is-the-frame",
+        "scrollDepthSystem": "material-to-construction-sequence"
+      }
+    },
+    {
+      "id": "pattern-table",
+      "mode": "niche-native",
+      "name": "Pattern Table",
+      "signatureInteraction": "Step through paper pattern pieces to reveal seam allowance and assembly order.",
+      "medium": "svg-dom",
+      "domainAnchor": "Pattern pieces, notches, grain lines, and seam allowance determine geometry and annotation.",
+      "conversionHypothesis": "A familiar cutting-table ritual lets students understand construction order before opening the notes.",
+      "tradeoff": "The tabletop communicates assembly precisely but cannot express the weight and softness of the finished material.",
+      "rejectionRisk": "Reject if pattern pieces become draggable decorations without a keyboard-equivalent sequence.",
+      "fingerprint": {
+        "heroArchetype": "tabletop",
+        "composition": "asymmetric-pattern-scatter",
+        "palette": "kraft-ink-cobalt",
+        "geometry": "paper-pattern-silhouettes",
+        "primaryVisual": "interactive-svg-patterns",
+        "motionSignature": "snap-and-align",
+        "typography": "humanist-workroom",
+        "sectionRhythm": "pattern-pieces-to-stitched-order",
+        "headerArchitecture": "top-measurement-rule",
+        "heroFrame": "physical-cutting-table",
+        "scrollDepthSystem": "horizontal-assembly-strip"
+      }
+    },
+    {
+      "id": "weave-field",
+      "mode": "visually-ambitious",
+      "name": "Weave Field",
+      "signatureInteraction": "Scrub an inspection lens that magnifies warp and weft without moving the copy.",
+      "medium": "webgpu-tsl",
+      "domainAnchor": "Warp, weft, thread density, and inspection magnification determine the shader field and labels.",
+      "conversionHypothesis": "A material-scale inspection moment makes the construction record feel worth opening.",
+      "tradeoff": "Microscopic abstraction loses the immediately legible silhouette of a draped textile.",
+      "rejectionRisk": "Reject if the shader resembles a generic wave grid rather than a readable weave structure.",
+      "fingerprint": {
+        "heroArchetype": "instrument",
+        "composition": "radial-magnification-field",
+        "palette": "silver-oxide-signal-red",
+        "geometry": "thread-lattice",
+        "primaryVisual": "procedural-weave-shader",
+        "motionSignature": "lens-density-reveal",
+        "typography": "mono-specimen-label",
+        "sectionRhythm": "magnification-chapters",
+        "headerArchitecture": "bottom-density-scale",
+        "heroFrame": "circular-inspection-window",
+        "scrollDepthSystem": "pinned-microscope-scale"
+      }
+    }
+  ],
+  "selectedConcept": "draped-page",
+  "selectionRationale": "Draped Page makes the requested cloth-like page motion structurally relevant to the archive, offers button-driven state changes instead of requiring pointer manipulation, and hands off from simulation to a provenance-recorded specimen image and semantic construction sequence.",
+  "system": {
+    "colors": [
+      { "name": "Tar", "value": "#131D23", "role": "page ground" },
+      { "name": "Chart white", "value": "#EDF0EB", "role": "primary text and textile" },
+      { "name": "Weave gray", "value": "#D9DED8", "role": "evidence ground" },
+      { "name": "Basting red", "value": "#DB4B35", "role": "action and seam" },
+      { "name": "Archive blue", "value": "#2F6075", "role": "cool material shadow" }
+    ],
+    "typography": {
+      "display": "Georgia / Times New Roman",
+      "body": "Avenir Next / Helvetica Neue / Arial",
+      "utility": "ui-monospace / SFMono-Regular / Consolas"
+    },
+    "geometry": "deformable sheet, thread grid, selvedge rule, and staged construction order",
+    "material": "translucent weave, red seam, raking light, and dark workroom"
+  },
+  "architecture": {
+    "header": "A fixed vertical selvedge rail persists across desktop and mobile; the fixed pause or resume control and aligned study footer occupy that reserved gutter outside the cloth stage.",
+    "heroFrame": "A simulated textile occupies and deforms the viewport behind semantic copy and state buttons.",
+    "sections": ["cloth state hero and construction console", "textile evidence photograph", "ordered construction sequence and return action", "shared material-study footer"],
+    "scrollDepth": "The simulated cloth resolves into photographic weave evidence, a static four-step construction order, and the shared study-route footer.",
+    "mobileMutation": "The rail narrows but remains vertical, the same state buttons drive a lower-resolution one-shot cloth mesh in a stacked hero, and the study footer becomes a two-column route grid inside the remaining content width."
+  },
+  "graphics": {
+    "primaryMedium": "three-webgl-verlet-cloth",
+    "justification": "Tension, weight, fold, and rest communicate textile construction more directly than a carousel or photo grid.",
+    "criticalContentInDom": true,
+    "fallbacks": {
+      "noWebGL": "An authored SVG fabric profile replaces the canvas while the construction states, notes, specimen description, and actions remain semantic HTML.",
+      "reducedMotion": "The cloth snaps to a static selected state; buttons remain usable without a continuous solver loop.",
+      "lowPower": "The Three.js path reduces cloth segments and weave-texture resolution, caps render pixels, and renders a static selected state instead of running the solver continuously.",
+      "assetFailure": "Construction notes, weave facts, state descriptions, and actions remain complete if the cloth or specimen media fails."
+    },
+    "runtime": {
+      "lazyLoaded": true,
+      "pauseWhenHidden": true,
+      "pauseControl": true,
+      "disposeOnUnmount": true,
+      "handlesContextLoss": true
+    }
+  },
+  "motion": {
+    "entrance": "Semantic copy, state controls, and a static field render before the lazy cloth enhancement.",
+    "nicheMoment": "Drape, fold, and inspect alter cloth constraints and rest state rather than triggering a generic reveal.",
+    "reducedMotionStrategy": "Snap the mesh to the selected construction state, stop the solver loop, and preserve the authored SVG no-WebGL path.",
+    "autoMotionOverFiveSeconds": true,
+    "pauseControl": true
+  },
+  "accessibility": {
+    "target": "WCAG 2.2 AA",
+    "semanticDom": true,
+    "keyboardComplete": true,
+    "visibleFocus": true,
+    "contrastChecked": true,
+    "zoomAndReflowChecked": true,
+    "reducedMotion": true,
+    "canvasAlternative": true,
+    "nonDragAlternative": true,
+    "targetSizeChecked": true,
+    "errorsAnnounced": true
+  },
+  "performanceBudget": {
+    "initialJsKbGzip": 70,
+    "routeJsKbGzip": 235,
+    "mediaMbDesktop": 1.2,
+    "mediaMbMobile": 0.75,
+    "maxDprDesktop": 1.5,
+    "maxDprMobile": 1.25,
+    "maxDrawCalls": 18,
+    "maxTriangles": 30000,
+    "lcpMs": 2500,
+    "cls": 0.1,
+    "tbtMs": 200
+  },
+  "claims": [
+    {
+      "id": "fictional-archive-label",
+      "text": "The Foldline page labels the textile record as a fictional archive demonstration.",
+      "status": "verified",
+      "source": "src/pages/Foldline.tsx",
+      "sourceType": "first-party-document",
+      "scope": "The claim verifies the page disclosure only; construction details are showcase content, not an authenticated museum record."
+    }
+  ],
+  "assets": [
+    {
+      "id": "foldline-cloth-scene",
+      "type": "procedural-threejs-verlet",
+      "source": "original-code",
+      "creator": "DEMETA showcase team",
+      "license": "MIT",
+      "path": "src/scenes/FoldlineScene.tsx",
+      "sha256": "409d9b184ee91aa3d2ef6d0cfc2a2cce1b6d0a365b6c05cdf56496bb1a26466b"
+    },
+    {
+      "id": "foldline-textile",
+      "type": "generated-raster",
+      "source": "generated",
+      "creator": "DEMETA showcase team",
+      "license": "CC0-1.0",
+      "path": "public/assets/foldline-textile.webp",
+      "sha256": "5c9dac0bcab24e5629f4ea2c18e796c1c1c931c3270326117ede3c13dd979831",
+      "prompt": "A photorealistic museum macro photograph of one unbranded translucent gray organza sample forming a precise soft fold. Show warp and weft, hand-finished selvedge, stitch holes, and one short vermilion basting line against a mineral-gray table and ink-blue field. Raking side light, wide crop, no person, garment, mannequin, logos, text, glitter, copied designer pattern, or glamour styling.",
+      "generator": "built-in image generation",
+      "generatedAt": "2026-07-10"
+    }
+  ],
+  "evidence": {
+    "status": "collected",
+    "buildCommand": "npm run build",
+    "viewports": ["1440x900", "1280x720", "390x844", "320x720"],
+    "screenshots": [
+      { "id": "foldline-desktop", "kind": "desktop", "path": "public/screenshots/foldline-desktop.png", "sha256": "ff536767680e8324e05d2d0bbbd599ddb93b764c4621354ec67bb348128c746d", "viewport": "1440x900" },
+      { "id": "foldline-interaction", "kind": "interaction", "path": "public/screenshots/foldline-interaction.png", "sha256": "80755657d30ac5cfd3f7fa61577830bc98bec669ba1a5c714d686a0edb1d1035", "viewport": "1440x900" },
+      { "id": "foldline-below-hero", "kind": "manual-review", "path": "public/screenshots/foldline-below-hero.png", "sha256": "1738b92a9264e1113902e1ba0965423b4952db53fbcfd89caab3d80a2138c616", "viewport": "1440x900" },
+      { "id": "foldline-mobile", "kind": "mobile", "path": "public/screenshots/foldline-mobile.png", "sha256": "b97f17eb8771f6561111ec5a910dab1916d86b92a004b32331f6cfd4f948c374", "viewport": "390x844" },
+      { "id": "foldline-reduced", "kind": "reduced-motion", "path": "public/screenshots/foldline-reduced-motion.png", "sha256": "615fc933402a94e4185a9ad5dfe30ce270bda40fb30d15d8adc6d32e9e18f8ff", "viewport": "1280x720" },
+      { "id": "foldline-no-webgl", "kind": "no-webgl", "path": "public/screenshots/foldline-no-webgl.png", "sha256": "771da9d2a4a1f3ab51731eb2a58a676ebde96ed665d339236a0206b718d8aff7", "viewport": "1280x720" }
+    ],
+    "reports": [
+      { "id": "foldline-build", "kind": "build", "path": "evidence/build.json", "sha256": "a41060898dd3eea8f95c5ba04a695b0e1a9ddb20ba43def4eede723db3e9e3d4" },
+      { "id": "foldline-lighthouse", "kind": "performance", "path": "evidence/lighthouse.json", "sha256": "77dbc394311edc56690ffe62263ccfd3bc2d2f69f5f05ec058ed9cb39311ac75", "notes": "Three desktop runs per route; the release gate recomputes median LCP, CLS, and TBT against this exact build." },
+      { "id": "foldline-keyboard", "kind": "keyboard", "path": "evidence/browser.json", "sha256": "bbcc4bbb529046d7e2746e2d3734299ca80e1f0b653635f1aa10a0323d642a5c", "notes": "The browser report records complete tab order, every state-control family, pause/resume, CTA activation, visible focus, and 24-by-24-pixel minimum targets." },
+      { "id": "foldline-console", "kind": "console", "path": "evidence/browser.json", "sha256": "bbcc4bbb529046d7e2746e2d3734299ca80e1f0b653635f1aa10a0323d642a5c", "notes": "The browser report records console and page errors for every route/profile pair." },
+      { "id": "foldline-accessibility", "kind": "axe", "path": "evidence/accessibility.json", "sha256": "25dee6c46b0437413c6d38d331de4322bc6b3ae86973c25a476e6c417c42f286" },
+      { "id": "foldline-manual-review", "kind": "manual-review", "path": "evidence/manual-review.json", "sha256": "2947203050d4ccfe242c97931a5b879d3caf79acde3c281d3ef239cbd90aaaf9" }
+    ],
+    "keyboardFlow": true,
+    "webglFallback": true,
+    "reducedMotionRun": true,
+    "consoleErrors": 0,
+    "axe": { "critical": 0, "serious": 0 }
+  }
+}

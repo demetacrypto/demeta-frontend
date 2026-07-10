@@ -1,0 +1,19 @@
+{
+  "name": "@demeta/frontend-skill",
+  "version": "2.0.0",
+  "private": true,
+  "description": "A self-contained Codex skill for original, evidence-led flagship frontend design.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "generate:validator": "node scripts/generate-validator.mjs",
+    "lint:fixture": "node scripts/evaluate-manifest.mjs tests/fixtures/accepted-pressure-atlas.json",
+    "test": "node scripts/verify-skill.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0"
+  }
+}

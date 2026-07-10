@@ -1,0 +1,37 @@
+{
+  "name": "demeta-frontend",
+  "version": "2.0.0",
+  "description": "Open-source Codex skill and material-design showcase for authored flagship frontend experiences.",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/demetacrypto/demeta-frontend.git"
+  },
+  "homepage": "https://github.com/demetacrypto/demeta-frontend#readme",
+  "bugs": "https://github.com/demetacrypto/demeta-frontend/issues",
+  "workspaces": [
+    "showcase",
+    "skills/demeta-frontend"
+  ],
+  "scripts": {
+    "generate:validator": "npm run generate:validator --workspace @demeta/frontend-skill",
+    "check:validator": "npm run generate:validator && git diff --exit-code -- skills/demeta-frontend/scripts/generated/design-manifest-validator.mjs",
+    "test:skill": "node skills/demeta-frontend/scripts/verify-skill.mjs",
+    "lint:manifests": "for manifest in showcase/manifests/*.json; do node skills/demeta-frontend/scripts/evaluate-manifest.mjs \"$manifest\" || exit 1; done",
+    "verify:evidence": "for manifest in showcase/manifests/*.json; do node skills/demeta-frontend/scripts/verify-project.mjs \"$manifest\" showcase || exit 1; done",
+    "verify:evidence-bindings": "npm run verify:evidence-bindings --workspace showcase",
+    "build": "npm run build --workspace showcase",
+    "typecheck": "npm run typecheck --workspace showcase",
+    "test:e2e": "npm run test:e2e --workspace showcase",
+    "audit:lighthouse": "npm run audit:lighthouse --workspace showcase",
+    "audit:evidence": "npm run audit:evidence --workspace showcase",
+    "capture": "npm run capture --workspace showcase",
+    "verify:runtime-evidence": "DEMETA_EVIDENCE_ROOT=test-results/runtime-evidence npm run audit:lighthouse && DEMETA_EVIDENCE_ROOT=test-results/runtime-evidence npm run audit:evidence && DEMETA_EVIDENCE_ROOT=test-results/runtime-evidence npm run verify:evidence-bindings",
+    "verify": "npm run check:validator && npm run test:skill && npm run lint:manifests && npm run typecheck && npm run build && npm run verify:evidence-bindings && npm run verify:evidence && npm run test:e2e",
+    "verify:release": "npm run verify && npm run verify:runtime-evidence"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
