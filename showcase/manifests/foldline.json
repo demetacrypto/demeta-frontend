@@ -219,11 +219,11 @@
       { "id": "foldline-no-webgl", "kind": "no-webgl", "path": "public/screenshots/foldline-no-webgl.png", "sha256": "771da9d2a4a1f3ab51731eb2a58a676ebde96ed665d339236a0206b718d8aff7", "viewport": "1280x720" }
     ],
     "reports": [
-      { "id": "foldline-build", "kind": "build", "path": "evidence/build.json", "sha256": "a41060898dd3eea8f95c5ba04a695b0e1a9ddb20ba43def4eede723db3e9e3d4" },
-      { "id": "foldline-lighthouse", "kind": "performance", "path": "evidence/lighthouse.json", "sha256": "77dbc394311edc56690ffe62263ccfd3bc2d2f69f5f05ec058ed9cb39311ac75", "notes": "Three desktop runs per route; the release gate recomputes median LCP, CLS, and TBT against this exact build." },
-      { "id": "foldline-keyboard", "kind": "keyboard", "path": "evidence/browser.json", "sha256": "bbcc4bbb529046d7e2746e2d3734299ca80e1f0b653635f1aa10a0323d642a5c", "notes": "The browser report records complete tab order, every state-control family, pause/resume, CTA activation, visible focus, and 24-by-24-pixel minimum targets." },
-      { "id": "foldline-console", "kind": "console", "path": "evidence/browser.json", "sha256": "bbcc4bbb529046d7e2746e2d3734299ca80e1f0b653635f1aa10a0323d642a5c", "notes": "The browser report records console and page errors for every route/profile pair." },
-      { "id": "foldline-accessibility", "kind": "axe", "path": "evidence/accessibility.json", "sha256": "25dee6c46b0437413c6d38d331de4322bc6b3ae86973c25a476e6c417c42f286" },
+      { "id": "foldline-build", "kind": "build", "path": "evidence/build.json", "sha256": "3a1833230d274fc9df9451bc39047b6ae8bb9f5cab8ba89b8cda5cb2279de040" },
+      { "id": "foldline-lighthouse", "kind": "performance", "path": "evidence/lighthouse.json", "sha256": "f7bddab896ab8b03068521fe4b56befd80a9858994f6f78b61cc6df02069138c", "notes": "Three desktop runs per route; the release gate recomputes median LCP, CLS, and TBT against this exact build." },
+      { "id": "foldline-keyboard", "kind": "keyboard", "path": "evidence/browser.json", "sha256": "fd0e8fa082b245b2fabb5bb4073973ec64ff68f2430670f51829ea300d32e3cf", "notes": "The browser report records complete tab order, every state-control family, pause/resume, CTA activation, visible focus, and 24-by-24-pixel minimum targets." },
+      { "id": "foldline-console", "kind": "console", "path": "evidence/browser.json", "sha256": "fd0e8fa082b245b2fabb5bb4073973ec64ff68f2430670f51829ea300d32e3cf", "notes": "The browser report records console and page errors for every route/profile pair." },
+      { "id": "foldline-accessibility", "kind": "axe", "path": "evidence/accessibility.json", "sha256": "ccdfcc427cc273d8b97a25ac61b1f36f45a146163e9733990baf5c7d9c036437" },
       { "id": "foldline-manual-review", "kind": "manual-review", "path": "evidence/manual-review.json", "sha256": "2947203050d4ccfe242c97931a5b879d3caf79acde3c281d3ef239cbd90aaaf9" }
     ],
     "keyboardFlow": true,

@@ -10,6 +10,7 @@ type RendererInfo = Readonly<{
   frames: number;
   lowPower: boolean;
   policyReason: string;
+  rendererName: string;
   animationRunning: boolean;
   visible: boolean;
   contextLost: boolean;
@@ -287,7 +288,7 @@ test("reduced motion redraws discrete controls once, then stays still", async ({
 
 test("a live reduced-motion preference change stops and restarts the loop", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name.includes("mobile"), "Mobile uses the low-power static policy.");
-  await page.goto("/pressure-atlas");
+  await page.goto("/pressure-atlas?fullPower=1");
   await expect.poll(async () => (await readRendererInfo(page))?.animationRunning).toBe(true);
 
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -330,6 +331,42 @@ test("save-data selects the low-power static policy", async ({ page }) => {
   expect((await readRendererInfo(page))?.animationRunning).toBe(false);
 });
 
+test("a software WebGL renderer selects the low-power static policy", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name.includes("mobile"), "The mobile viewport already selects its stricter static policy.");
+  await page.addInitScript(() => {
+    type PatchableContext = {
+      getExtension: (name: string) => unknown;
+      getParameter: (parameter: number) => unknown;
+    };
+    const patchContext = (prototype: PatchableContext) => {
+      const originalGetExtension = prototype.getExtension;
+      const originalGetParameter = prototype.getParameter;
+      prototype.getExtension = function (this: PatchableContext, name: string) {
+        if (name === "WEBGL_debug_renderer_info") {
+          return { UNMASKED_RENDERER_WEBGL: 0x9246 };
+        }
+        return originalGetExtension.call(this, name);
+      };
+      prototype.getParameter = function (this: PatchableContext, parameter: number) {
+        if (parameter === 0x9246) return "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device))";
+        return originalGetParameter.call(this, parameter);
+      };
+    };
+    patchContext(WebGLRenderingContext.prototype as unknown as PatchableContext);
+    if (typeof WebGL2RenderingContext !== "undefined") {
+      patchContext(WebGL2RenderingContext.prototype as unknown as PatchableContext);
+    }
+  });
+  await page.goto("/pressure-atlas");
+  await expect.poll(async () => (await readRendererInfo(page))?.policyReason).toBe("software-renderer");
+  const info = (await readRendererInfo(page))!;
+  expect(info.lowPower).toBe(true);
+  expect(info.maxRenderPixels).toBe(720_000);
+  expect(info.animationRunning).toBe(false);
+  await page.waitForTimeout(220);
+  expect((await readRendererInfo(page))?.frames).toBe(info.frames);
+});
+
 test("renderer creation failure is contained by the authored fallback", async ({ page }) => {
   await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext;
@@ -363,7 +400,7 @@ test("context loss falls back and context restoration rebuilds cleanly", async (
 
 test("offscreen graphics stop their animation loop and restart on return", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name.includes("mobile"), "Mobile uses the low-power static policy.");
-  await page.goto("/pressure-atlas");
+  await page.goto("/pressure-atlas?fullPower=1");
   await expect.poll(async () => (await readRendererInfo(page))?.animationRunning).toBe(true);
   await page.locator(".pressure-coda").scrollIntoViewIfNeeded();
   await expect.poll(async () => (await readRendererInfo(page))?.visible).toBe(false);

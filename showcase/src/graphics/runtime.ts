@@ -14,7 +14,7 @@ const LOW_POWER_RENDER_DIMENSION_CAP = 2_048;
 
 export type GraphicsPolicy = Readonly<{
   lowPower: boolean;
-  reason: "forced" | "save-data" | "small-viewport" | "standard";
+  reason: "forced" | "save-data" | "small-viewport" | "software-renderer" | "standard";
   maxRenderPixels: number;
 }>;
 
@@ -68,6 +68,23 @@ function resolveGraphicsPolicy(viewportWidth = window.innerWidth): GraphicsPolic
   });
 }
 
+function rendererName(renderer: WebGLRenderer) {
+  const context = renderer.getContext();
+  const extension = context.getExtension("WEBGL_debug_renderer_info");
+  if (!extension) return "";
+  const value = context.getParameter(extension.UNMASKED_RENDERER_WEBGL);
+  return typeof value === "string" ? value : "";
+}
+
+function softwareRendererPolicy(policy: GraphicsPolicy, softwareRenderer: boolean): GraphicsPolicy {
+  if (policy.lowPower || !softwareRenderer) return policy;
+  return Object.freeze({
+    lowPower: true,
+    reason: "software-renderer",
+    maxRenderPixels: LOW_POWER_RENDER_PIXEL_BUDGET
+  });
+}
+
 function inertMount(): MountedThreeScene {
   return Object.freeze({
     dispose: () => undefined,
@@ -96,6 +113,12 @@ export function mountThreeScene(canvas: HTMLCanvasElement, options: MountOptions
     options.onFallback("WebGL is unavailable; the semantic fallback remains complete.");
     return inertMount();
   }
+
+  const detectedRendererName = rendererName(renderer);
+  const fullPowerRequested = new URLSearchParams(window.location.search).get("fullPower") === "1";
+  const softwareRenderer = !fullPowerRequested
+    && /swiftshader|llvmpipe|software rasterizer|mesa offscreen/i.test(detectedRendererName);
+  policy = softwareRendererPolicy(policy, softwareRenderer);
 
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
@@ -254,7 +277,7 @@ export function mountThreeScene(canvas: HTMLCanvasElement, options: MountOptions
     const rect = canvas.getBoundingClientRect();
     const width = Math.max(1, Math.floor(rect.width));
     const height = Math.max(1, Math.floor(rect.height));
-    const nextPolicy = resolveGraphicsPolicy(window.innerWidth);
+    const nextPolicy = softwareRendererPolicy(resolveGraphicsPolicy(window.innerWidth), softwareRenderer);
     const policyChanged = nextPolicy.lowPower !== policy.lowPower || nextPolicy.reason !== policy.reason;
     policy = nextPolicy;
     if (policyChanged && !rebuildController()) return;
@@ -331,6 +354,7 @@ export function mountThreeScene(canvas: HTMLCanvasElement, options: MountOptions
       frames: renderedFrames,
       lowPower: policy.lowPower,
       policyReason: policy.reason,
+      rendererName: detectedRendererName,
       animationRunning: loopRunning,
       visible,
       contextLost

@@ -88,6 +88,8 @@ Use only when viscosity, advection, or currents are the signature and the budget
 
 Avoid full-resolution multipass simulation on mobile. Honor reduced motion, `saveData`, visibility, and low-power mode by freezing or replacing it.
 
+Treat software WebGL as a low-power device, even on a desktop viewport. When `WEBGL_debug_renderer_info` is available, inspect the unmasked renderer for SwiftShader, llvmpipe, software rasterizers, or offscreen Mesa. Render one authored low-resolution frame, stop the continuous loop, and preserve every DOM interaction. Do not rely on user-agent sniffing, and keep any full-power override diagnostic-only. A desktop-sized canvas backed by software rasterization can otherwise turn a light shader or cloth scene into seconds of main-thread blocking.
+
 ## Optical glass
 
 For a transparent phone-like product, lens, vessel, or layered cutaway:
