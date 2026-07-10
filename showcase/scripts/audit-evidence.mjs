@@ -75,6 +75,10 @@ function startPreview() {
 
 function stopPreview(preview) {
   if (!preview.pid) return;
+  if (process.platform === "win32") {
+    spawn("taskkill", ["/pid", String(preview.pid), "/t", "/f"], { stdio: "ignore" });
+    return;
+  }
   try {
     process.kill(-preview.pid, "SIGTERM");
   } catch {
@@ -94,12 +98,16 @@ async function buildReport(manifests) {
       sha256: createHash("sha256").update(bytes).digest("hex")
     });
   }));
-  const initialJs = files.find(({ name }) => /^index-.*\.js$/.test(name));
-  const three = files.find(({ name }) => /^three-.*\.js$/.test(name));
-  const runtime = files.find(({ name }) => /^runtime-.*\.js$/.test(name));
-  const css = files.find(({ name }) => /^index-.*\.css$/.test(name));
+  const uniqueMatch = (pattern) => {
+    const matches = files.filter(({ name }) => pattern.test(name));
+    return matches.length === 1 ? matches[0] : undefined;
+  };
+  const initialJs = uniqueMatch(/^index-.*\.js$/);
+  const three = uniqueMatch(/^three-.*\.js$/);
+  const runtime = uniqueMatch(/^runtime-.*\.js$/);
+  const css = uniqueMatch(/^index-.*\.css$/);
   const routeBundles = await Promise.all(routes.map(async (route) => {
-    const scene = files.find(({ name }) => route.sceneChunk.test(name));
+    const scene = uniqueMatch(route.sceneChunk);
     const mediaBytes = (await Promise.all(route.media.map(async (name) => (
       stat(join(showcaseRoot, "public", "assets", name))
     )))).reduce((total, entry) => total + entry.size, 0);
@@ -111,11 +119,11 @@ async function buildReport(manifests) {
     const mediaMiB = Number((mediaBytes / 1024 / 1024).toFixed(3));
     const budget = manifests[route.slug].performanceBudget;
     const pass = initialJsGzipKiB !== null && routeJsGzipKiB !== null && cssGzipKiB !== null
-      && initialJsGzipKiB <= budget.initialJsKbGzip
-      && routeJsGzipKiB <= budget.routeJsKbGzip
-      && cssGzipKiB <= 100
-      && mediaMiB <= budget.mediaMbDesktop
-      && mediaMiB <= budget.mediaMbMobile;
+      && initialJs.gzipBytes <= budget.initialJsKbGzip * 1024
+      && initialJs.gzipBytes + three.gzipBytes + runtime.gzipBytes + scene.gzipBytes <= budget.routeJsKbGzip * 1024
+      && css.gzipBytes <= 100 * 1024
+      && mediaBytes <= budget.mediaMbDesktop * 1024 * 1024
+      && mediaBytes <= budget.mediaMbMobile * 1024 * 1024;
     return Object.freeze({
       route: route.path,
       pass,

@@ -2,7 +2,7 @@
 import { createHash } from "node:crypto";
 import { gzipSync } from "node:zlib";
 import { readFile, readdir, stat } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
+import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const showcaseRoot = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -10,6 +10,10 @@ const distAssets = join(showcaseRoot, "dist", "assets");
 const evidenceRoot = process.env.DEMETA_EVIDENCE_ROOT
   ? resolve(showcaseRoot, process.env.DEMETA_EVIDENCE_ROOT)
   : join(showcaseRoot, "evidence");
+// Node/zlib releases can produce slightly different gzip streams for identical
+// bytes. Node 22 and 25 measurements for this build differ by at most 0.5%.
+const gzipRelativeTolerance = 0.01;
+const gzipAbsoluteToleranceBytes = 32;
 const routes = Object.freeze([
   Object.freeze({ slug: "pressure-atlas", path: "/pressure-atlas", sceneChunk: /^PressureAtlasScene-.*\.js$/, media: Object.freeze(["pressure-atlas-specimen.webp"]) }),
   Object.freeze({ slug: "vitreum", path: "/vitreum", sceneChunk: /^VitreumScene-.*\.js$/, media: Object.freeze([]) }),
@@ -29,6 +33,38 @@ function same(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
 }
 
+function sourceBoundInventory(files) {
+  return files.map(({ name, bytes, sha256 }) => ({ name, bytes, sha256 }));
+}
+
+function gzipInventoriesCompatible(storedFiles, currentFiles) {
+  const currentByName = new Map(currentFiles.map((file) => [file.name, file]));
+  return storedFiles.length === currentFiles.length && storedFiles.every((stored) => {
+    const current = currentByName.get(stored.name);
+    if (!current) return false;
+    const portabilityAllowance = Math.max(
+      gzipAbsoluteToleranceBytes,
+      Math.ceil(current.gzipBytes * gzipRelativeTolerance)
+    );
+    return Math.abs(stored.gzipBytes - current.gzipBytes) <= portabilityAllowance;
+  });
+}
+
+function uniqueMatch(files, pattern) {
+  const matches = files.filter(({ name }) => pattern.test(name));
+  return matches.length === 1 ? matches[0] : undefined;
+}
+
+function expectedBuildSummary(files) {
+  const initial = uniqueMatch(files, /^index-.*\.js$/);
+  const three = uniqueMatch(files, /^three-.*\.js$/);
+  const runtime = uniqueMatch(files, /^runtime-.*\.js$/);
+  return Object.freeze({
+    initialJsGzipKiB: initial ? rounded(initial.gzipBytes / 1024) : null,
+    enhancedSharedGzipKiB: three && runtime ? rounded((three.gzipBytes + runtime.gzipBytes) / 1024) : null
+  });
+}
+
 async function inventory() {
   const names = (await readdir(distAssets)).sort();
   return Promise.all(names.map(async (name) => {
@@ -43,11 +79,11 @@ async function inventory() {
 }
 
 async function expectedRouteBundle(route, files, manifest) {
-  const initial = files.find(({ name }) => /^index-.*\.js$/.test(name));
-  const three = files.find(({ name }) => /^three-.*\.js$/.test(name));
-  const runtime = files.find(({ name }) => /^runtime-.*\.js$/.test(name));
-  const css = files.find(({ name }) => /^index-.*\.css$/.test(name));
-  const scene = files.find(({ name }) => route.sceneChunk.test(name));
+  const initial = uniqueMatch(files, /^index-.*\.js$/);
+  const three = uniqueMatch(files, /^three-.*\.js$/);
+  const runtime = uniqueMatch(files, /^runtime-.*\.js$/);
+  const css = uniqueMatch(files, /^index-.*\.css$/);
+  const scene = uniqueMatch(files, route.sceneChunk);
   const mediaBytes = (await Promise.all(route.media.map((name) => stat(join(showcaseRoot, "public", "assets", name)))))
     .reduce((total, entry) => total + entry.size, 0);
   const budget = manifest.performanceBudget;
@@ -58,11 +94,11 @@ async function expectedRouteBundle(route, files, manifest) {
   const cssGzipKiB = css ? rounded(css.gzipBytes / 1024) : null;
   const mediaMiB = rounded(mediaBytes / 1024 / 1024, 3);
   const pass = initialJsGzipKiB !== null && routeJsGzipKiB !== null && cssGzipKiB !== null
-    && initialJsGzipKiB <= budget.initialJsKbGzip
-    && routeJsGzipKiB <= budget.routeJsKbGzip
-    && cssGzipKiB <= 100
-    && mediaMiB <= budget.mediaMbDesktop
-    && mediaMiB <= budget.mediaMbMobile;
+    && initial.gzipBytes <= budget.initialJsKbGzip * 1024
+    && initial.gzipBytes + three.gzipBytes + runtime.gzipBytes + scene.gzipBytes <= budget.routeJsKbGzip * 1024
+    && css.gzipBytes <= 100 * 1024
+    && mediaBytes <= budget.mediaMbDesktop * 1024 * 1024
+    && mediaBytes <= budget.mediaMbMobile * 1024 * 1024;
   return Object.freeze({
     route: route.path,
     pass,
@@ -96,13 +132,37 @@ async function run() {
   const files = await inventory();
   const fingerprint = createHash("sha256").update(files.map(({ name, sha256 }) => `${name}:${sha256}`).join("\n")).digest("hex");
 
-  if (!same(build.files, files)) failures.push("build-inventory-does-not-match-current-dist");
+  const storedFiles = Array.isArray(build.files) ? build.files : [];
+  const storedGzipInventoryPass = storedFiles.length === files.length
+    && storedFiles.every(({ gzipBytes }) => Number.isSafeInteger(gzipBytes) && gzipBytes > 0);
+  if (!same(sourceBoundInventory(storedFiles), sourceBoundInventory(files))) {
+    failures.push("build-inventory-does-not-match-current-dist");
+  }
+  if (!storedGzipInventoryPass) failures.push("stored-build-gzip-inventory-invalid");
+  if (!gzipInventoriesCompatible(storedFiles, files)) {
+    failures.push("stored-build-gzip-measurements-outside-portability-tolerance");
+  }
   if (build.buildFingerprint !== fingerprint) failures.push("build-report-fingerprint-mismatch");
   if (lighthouse.buildFingerprint !== fingerprint) failures.push("lighthouse-fingerprint-mismatch");
 
-  const routeBundles = await Promise.all(routes.map((route) => expectedRouteBundle(route, files, manifests[route.slug])));
-  if (!same(build.routeBundles, routeBundles)) failures.push("build-route-budget-calculation-mismatch");
-  if (build.pass !== routeBundles.every(({ pass }) => pass)) failures.push("build-pass-is-not-derived-from-route-budgets");
+  // gzip output can differ slightly between zlib versions. Keep exact name/byte/SHA
+  // source binding, prove the stored report is internally derived, then enforce
+  // every budget again with gzip measurements from the current runner.
+  const storedRouteBundles = await Promise.all(routes.map((route) => expectedRouteBundle(route, storedFiles, manifests[route.slug])));
+  const currentRouteBundles = await Promise.all(routes.map((route) => expectedRouteBundle(route, files, manifests[route.slug])));
+  const storedBuildSummary = expectedBuildSummary(storedFiles);
+  const storedRouteBudgetsPass = storedRouteBundles.every(({ pass }) => pass);
+  const currentRouteBudgetsPass = currentRouteBundles.every(({ pass }) => pass);
+  if (!same({
+    initialJsGzipKiB: build.initialJsGzipKiB,
+    enhancedSharedGzipKiB: build.enhancedSharedGzipKiB
+  }, storedBuildSummary)) failures.push("stored-build-summary-calculation-mismatch");
+  if (!same(build.routeBundles, storedRouteBundles)) failures.push("stored-build-route-budget-calculation-mismatch");
+  if (!storedRouteBudgetsPass) failures.push("stored-build-route-budget-failure");
+  if (!currentRouteBudgetsPass) failures.push("current-build-route-budget-failure");
+  if (build.pass !== storedRouteBudgetsPass || build.pass !== true) {
+    failures.push("build-pass-is-not-derived-from-stored-route-budgets");
+  }
 
   const protocolPass = lighthouse.reportVersion === "1.0.0"
     && lighthouse.tool === "Lighthouse 13.4.0"
@@ -150,7 +210,11 @@ async function run() {
   }
   for (const asset of assetManifest.assets || []) {
     const assetPath = resolve(showcaseRoot, asset.path);
-    if (!assetPath.startsWith(`${showcaseRoot}/`)) {
+    const relativeAssetPath = relative(showcaseRoot, assetPath);
+    const escapesShowcase = relativeAssetPath === ".."
+      || relativeAssetPath.startsWith(`..${sep}`)
+      || isAbsolute(relativeAssetPath);
+    if (escapesShowcase) {
       failures.push(`asset-path-escapes-showcase:${asset.id}`);
       continue;
     }

@@ -11,6 +11,19 @@ const routes = Object.freeze([
   { slug: "foldline", path: "/foldline", evidence: "#construction", action: async (page) => page.getByRole("button", { name: "Fold" }).click() }
 ]);
 
+function stopPreview(preview) {
+  if (!preview.pid) return;
+  if (process.platform === "win32") {
+    spawn("taskkill", ["/pid", String(preview.pid), "/t", "/f"], { stdio: "ignore" });
+    return;
+  }
+  try {
+    process.kill(-preview.pid, "SIGTERM");
+  } catch {
+    preview.kill("SIGTERM");
+  }
+}
+
 async function assertPortAvailable() {
   try {
     await fetch(baseURL, { signal: AbortSignal.timeout(600) });
@@ -75,11 +88,5 @@ try {
     await captureRoute(route, { name: "no-webgl", viewport: { width: 1280, height: 720 }, query: "?noWebgl=1" });
   }
 } finally {
-  if (preview.pid) {
-    try {
-      process.kill(-preview.pid, "SIGTERM");
-    } catch {
-      preview.kill("SIGTERM");
-    }
-  }
+  stopPreview(preview);
 }

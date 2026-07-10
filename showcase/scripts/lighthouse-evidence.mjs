@@ -8,6 +8,7 @@ import { chromium } from "playwright";
 
 const LIGHTHOUSE_VERSION = "13.4.0";
 const RUNS_PER_ROUTE = 3;
+const TRANSIENT_ATTEMPTS = 2;
 const baseURL = "http://127.0.0.1:4173";
 const showcaseRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const rawRoot = join(showcaseRoot, "test-results", "lighthouse");
@@ -31,6 +32,10 @@ function startPreview() {
 
 function stopPreview(preview) {
   if (!preview.pid) return;
+  if (process.platform === "win32") {
+    spawn("taskkill", ["/pid", String(preview.pid), "/t", "/f"], { stdio: "ignore" });
+    return;
+  }
   try {
     process.kill(-preview.pid, "SIGTERM");
   } catch {
@@ -78,28 +83,34 @@ function median(values) {
   return sorted[Math.floor(sorted.length / 2)];
 }
 
-function runLighthouse(route, run) {
+async function runLighthouse(route, run) {
   const outputPath = join(rawRoot, `${route.slug}-${run}.json`);
   const executable = process.platform === "win32" ? "npx.cmd" : "npx";
-  const result = spawnSync(executable, [
-    "--yes",
-    `lighthouse@${LIGHTHOUSE_VERSION}`,
-    `${baseURL}${route.path}`,
-    "--only-categories=performance",
-    "--preset=desktop",
-    "--output=json",
-    `--output-path=${outputPath}`,
-    "--chrome-flags=--headless --no-sandbox",
-    "--quiet"
-  ], {
-    cwd: showcaseRoot,
-    encoding: "utf8",
-    env: { ...process.env, CHROME_PATH: process.env.CHROME_PATH || chromium.executablePath() }
-  });
-  if (result.status !== 0) {
-    throw new Error(`Lighthouse failed for ${route.path} run ${run}: ${result.stderr || result.stdout}`);
+  for (let attempt = 1; attempt <= TRANSIENT_ATTEMPTS; attempt += 1) {
+    const result = spawnSync(executable, [
+      "--yes",
+      `lighthouse@${LIGHTHOUSE_VERSION}`,
+      `${baseURL}${route.path}`,
+      "--only-categories=performance",
+      "--preset=desktop",
+      "--output=json",
+      `--output-path=${outputPath}`,
+      "--chrome-flags=--headless=new --no-sandbox --disable-backgrounding-occluded-windows --disable-renderer-backgrounding",
+      "--quiet"
+    ], {
+      cwd: showcaseRoot,
+      encoding: "utf8",
+      env: { ...process.env, CHROME_PATH: process.env.CHROME_PATH || chromium.executablePath() }
+    });
+    if (result.status === 0) return outputPath;
+    const diagnostic = result.stderr || result.stdout || "unknown Lighthouse failure";
+    const transientNoPaint = /NO_FCP|page did not paint any content/i.test(diagnostic);
+    if (!transientNoPaint || attempt === TRANSIENT_ATTEMPTS) {
+      throw new Error(`Lighthouse failed for ${route.path} run ${run}: ${diagnostic}`);
+    }
+    await new Promise((resolve) => setTimeout(resolve, 500));
   }
-  return outputPath;
+  throw new Error(`Lighthouse exhausted retries for ${route.path} run ${run}.`);
 }
 
 function extractRun(report, run) {
@@ -128,7 +139,7 @@ async function run() {
     await waitForServer(preview);
     const outputPaths = Object.fromEntries(routes.map(({ slug }) => [slug, []]));
     for (let runIndex = 1; runIndex <= RUNS_PER_ROUTE; runIndex += 1) {
-      for (const route of routes) outputPaths[route.slug].push(runLighthouse(route, runIndex));
+      for (const route of routes) outputPaths[route.slug].push(await runLighthouse(route, runIndex));
     }
     const routeReports = await Promise.all(routes.map(async (route) => {
       const runs = await Promise.all(outputPaths[route.slug].map(async (path, index) => (
