@@ -260,6 +260,20 @@ function OperationsContent({ data }: Readonly<{ data: KnowledgeOperationsData }>
 export default function BrainResearch() {
   const [data, setData] = useState<KnowledgeOperationsData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => { let active = true; loadKnowledgeOperations().then((result) => { if (active) setData(result); }).catch((reason: unknown) => { if (active) setError(reason instanceof Error ? reason.message : "research_api_unavailable"); }); return () => { active = false; }; }, []);
+  useEffect(() => {
+    let active = true;
+    let timer = 0;
+    const refresh = () => loadKnowledgeOperations().then((result) => {
+      if (active) { setData(result); setError(null); }
+    }).catch((reason: unknown) => {
+      if (active) setError(reason instanceof Error ? reason.message : "research_api_unavailable");
+    });
+    const schedule = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(refresh, document.hidden ? 60000 : 15000);
+    };
+    refresh(); schedule(); document.addEventListener("visibilitychange", schedule);
+    return () => { active = false; window.clearInterval(timer); document.removeEventListener("visibilitychange", schedule); };
+  }, []);
   return <main id="main" className="brain-research">{!configuredBrainApiBase() ? <section className="brain-notice"><p>Read-only private console</p><h1>Knowledge operations</h1><p>Brain research projections are not configured for this origin.</p></section> : error ? <section className="brain-notice"><p>Read-only private console</p><h1>Knowledge operations</h1><p>Research observability could not initialise.</p><code>{error}</code></section> : data ? <OperationsContent data={data} /> : <section className="brain-notice" aria-live="polite"><p>Read-only private console</p><h1>Knowledge operations</h1><p>Loading bounded research evidence…</p></section>}</main>;
 }

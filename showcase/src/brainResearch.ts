@@ -212,13 +212,40 @@ async function readProjection<T>(endpoint: "worker" | "queue" | "sources" | "tru
   }
 }
 
+let operationsEtag: string | null = null;
+let operationsCache: KnowledgeOperationsData | null = null;
+
 export async function loadKnowledgeOperations(): Promise<KnowledgeOperationsData> {
   if (!apiBase) throw new Error("research_api_unconfigured");
+  try {
+    const response = await fetch(`${apiBase}/operations`, {
+      method: "GET",
+      headers: { Accept: "application/json", ...(operationsEtag ? { "If-None-Match": operationsEtag } : {}) },
+      credentials: "same-origin",
+      cache: "no-store"
+    });
+    if (response.status === 304 && operationsCache) return operationsCache;
+    if (response.ok) {
+      const envelope = await response.json();
+      const data = isRecord(envelope) && isRecord(envelope.data) ? envelope.data : null;
+      if (data) {
+        const next = {
+          worker: normalizeProjection<WorkerProjection>(data.worker),
+          queue: normalizeProjection<QueueProjection>(data.queue),
+          sources: normalizeProjection<SourcesProjection>(data.sources),
+          trust: normalizeProjection<TrustProjection>(data.trust)
+        };
+        operationsEtag = response.headers.get("ETag") || null;
+        operationsCache = next;
+        return next;
+      }
+    }
+  } catch {
+    // Fall through to the independently bounded legacy projections.
+  }
   const [worker, queue, sources, trust] = await Promise.all([
-    readProjection<WorkerProjection>("worker"),
-    readProjection<QueueProjection>("queue"),
-    readProjection<SourcesProjection>("sources"),
-    readProjection<TrustProjection>("trust")
+    readProjection<WorkerProjection>("worker"), readProjection<QueueProjection>("queue"),
+    readProjection<SourcesProjection>("sources"), readProjection<TrustProjection>("trust")
   ]);
   return { worker, queue, sources, trust };
 }
