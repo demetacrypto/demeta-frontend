@@ -51,7 +51,7 @@ async function readJson<T>(path: string): Promise<T> {
   const response = await fetch(`${apiBase}${path}`, {
     method: "GET",
     headers: { Accept: "application/json" },
-    credentials: "omit",
+    credentials: "same-origin",
     cache: "no-store"
   });
   if (!response.ok) throw new Error(`brain_api_${response.status}`);

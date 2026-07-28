@@ -1,13 +1,13 @@
 {
   "reportVersion": "1.0.0",
-  "generatedAt": "2026-07-28T01:06:57.507Z",
+  "generatedAt": "2026-07-28T01:18:02.176Z",
   "tool": "Lighthouse 13.4.0",
   "protocol": {
     "preset": "desktop",
     "runsPerRoute": 3,
     "statistic": "median"
   },
-  "buildFingerprint": "7ae480ad274b59a74d478205fc1977926373a8549af196bf598afab1afe3f7b1",
+  "buildFingerprint": "80cb22a038e259c3a96f1c656f17961ad7459e57177882640a1fc99e294f7791",
   "pass": true,
   "routes": [
     {
@@ -20,7 +20,7 @@
       },
       "medians": {
         "performanceScore": 100,
-        "lcpMs": 550.9,
+        "lcpMs": 552.6,
         "tbtMs": 0,
         "cls": 0
       },
@@ -28,32 +28,32 @@
         {
           "run": 1,
           "performanceScore": 100,
-          "fcpMs": 430.3,
-          "lcpMs": 555.6,
+          "fcpMs": 430.8,
+          "lcpMs": 556.6,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 470.1,
-          "ttiMs": 557.6
+          "speedIndexMs": 474,
+          "ttiMs": 558.6
         },
         {
           "run": 2,
           "performanceScore": 100,
-          "fcpMs": 426.9,
-          "lcpMs": 550.7,
+          "fcpMs": 427.3,
+          "lcpMs": 551.1,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 453.5,
-          "ttiMs": 552.7
+          "speedIndexMs": 451.8,
+          "ttiMs": 553.1
         },
         {
           "run": 3,
           "performanceScore": 100,
-          "fcpMs": 427.1,
-          "lcpMs": 550.9,
+          "fcpMs": 428.5,
+          "lcpMs": 552.6,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 452.6,
-          "ttiMs": 552.9
+          "speedIndexMs": 457.3,
+          "ttiMs": 554.6
         }
       ]
     },
@@ -67,7 +67,7 @@
       },
       "medians": {
         "performanceScore": 100,
-        "lcpMs": 532.5,
+        "lcpMs": 531.1,
         "tbtMs": 0,
         "cls": 0
       },
@@ -75,32 +75,32 @@
         {
           "run": 1,
           "performanceScore": 100,
-          "fcpMs": 430.5,
-          "lcpMs": 534.9,
+          "fcpMs": 428,
+          "lcpMs": 531.6,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 488.3,
-          "ttiMs": 534.9
+          "speedIndexMs": 491.4,
+          "ttiMs": 531.6
         },
         {
           "run": 2,
           "performanceScore": 100,
-          "fcpMs": 426.8,
-          "lcpMs": 530.6,
+          "fcpMs": 427.6,
+          "lcpMs": 531.1,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 483.2,
-          "ttiMs": 530.6
+          "speedIndexMs": 489.7,
+          "ttiMs": 531.1
         },
         {
           "run": 3,
           "performanceScore": 100,
-          "fcpMs": 428.4,
-          "lcpMs": 532.5,
+          "fcpMs": 426.6,
+          "lcpMs": 530,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 489.3,
-          "ttiMs": 532.5
+          "speedIndexMs": 497.8,
+          "ttiMs": 530
         }
       ]
     },
@@ -114,7 +114,7 @@
       },
       "medians": {
         "performanceScore": 100,
-        "lcpMs": 591.5,
+        "lcpMs": 591.1,
         "tbtMs": 0,
         "cls": 0
       },
@@ -122,32 +122,32 @@
         {
           "run": 1,
           "performanceScore": 100,
-          "fcpMs": 429.4,
-          "lcpMs": 593.6,
+          "fcpMs": 427.2,
+          "lcpMs": 591.1,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 730.5,
-          "ttiMs": 599.6
+          "speedIndexMs": 729.3,
+          "ttiMs": 597.1
         },
         {
           "run": 2,
           "performanceScore": 100,
-          "fcpMs": 427.6,
-          "lcpMs": 591.5,
+          "fcpMs": 427.8,
+          "lcpMs": 592.2,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 724.2,
-          "ttiMs": 597.5
+          "speedIndexMs": 725.6,
+          "ttiMs": 598.2
         },
         {
           "run": 3,
           "performanceScore": 100,
-          "fcpMs": 426.4,
-          "lcpMs": 590.1,
+          "fcpMs": 426.8,
+          "lcpMs": 590.5,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 722.2,
-          "ttiMs": 596.1
+          "speedIndexMs": 722.7,
+          "ttiMs": 596.5
         }
       ]
     }
