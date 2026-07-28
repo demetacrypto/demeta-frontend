@@ -1,6 +1,6 @@
 {
   "reportVersion": "1.0.0",
-  "generatedAt": "2026-07-28T00:37:35.906Z",
+  "generatedAt": "2026-07-28T01:07:05.189Z",
   "browser": "Chromium 149.0.7827.55",
   "pass": true,
   "runs": [
@@ -10,7 +10,7 @@
       "viewport": "1280x720",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 719.3,
+      "enhancementReadyMs": 710,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -34,10 +34,10 @@
         "lcpMs": 112,
         "cls": 0,
         "longTaskCount": 2,
-        "longTaskTotalMs": 311,
-        "observerBlockingProxyMs": 211,
-        "domContentLoadedMs": 47.3,
-        "loadMs": 47.3
+        "longTaskTotalMs": 310,
+        "observerBlockingProxyMs": 210,
+        "domContentLoadedMs": 46.9,
+        "loadMs": 46.9
       },
       "axe": {
         "violations": 0,
@@ -52,7 +52,7 @@
       "viewport": "390x844",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 593.6,
+      "enhancementReadyMs": 594.6,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -78,8 +78,8 @@
         "longTaskCount": 1,
         "longTaskTotalMs": 134,
         "observerBlockingProxyMs": 84,
-        "domContentLoadedMs": 24.7,
-        "loadMs": 24.7
+        "domContentLoadedMs": 24.9,
+        "loadMs": 24.9
       },
       "axe": {
         "violations": 0,
@@ -94,7 +94,7 @@
       "viewport": "1280x720",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 1019.4,
+      "enhancementReadyMs": 901.7,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -115,13 +115,13 @@
         "contextLost": false
       },
       "performance": {
-        "lcpMs": 56,
+        "lcpMs": 52,
         "cls": 0,
         "longTaskCount": 2,
-        "longTaskTotalMs": 644,
-        "observerBlockingProxyMs": 544,
-        "domContentLoadedMs": 26.3,
-        "loadMs": 26.3
+        "longTaskTotalMs": 538,
+        "observerBlockingProxyMs": 438,
+        "domContentLoadedMs": 22.7,
+        "loadMs": 22.7
       },
       "axe": {
         "violations": 0,
@@ -136,7 +136,7 @@
       "viewport": "390x844",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 821.3,
+      "enhancementReadyMs": 763.1,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -157,13 +157,13 @@
         "contextLost": false
       },
       "performance": {
-        "lcpMs": 56,
+        "lcpMs": 48,
         "cls": 0,
         "longTaskCount": 1,
-        "longTaskTotalMs": 412,
-        "observerBlockingProxyMs": 362,
-        "domContentLoadedMs": 29.5,
-        "loadMs": 29.5
+        "longTaskTotalMs": 363,
+        "observerBlockingProxyMs": 313,
+        "domContentLoadedMs": 23,
+        "loadMs": 23
       },
       "axe": {
         "violations": 0,
@@ -178,7 +178,7 @@
       "viewport": "1280x720",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 747.4,
+      "enhancementReadyMs": 750.3,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -202,10 +202,10 @@
         "lcpMs": 56,
         "cls": 0,
         "longTaskCount": 2,
-        "longTaskTotalMs": 370,
-        "observerBlockingProxyMs": 270,
-        "domContentLoadedMs": 22.8,
-        "loadMs": 22.8
+        "longTaskTotalMs": 376,
+        "observerBlockingProxyMs": 276,
+        "domContentLoadedMs": 22.7,
+        "loadMs": 22.7
       },
       "axe": {
         "violations": 0,
@@ -220,7 +220,7 @@
       "viewport": "390x844",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 692.6,
+      "enhancementReadyMs": 591.9,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -241,13 +241,13 @@
         "contextLost": false
       },
       "performance": {
-        "lcpMs": 60,
+        "lcpMs": 52,
         "cls": 0,
         "longTaskCount": 1,
-        "longTaskTotalMs": 278,
-        "observerBlockingProxyMs": 228,
-        "domContentLoadedMs": 29.7,
-        "loadMs": 29.7
+        "longTaskTotalMs": 186,
+        "observerBlockingProxyMs": 136,
+        "domContentLoadedMs": 23.9,
+        "loadMs": 23.9
       },
       "axe": {
         "violations": 0,

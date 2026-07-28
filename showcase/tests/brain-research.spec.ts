@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const apiBase = "http://127.0.0.1:4173/brain-api";
+const apiBase = "/brain/research";
 const candidateId = "research-candidate:3f1a8bd817bbe19abd79219811d9861b4ab9e24c1c487d71195b7598e4a0272a";
 const routeWithMockApi = `/brain-research?brainApiBase=${encodeURIComponent(apiBase)}`;
 
@@ -57,15 +57,15 @@ const candidate = {
 };
 
 async function mockBrainApi(page: import("@playwright/test").Page) {
-  await page.route(`${apiBase}/**`, async (route) => {
-    const path = new URL(route.request().url()).pathname.replace("/brain-api", "");
-    const payload = path === "/brain/research/status"
+  await page.route("**/brain/research/**", async (route) => {
+    const path = new URL(route.request().url()).pathname.replace("/brain/research", "");
+    const payload = path === "/status"
       ? { sidecar: { state: "active", started_at: "2026-07-27T23:00:00Z" }, latest_cycle_at: "2026-07-27T23:22:52Z" }
-      : path === "/brain/research/candidates"
+      : path === "/candidates"
         ? { items: [candidate] }
-        : path === `/brain/research/candidates/${encodeURIComponent(candidateId)}`
+        : path === `/candidates/${encodeURIComponent(candidateId)}`
           ? candidate
-          : path === "/brain/research/events"
+          : path === "/events"
             ? { items: [{ id: "event:1", timestamp: "2026-07-27T23:22:52Z", type: "capacity_released", candidate_id: candidateId, summary: "Canonical reservation released." }] }
             : { items: [{ package_id: "ba8-package:sha256:blocked", status: "blocked", candidate_id: candidateId }] };
     await route.fulfill({ contentType: "application/json", body: JSON.stringify(payload) });
@@ -76,6 +76,11 @@ test.describe("Brain Research", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
   test("renders the certified failed-and-blocked paper cycle without mutation controls", async ({ page }) => {
+    const brainRequests: string[] = [];
+    page.on("request", (request) => {
+      const url = new URL(request.url());
+      if (url.pathname.startsWith("/brain/research/")) brainRequests.push(url.pathname);
+    });
     await mockBrainApi(page);
     await page.goto(routeWithMockApi);
 
@@ -92,6 +97,12 @@ test.describe("Brain Research", () => {
     await expect(page.getByRole("button")).toHaveCount(1);
     await expect(page.getByRole("button", { name: /pause ambient motion/i })).toBeVisible();
     await expect(page.locator("button[data-brain-mutation]")).toHaveCount(0);
+    expect(brainRequests.sort()).toEqual([
+      "/brain/research/candidates",
+      "/brain/research/delivery-packages",
+      "/brain/research/events",
+      "/brain/research/status"
+    ]);
   });
 
   test("opens the candidate evidence view and keeps the phone layout contained", async ({ page }) => {

@@ -61,10 +61,10 @@ async function readJson<T>(path: string): Promise<T> {
 export async function loadBrainResearch(): Promise<BrainResearchData> {
   if (!apiBase) throw new Error("brain_api_unconfigured");
   const [status, candidates, events, deliveryPackages] = await Promise.all([
-    readJson<Record<string, unknown>>("/brain/research/status"),
-    readJson<{ items?: BrainCandidate[] }>("/brain/research/candidates"),
-    readJson<{ items?: BrainEvent[] }>("/brain/research/events"),
-    readJson<{ items?: Record<string, unknown>[] }>("/brain/research/delivery-packages")
+    readJson<Record<string, unknown>>("/status"),
+    readJson<{ items?: BrainCandidate[] }>("/candidates"),
+    readJson<{ items?: BrainEvent[] }>("/events"),
+    readJson<{ items?: Record<string, unknown>[] }>("/delivery-packages")
   ]);
   return {
     status,

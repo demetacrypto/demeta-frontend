@@ -93,6 +93,6 @@ export default function BrainResearch() {
   }, []);
   return <main id="main" className="brain-research">
     <a className="skip-link" href="#candidate-list-title">Skip to candidates</a>
-    {!configuredBrainApiBase() ? <section className="brain-notice"><h1>Brain Research</h1><p>Brain API endpoint is not configured.</p><p>This read-only interface will remain unavailable until a sanctioned HTTPS API origin is configured.</p></section> : error ? <section className="brain-notice"><h1>Brain Research</h1><p>Read-only Brain data is unavailable.</p><code>{error}</code></section> : data ? <ResearchContent data={data} /> : <section className="brain-notice"><h1>Brain Research</h1><p>Loading read-only research evidence…</p></section>}
+    {!configuredBrainApiBase() ? <section className="brain-notice"><h1>Brain Research</h1><p>Brain API endpoint is not configured.</p><p>This read-only interface remains unavailable until its authenticated same-origin API route is configured.</p></section> : error ? <section className="brain-notice"><h1>Brain Research</h1><p>Read-only Brain data is unavailable.</p><code>{error}</code></section> : data ? <ResearchContent data={data} /> : <section className="brain-notice"><h1>Brain Research</h1><p>Loading read-only research evidence…</p></section>}
   </main>;
 }

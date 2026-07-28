@@ -28,7 +28,7 @@ Three original fictional studies prove different material systems. They are exam
 
 **[Open the live interactive showcase](https://demetacrypto.github.io/demeta-frontend/)** — use the depth/lens controls, inspect the transparent device layers, and switch the cloth between drape, fold, and inspection modes.
 
-The showcase also contains a read-only [Brain Research](https://demetacrypto.github.io/demeta-frontend/brain-research/) route. It only renders the published `GET /brain/research/*` contract when the Pages build receives a sanctioned HTTPS `VITE_BRAIN_RESEARCH_API_BASE`; it never starts research, runs Stages, approves BA-8, or affects trading.
+The showcase also contains a read-only [Brain Research](https://demetacrypto.github.io/demeta-frontend/brain-research/) route. The GitHub Pages build is an unconfigured static demonstration. An operational deployment must set `VITE_BRAIN_RESEARCH_API_BASE=/brain/research` behind its existing authenticated same-origin proxy; it only renders the published `GET /brain/research/*` contract and never starts research, runs Stages, approves BA-8, or affects trading.
 
 | Study | Signature medium | Purpose |
 |---|---|---|
