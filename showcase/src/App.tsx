@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import PressureAtlas from "./pages/PressureAtlas";
 import Vitreum from "./pages/Vitreum";
 import Foldline from "./pages/Foldline";
 import MaterialIndex from "./pages/MaterialIndex";
-import BrainResearch from "./pages/BrainResearch";
 import { BRAIN_RESEARCH_ROUTE, currentRoute, routeHref } from "./routing";
+
+const BrainResearch = lazy(() => import("./pages/BrainResearch"));
 
 const studies = Object.freeze([
   { path: "/pressure-atlas", short: "Flow", label: "Pressure Atlas" },
@@ -27,14 +28,16 @@ export function App() {
   const [motionPaused, setMotionPaused] = useState(false);
   const currentStudy = studies.find(({ path }) => path === current);
 
-  if (current === BRAIN_RESEARCH_ROUTE) return <BrainResearch />;
-
   useEffect(() => {
     document.documentElement.dataset.userMotion = motionPaused ? "paused" : "running";
     window.dispatchEvent(new CustomEvent("demeta-motion-toggle", {
       detail: { paused: motionPaused }
     }));
   }, [motionPaused]);
+
+  if (current === BRAIN_RESEARCH_ROUTE) {
+    return <Suspense fallback={<main id="main" className="brain-research"><section className="brain-notice" aria-live="polite"><p>Read-only private console</p><h1>Knowledge operations</h1><p>Loading bounded research evidence…</p></section></main>}><BrainResearch /></Suspense>;
+  }
 
   return (
     <>

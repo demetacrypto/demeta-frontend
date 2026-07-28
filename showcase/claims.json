@@ -24,6 +24,14 @@
       "source": "src/pages/Foldline.tsx",
       "sourceType": "first-party-document",
       "scope": "Foldline example"
+    },
+    {
+      "id": "knowledge-operations-read-only",
+      "text": "The Knowledge Operations route reads exactly four research projections and exposes no mutation controls.",
+      "status": "verified",
+      "source": "tests/brain-research.spec.ts",
+      "sourceType": "first-party-document",
+      "scope": "Knowledge Operations console"
     }
   ]
 }

@@ -1,19 +1,19 @@
 {
   "reportVersion": "1.0.0",
-  "generatedAt": "2026-07-28T01:24:01.123Z",
+  "generatedAt": "2026-07-28T08:52:31.602Z",
   "command": "npm run build",
   "node": "v25.6.1",
   "pass": true,
-  "buildFingerprint": "ba7565e1bbb4c1aa2554845e2d554e02ae74b5ff08141506b1b1626c7d65c7b3",
-  "initialJsGzipKiB": 67.27,
+  "buildFingerprint": "beffa9c9f162bf0a187947834d2376795b8f26d15554fbd1ca584acbf765ed00",
+  "initialJsGzipKiB": 65.45,
   "enhancedSharedGzipKiB": 132.1,
   "routeBundles": [
     {
       "route": "/pressure-atlas",
       "pass": true,
-      "initialJsGzipKiB": 67.27,
-      "routeJsGzipKiB": 201.44,
-      "cssGzipKiB": 8.97,
+      "initialJsGzipKiB": 65.45,
+      "routeJsGzipKiB": 199.63,
+      "cssGzipKiB": 10.49,
       "mediaMiB": 0.058,
       "budget": {
         "initialJsKbGzip": 95,
@@ -26,9 +26,9 @@
     {
       "route": "/vitreum",
       "pass": true,
-      "initialJsGzipKiB": 67.27,
-      "routeJsGzipKiB": 201.68,
-      "cssGzipKiB": 8.97,
+      "initialJsGzipKiB": 65.45,
+      "routeJsGzipKiB": 199.86,
+      "cssGzipKiB": 10.49,
       "mediaMiB": 0,
       "budget": {
         "initialJsKbGzip": 70,
@@ -41,9 +41,9 @@
     {
       "route": "/foldline",
       "pass": true,
-      "initialJsGzipKiB": 67.27,
-      "routeJsGzipKiB": 201.93,
-      "cssGzipKiB": 8.97,
+      "initialJsGzipKiB": 65.45,
+      "routeJsGzipKiB": 200.11,
+      "cssGzipKiB": 10.49,
       "mediaMiB": 0.153,
       "budget": {
         "initialJsKbGzip": 70,
@@ -56,22 +56,28 @@
   ],
   "files": [
     {
-      "name": "FoldlineScene-C0ICnIVu.js",
+      "name": "BrainResearch-DJ69M3NY.js",
+      "bytes": 22482,
+      "gzipBytes": 5837,
+      "sha256": "60c7462f723bc152faa4160054f9c3cadd2b53325256ec4aa21bd084da63b90a"
+    },
+    {
+      "name": "FoldlineScene-CcVkX44X.js",
       "bytes": 5310,
-      "gzipBytes": 2621,
-      "sha256": "6102a3efd6119591c9fdb2d69b10d9a3eb8deb7f8d5605c9c6e768a579ad34f8"
+      "gzipBytes": 2625,
+      "sha256": "4e6fb11bd5323c652f2c4f9efd6f515eb705e2447186bf29d7ea950174082cd2"
     },
     {
-      "name": "PressureAtlasScene-DTnIBxQm.js",
+      "name": "PressureAtlasScene-X3SGrtjJ.js",
       "bytes": 4843,
-      "gzipBytes": 2124,
-      "sha256": "de32e0776fbc2d9d1e7dd1d9af2477cd0296c5862df581447b76843a05dc3941"
+      "gzipBytes": 2126,
+      "sha256": "b41e02ad9079071a5cd4f17d62b26d14a89739bb60bbbcc0ec1ec5d353ee664e"
     },
     {
-      "name": "VitreumScene-BUMnY0kK.js",
+      "name": "VitreumScene-CgcDyCp3.js",
       "bytes": 5116,
-      "gzipBytes": 2362,
-      "sha256": "8c04b24f472b63bd101a469a23649532be3e5e74715fcdd4b90dad2b96e366a7"
+      "gzipBytes": 2366,
+      "sha256": "f7520926ce2ee263ec73cac650acad354860e8b8d617e78fe7c7d260a9e7c2d2"
     },
     {
       "name": "foldline-textile.webp",
@@ -80,16 +86,16 @@
       "sha256": "5c9dac0bcab24e5629f4ea2c18e796c1c1c931c3270326117ede3c13dd979831"
     },
     {
-      "name": "index-6ec4P12D.css",
-      "bytes": 41523,
-      "gzipBytes": 9185,
-      "sha256": "a49e7ddceceb9a6051c112bd59511bd5be0e6c4f493ff3c40e1ef2917d924f59"
+      "name": "index-F_YyQNNA.js",
+      "bytes": 217493,
+      "gzipBytes": 67023,
+      "sha256": "23fb58be92ffbb420aede6e2d196813419f0cbd39437c89503370ea8912fe40c"
     },
     {
-      "name": "index-Dir6yHGD.js",
-      "bytes": 224732,
-      "gzipBytes": 68888,
-      "sha256": "feef4eb44b36280feb887313e2c44d5ac3351692d6e439a62702e218d5596fa7"
+      "name": "index-llH26sTE.css",
+      "bytes": 50237,
+      "gzipBytes": 10743,
+      "sha256": "24037702cabda2b0956d1bc986071f2a2fabecfa1e0c3ac2be08a619d391442a"
     },
     {
       "name": "pressure-atlas-specimen.webp",
@@ -98,10 +104,10 @@
       "sha256": "c983836ecd61fea940ad96eed2fdb85019d6334062443e583e3e334eb232a9a7"
     },
     {
-      "name": "runtime-ChK7mIZe.js",
+      "name": "runtime-CtDNT_Eu.js",
       "bytes": 5781,
-      "gzipBytes": 2461,
-      "sha256": "51f5be8404b2b9526084cb8ffd0b266823f994e2e4e2107b90329c7635e34b81"
+      "gzipBytes": 2462,
+      "sha256": "fb7572427e2f417e697594d2444c46350c9219d4a2dd5b4ccd7d178c013b449a"
     },
     {
       "name": "three-C0SvHCyD.js",

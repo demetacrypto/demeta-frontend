@@ -1,145 +1,265 @@
-import { useEffect, useId, useRef, useState } from "react";
-import { configuredBrainApiBase, loadBrainResearch, type BrainCandidate, type BrainEvent, type BrainResearchData, type BrainStage, type Evidence } from "../brainResearch";
+import { useEffect, useState, type ReactNode } from "react";
+import {
+  configuredBrainApiBase,
+  loadKnowledgeOperations,
+  type CandidateStage,
+  type CandidateStageEvidence,
+  type ConnectorOutcome,
+  type KnowledgeOperationsData,
+  type LatestCandidate,
+  type Projection,
+  type ProjectionState
+} from "../brainResearch";
 import { routeHref } from "../routing";
 
-const helpCopy = {
-  "Brain Research": "Read-only evidence from the deployed paper-research sidecar. This page cannot start cycles, run Stages, approve BA-8, or affect trading.",
-  Sidecar: "The isolated paper-research service that records certified evidence. Its status is operational health, not strategy profitability.",
-  "Latest Autonomous Cycle": "The latest completed paper cycle timestamp from persisted certified evidence; it does not refresh or start a cycle.",
-  Authority: "All live order, capital, risk, configuration, promotion, deployment, and process-control authority is denied.",
-  "Strategies / Candidates": "Candidate records preserve their evidence and immutable identifiers. A retired candidate is a governed outcome, not a pass.",
-  Hypothesis: "The paper-only statement under test, plus its null and alternative statements when the artifact records them.",
-  "Modular Components": "The specific entry, exit, and bounded repair elements recorded in the StrategySpec lineage.",
-  "Stage Timeline": "Stages are shown as failed, skipped, or passed exactly as persisted. A skipped Stage never implies a pass.",
-  Trades: "Closed trade count recorded by the Stage evaluator. A real zero remains zero, not unavailable.",
-  PF: "Profit factor from the recorded Stage metrics.",
-  PnL: "Net PnL from the recorded Stage metrics.",
-  Drawdown: "Capital-normalized drawdown is shown only when calculated; quote-unit drawdown is labelled separately.",
-  "BA-6 Learning": "Measured findings and bounded lessons stored by the reflection artifact.",
-  "BA-7 Decision": "The controller-selected paper action and final disposition; it never grants live control.",
-  Capacity: "Reserved and released paper-only compute, time, and Stage-run capacity using the canonical reservation ID.",
-  "BA-8 Delivery": "A truthful blocked or ready-for-human-review package only. This page cannot approve or deliver it.",
-  "Activity Feed": "Newest-first, structured events derived from persisted cycle, Stage, reflection, capacity, and BA-8 artifacts."
-} as const;
+const endpointLabels = Object.freeze({ worker: "Worker", queue: "Queue", sources: "Sources", trust: "Trust" });
 
-type HelpLabel = keyof typeof helpCopy;
-
-function Help({ label }: Readonly<{ label: HelpLabel }>) {
-  const [open, setOpen] = useState(false);
-  const id = useId();
-  const root = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
-    const closeOnOutsidePointer = (event: PointerEvent) => { if (root.current && !root.current.contains(event.target as Node)) setOpen(false); };
-    window.addEventListener("keydown", closeOnEscape);
-    window.addEventListener("pointerdown", closeOnOutsidePointer);
-    return () => { window.removeEventListener("keydown", closeOnEscape); window.removeEventListener("pointerdown", closeOnOutsidePointer); };
-  }, []);
-  return <span ref={root} className="brain-help">
-    <button type="button" aria-label={`Help: ${label}`} aria-describedby={open ? id : undefined} aria-expanded={open} onMouseEnter={() => setOpen(true)} onFocus={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onBlur={() => setOpen(false)} onClick={() => setOpen(true)}>?</button>
-    {open ? <span id={id} role="tooltip">{helpCopy[label]}</span> : null}
-  </span>;
+function readable(value: string | null | undefined, fallback = "Not recorded") {
+  if (!value) return fallback;
+  return value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-function readable(value: string) {
-  return value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+function dateTime(value: string | null | undefined, fallback = "Not recorded") {
+  if (!value || Number.isNaN(Date.parse(value))) return fallback;
+  return new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Darwin", dateStyle: "medium", timeStyle: "medium" }).format(new Date(value));
+}
+
+function exactNumber(value: number | null | undefined) {
+  return typeof value === "number" && Number.isFinite(value) ? String(value) : "Not recorded";
 }
 
 function shortId(value: string | null | undefined) {
   if (!value) return "Not recorded";
-  return value.length > 18 ? `${value.slice(0, 10)}…${value.slice(-6)}` : value;
+  return value.length > 32 ? `${value.slice(0, 19)}…${value.slice(-9)}` : value;
 }
 
-function evidenceText(value: Evidence<unknown> | null | undefined, fallback = "Not recorded in this candidate artifact") {
-  if (!value) return fallback;
-  if (value.state === "available") {
-    if (Array.isArray(value.value)) return value.value.join(" · ");
-    if (typeof value.value === "object" && value.value) return Object.entries(value.value).map(([key, item]) => `${item} ${readable(key)}`).join(", ");
-    return value.value === null ? fallback : String(value.value);
+function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function atomText(value: unknown): string {
+  if (value === null || value === undefined || value === "") return "Not recorded";
+  if (typeof value === "boolean") return value ? "Yes" : "No";
+  if (typeof value === "number") return Number.isFinite(value) ? String(value) : "Not recorded";
+  const text = String(value);
+  return /[\s.:@/]/.test(text) ? text : readable(text);
+}
+
+function evidenceKeyLabel(key: string) {
+  const exactLabels: Readonly<Record<string, string>> = Object.freeze({
+    stage1: "Stage 1",
+    stage_1: "Stage 1",
+    stage1_5: "Stage 1.5",
+    stage_1_5: "Stage 1.5",
+    stage2: "Stage 2",
+    stage_2: "Stage 2",
+    evidence_id: "Evidence ID"
+  });
+  return exactLabels[key] || readable(key);
+}
+
+function formattedEvidence(value: unknown, depth: number): string {
+  if (Array.isArray(value)) {
+    const present = value.filter((item) => item !== null && item !== undefined && item !== "");
+    return present.map((item) => formattedEvidence(item, depth + 1)).join(depth > 0 ? ", " : " · ");
   }
-  return `${readable(value.state)} — ${value.reason || fallback}`;
+  if (isRecord(value)) {
+    if (depth >= 3) return "Nested evidence recorded";
+    return Object.entries(value)
+      .filter(([, item]) => item !== null && item !== undefined && item !== "")
+      .map(([key, item]) => {
+        const structured = isRecord(item) || (Array.isArray(item) && item.some(isRecord));
+        const rendered = formattedEvidence(item, depth + 1);
+        return depth > 0 || structured ? `${evidenceKeyLabel(key)}: ${rendered}` : rendered;
+      })
+      .join(" · ");
+  }
+  return atomText(value);
 }
 
-function dateTime(value: Evidence<string> | null | undefined) {
-  if (!value || value.state !== "available" || !value.value || Number.isNaN(Date.parse(value.value))) return evidenceText(value);
-  return new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Darwin", dateStyle: "medium", timeStyle: "medium" }).format(new Date(value.value));
+function evidenceText(value: unknown, fallback = "Not recorded") {
+  if (value === null || value === undefined || value === "") return fallback;
+  const rendered = formattedEvidence(value, 0);
+  return rendered || fallback;
 }
 
-function stageName(value: string) {
-  return value === "stage1" ? "Stage 1" : value === "stage1_5" ? "Stage 1.5" : value === "stage2" ? "Stage 2" : readable(value);
+function recordValue(record: Readonly<Record<string, unknown>>, ...keys: string[]) {
+  return keys.map((key) => record[key]).find((value) => value !== null && value !== undefined);
 }
 
-function stageStatus(value: string | null | undefined): "failed" | "skipped" | "passed" | "unavailable" {
-  if (String(value).startsWith("skipped")) return "skipped";
-  if (value === "failed") return "failed";
-  if (value === "passed") return "passed";
-  return "unavailable";
+function recordItems(value: unknown): ReadonlyArray<Readonly<Record<string, unknown>>> {
+  return Array.isArray(value) ? value.filter(isRecord) : [];
 }
 
-function Metric({ label, value, help }: Readonly<{ label: string; value: Evidence<unknown> | undefined; help: HelpLabel }>) {
-  return <div className="brain-metric"><span>{label} <Help label={help} /></span><strong>{evidenceText(value)}</strong></div>;
+function statusClass(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9_-]+/g, "-");
 }
 
-function StageRow({ stage }: Readonly<{ stage: BrainStage }>) {
-  const status = stageStatus(stage.status);
-  const reason = status === "skipped" ? evidenceText(stage.skip_reason) : evidenceText(stage.reason);
-  return <li>
-    <span>{stageName(stage.stage)}</span>
-    <strong className={`brain-state brain-state--${status}`}>{stageName(stage.stage)} — {readable(status)}</strong>
-    <p>{reason}</p>
-    <small>{dateTime(stage.ended_at)}</small>
-  </li>;
+const stageKeys = Object.freeze({
+  stage1: Object.freeze(["stage1", "stage_1"]),
+  stage15: Object.freeze(["stage1_5", "stage_1_5"]),
+  stage2: Object.freeze(["stage2", "stage_2"])
+} as const);
+
+function stageSignal(stageStatus: CandidateStageEvidence["status"], keys: ReadonlyArray<string>, stage: CandidateStage | null | undefined) {
+  const signal = isRecord(stageStatus) ? keys.map((key) => stageStatus[key]).find((value) => value !== null && value !== undefined) : undefined;
+  const signalRecord = isRecord(signal) ? signal : null;
+  const status = typeof signal === "string"
+    ? signal
+    : typeof signalRecord?.status === "string"
+      ? signalRecord.status
+      : stage?.status || (typeof stageStatus === "string" && keys === stageKeys.stage1 ? stageStatus : "unavailable");
+  const reason = typeof signalRecord?.reason === "string" ? signalRecord.reason : stage?.reason;
+  return { status, reason } as const;
 }
 
-function Metadata({ candidate }: Readonly<{ candidate: BrainCandidate }>) {
-  return <details className="brain-metadata"><summary>Evidence IDs and provenance</summary><dl>
-    <div><dt>Candidate</dt><dd>{candidate.candidate_id}</dd></div>
-    <div><dt>Parent</dt><dd>{candidate.parent_candidate_id || "Not recorded in this candidate artifact"}</dd></div>
-    <div><dt>Stage 1</dt><dd>{evidenceText(candidate.stages?.[0]?.stage_id)}</dd></div>
-    <div><dt>Reservation</dt><dd>{evidenceText(candidate.ba7?.reservation_id)}</dd></div>
-    <div><dt>Snapshot</dt><dd>{evidenceText(candidate.ba8?.snapshot_id)}</dd></div>
-    <div><dt>BA-8 package</dt><dd>{evidenceText(candidate.ba8?.package_id)}</dd></div>
-  </dl></details>;
+function stageProgress(stageStatus: CandidateStageEvidence["status"]) {
+  if (!isRecord(stageStatus)) return readable(typeof stageStatus === "string" ? stageStatus : null);
+  const labels = Object.freeze([ [stageKeys.stage1, "Stage 1"], [stageKeys.stage15, "Stage 1.5"], [stageKeys.stage2, "Stage 2"] ] as const);
+  const values = labels.flatMap(([keys, label]) => {
+    const signal = keys.map((key) => stageStatus[key]).find((value) => value !== null && value !== undefined);
+    const status = typeof signal === "string" ? signal : isRecord(signal) && typeof signal.status === "string" ? signal.status : null;
+    return status ? [`${label}: ${readable(status)}`] : [];
+  });
+  return values.length ? values.join(" · ") : "Not recorded";
 }
 
-function CandidateDetail({ candidate }: Readonly<{ candidate: BrainCandidate }>) {
-  const lineage = candidate.improvement_history?.[0];
-  return <section className="brain-detail" aria-labelledby="candidate-detail-title">
-    <div className="brain-section-heading"><div><p>Candidate evidence</p><h2 id="candidate-detail-title">{candidate.label || shortId(candidate.candidate_id)}</h2></div><span>{shortId(candidate.candidate_id)}</span></div>
-    <p className="brain-detail__meta">Created {dateTime(candidate.created_at)} · Updated {dateTime(candidate.updated_at)}</p>
-    <div className="brain-detail-grid">
-      <article><h3>Hypothesis <Help label="Hypothesis" /></h3><p>{evidenceText(candidate.summary?.hypothesis)}</p><p><b>Null:</b> {evidenceText(candidate.summary?.null_hypothesis)}</p><p><b>Alternative:</b> {evidenceText(candidate.summary?.alternative_hypothesis)}</p></article>
-      <article><h3>Modular components <Help label="Modular Components" /></h3><p>{evidenceText(candidate.summary?.components)}</p><p><b>Expected regime:</b> {evidenceText(candidate.summary?.expected_market_condition)}</p><p><b>Failure condition:</b> {evidenceText(candidate.summary?.failure_condition)}</p></article>
-      <article><h3>Stage timeline <Help label="Stage Timeline" /></h3><ol className="brain-timeline">{(candidate.stages || []).map((stage) => <StageRow key={stage.stage} stage={stage} />)}</ol></article>
-      <article><h3>BA-6 learning <Help label="BA-6 Learning" /></h3><p>{evidenceText(candidate.learning?.facts)}</p><p>{evidenceText(candidate.learning?.inferences)}</p><p className="brain-muted">{evidenceText(candidate.learning?.next_research_recommendation)}</p></article>
-      <article><h3>BA-7 decision <Help label="BA-7 Decision" /></h3><p>{evidenceText(candidate.ba7?.initial_action)} → {evidenceText(candidate.ba7?.final_action)}</p><p>{evidenceText(candidate.ba7?.reason)}</p><p><b>Repair:</b> {evidenceText(candidate.ba7?.changed_component)}</p><p>{evidenceText(candidate.ba7?.repair_thesis)}</p></article>
-      <article><h3>Capacity <Help label="Capacity" /></h3><p><b>Reserved:</b> {evidenceText(candidate.ba7?.capacity?.reserved)}</p><p><b>Released:</b> {evidenceText(candidate.ba7?.capacity?.released)}</p><p>{candidate.ba7?.released ? "Terminal capacity released." : "No terminal capacity release recorded."}</p></article>
-      <article><h3>Improvement lineage</h3><p><b>Parent:</b> {shortId(lineage?.parent_candidate_id || candidate.parent_candidate_id)}</p><p><b>Repair child:</b> {shortId(lineage?.child_candidate_id || candidate.child_candidate_id)}</p><p><b>Change:</b> {lineage?.changed_components?.join(" · ") || "Not recorded in this candidate artifact"}</p><p><b>Disposition:</b> {readable(lineage?.final_disposition || candidate.lifecycle_status || "unavailable")}</p></article>
-      <article className="brain-detail__wide"><h3>BA-8 limitations <Help label="BA-8 Delivery" /></h3><p><b>{evidenceText(candidate.ba8?.status)}</b></p><p>{evidenceText(candidate.ba8?.missing_requirements)}</p><p><b>Expiry:</b> {dateTime(candidate.ba8?.expiry)}</p><Metadata candidate={candidate} /></article>
-    </div>
+function StateBadge({ label, state }: Readonly<{ label: string; state: ProjectionState }>) {
+  return <span className={`research-state research-state--${state}`} role="status" aria-label={`${label} state: ${readable(state)}`}><i aria-hidden="true" />{readable(state)}</span>;
+}
+
+function ProjectionHeader<T>({ label, title, titleId, projection }: Readonly<{ label: string; title: string; titleId: string; projection: Projection<T> }>) {
+  return <header className="research-panel__header"><div><p>{label}</p><h2 id={titleId}>{title}</h2></div><StateBadge label={label} state={projection.state} /></header>;
+}
+
+function ProjectionMessage<T>({ projection }: Readonly<{ projection: Projection<T> }>) {
+  if (projection.state === "available" && projection.data) return null;
+  const fallback = projection.state === "empty" ? "No records are currently present." : `This ${projection.state} projection has no current evidence.`;
+  return <p className={`research-message research-message--${projection.state}`}>{projection.reason || fallback}</p>;
+}
+
+function DataPoint({ label, value, note }: Readonly<{ label: string; value: ReactNode; note?: ReactNode }>) {
+  return <div className="research-data-point"><dt>{label}</dt><dd>{value}{note ? <small>{note}</small> : null}</dd></div>;
+}
+
+function Breakdown({ title, counts }: Readonly<{ title: string; counts: Readonly<Record<string, number>> | null | undefined }>) {
+  const entries = Object.entries(counts || {});
+  return <section className="breakdown" aria-label={title}><h3>{title}</h3>{entries.length ? <dl>{entries.map(([label, count]) => <DataPoint key={label} label={atomText(label)} value={exactNumber(count)} />)}</dl> : <p>No breakdown recorded.</p>}</section>;
+}
+
+function StageOutcome({ name, stage, status, reason }: Readonly<{ name: string; stage: CandidateStage | null | undefined; status: string; reason?: string | null }>) {
+  const metrics = [
+    typeof stage?.trades === "number" ? `${stage.trades} trades` : null,
+    typeof stage?.profit_factor === "number" ? `PF ${stage.profit_factor}` : null,
+    typeof stage?.net_pnl === "number" ? `PnL ${stage.net_pnl}` : null
+  ].filter(Boolean).join(" · ");
+  return <li className={`candidate-step candidate-step--${statusClass(status)}`}><span>{name}</span><strong>{name} — {readable(status)}</strong><p>{metrics || readable(reason, status === "skipped" || status === "not_permitted" ? "Prior gate did not pass" : "No metrics recorded")}</p>{typeof stage?.max_drawdown === "number" ? <small>Drawdown {stage.max_drawdown}</small> : null}</li>;
+}
+
+function WorkerPanel({ projection }: Readonly<{ projection: KnowledgeOperationsData["worker"] }>) {
+  const worker = projection.data;
+  const spark = worker?.spark;
+  return <section className="research-panel research-panel--worker" aria-labelledby="worker-title">
+    <ProjectionHeader label="Worker" title="Runtime pulse" titleId="worker-title" projection={projection} />
+    <ProjectionMessage projection={projection} />
+    {worker ? <>
+      <dl className="research-data-grid">
+        <DataPoint label="Version" value={worker.version || "Not recorded"} />
+        <DataPoint label="Heartbeat" value={dateTime(worker.heartbeat_at)} note={projection.state === "stale" ? "Heartbeat is outside the current freshness window." : undefined} />
+        <DataPoint label="Scheduler" value={`Scheduler ${readable(worker.scheduler?.status)}`} note={worker.scheduler?.pause_reason ? readable(worker.scheduler.pause_reason) : undefined} />
+        <DataPoint label="Last cycle" value={dateTime(worker.scheduler?.last_run_at, "No completed cycle recorded")} />
+        <DataPoint label="Next cycle" value={dateTime(worker.scheduler?.next_run_at, "Not scheduled")} />
+        <DataPoint label="Last crawl" value={dateTime(worker.last_crawl_at, "No crawl recorded")} />
+        <DataPoint label="Authority" value="Research and paper only" note="No live, capital, order, promotion, or configuration authority." />
+      </dl>
+      <div className="spark-block"><span>Spark advisory bridge</span><strong>Spark {readable(spark?.status)}</strong><p>{exactNumber(spark?.variants_generated)} generated · {exactNumber(spark?.variants_admitted)} admitted · limit {exactNumber(spark?.variant_limit)}</p><dl><DataPoint label="Runtime" value={readable(spark?.runtime_status)} /><DataPoint label="Deterministic fallback" value={spark?.fallback === null || spark?.fallback === undefined ? "Not recorded" : spark.fallback ? "Active" : "Not active"} /></dl></div>
+    </> : null}
   </section>;
 }
 
-function ActivityFeed({ events }: Readonly<{ events: BrainEvent[] }>) {
-  return <section className="brain-activity" aria-labelledby="activity-title"><div className="brain-section-heading"><div><p>Structured audit</p><h2 id="activity-title">Activity feed <Help label="Activity Feed" /></h2></div><span>Newest first</span></div><ol>{events.map((event, index) => <li key={event.id || `${event.type}-${index}`}><time>{dateTime(event.timestamp)}</time><strong>{readable(event.type || "event")}</strong><p>{event.explanation || "No explanation recorded."}</p><span>{shortId(event.candidate_id)}{event.stage_id ? ` · ${shortId(event.stage_id)}` : ""}{event.package_id ? ` · ${shortId(event.package_id)}` : ""}</span></li>)}</ol></section>;
+function QueuePanel({ projection }: Readonly<{ projection: KnowledgeOperationsData["queue"] }>) {
+  const queue = projection.data;
+  const items = recordItems(queue?.items);
+  const decisions = recordItems(queue?.admission_decisions);
+  return <section className="research-panel" aria-labelledby="queue-title">
+    <ProjectionHeader label="Queue" title="Bounded work" titleId="queue-title" projection={projection} />
+    <ProjectionMessage projection={projection} />
+    {queue ? <>
+      <dl className="queue-counts"><DataPoint label="Pending" value={exactNumber(queue.counts?.pending)} /><DataPoint label="Running" value={exactNumber(queue.counts?.running)} /><DataPoint label="Held" value={exactNumber(queue.counts?.held)} /></dl>
+      <div className="capacity-block"><h3>Active paper capacity</h3><dl><DataPoint label="Compute" value={exactNumber(queue.active_capacity?.compute)} /><DataPoint label="Seconds" value={exactNumber(queue.active_capacity?.time_seconds)} /><DataPoint label="Stage runs" value={exactNumber(queue.active_capacity?.stage_runs)} /><DataPoint label="Active candidates" value={exactNumber(queue.active_capacity?.active_candidates)} /></dl></div>
+      <section className="compact-ledger"><h3>Research queue</h3>{items.length ? <ul>{items.map((item, index) => <li key={String(recordValue(item, "candidate_id", "job_id", "id") || index)}><strong>{String(recordValue(item, "candidate_id", "job_id", "id") || "Unnamed job")}</strong><span>{evidenceText([recordValue(item, "kind", "job_type"), recordValue(item, "status"), recordValue(item, "priority")])}</span><p>{evidenceText(recordValue(item, "reason", "reason_codes"), "No hold reason recorded.")}</p></li>)}</ul> : <p>Queue clear — no jobs recorded.</p>}</section>
+      <section className="compact-ledger"><h3>Research Admission Gate</h3>{decisions.length ? <ul>{decisions.map((decision, index) => <li key={String(recordValue(decision, "decision_id", "candidate_id", "id") || index)}><strong>{String(recordValue(decision, "candidate_id", "decision_id", "id") || "Admission decision")}</strong><span>{evidenceText([recordValue(decision, "status"), recordValue(decision, "rank")])}</span><p>{evidenceText(recordValue(decision, "reason_codes", "reasons"))}</p></li>)}</ul> : <p>No admission-gate decision recorded.</p>}</section>
+    </> : null}
+  </section>;
 }
 
-function ResearchContent({ data }: Readonly<{ data: BrainResearchData }>) {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const candidate = data.candidates.find((item) => item.candidate_id === selectedId) || data.candidates[0];
-  const sidecar = data.status.service || {};
-  return <>
-    <nav className="brain-nav" aria-label="Operations Console"><a href={routeHref("/")}>Dashboard</a><a aria-current="page" href={routeHref("/brain-research")}>Brain Research</a></nav>
-    <section className="brain-hero" aria-labelledby="brain-title"><p>Read-only observability · paper research only</p><h1 id="brain-title">Brain Research <Help label="Brain Research" /></h1><p className="brain-hero__deck">Governed candidate evidence, gates, reflection and delivery disposition. This surface cannot start cycles, route Stages, approve delivery, or affect trading.</p><dl className="brain-status"><div><dt>Sidecar <Help label="Sidecar" /></dt><dd>Sidecar {String(sidecar.state || "unavailable")}</dd></div><div><dt>Latest autonomous cycle <Help label="Latest Autonomous Cycle" /></dt><dd>{dateTime(data.status.last_autonomous_cycle_at)}</dd></div><div><dt>Authority <Help label="Authority" /></dt><dd>Denied for live control</dd></div></dl></section>
-    <section className="brain-candidates" aria-labelledby="candidate-list-title"><div className="brain-section-heading"><div><p>Candidate ledger</p><h2 id="candidate-list-title">Strategies / candidates <Help label="Strategies / Candidates" /></h2></div><span>{data.candidates.length} recorded</span></div>{data.candidates.map((item) => <a className="brain-candidate" href={`#${encodeURIComponent(item.candidate_id)}`} key={item.candidate_id} onClick={() => setSelectedId(item.candidate_id)}><div><span>{item.target_bot || "Not recorded"} · {item.symbol || "Not recorded"} · {item.timeframe || "Not recorded"}</span><strong>{item.label || shortId(item.candidate_id)}</strong><small>{shortId(item.candidate_id)}</small></div><div className="brain-candidate__stages">{["stage1", "stage1_5", "stage2"].map((stage) => <span key={stage}><b>{stageName(stage)}</b>{readable(stageStatus(item.stage?.[stage]))}</span>)}</div><div className="brain-candidate__metrics"><Metric label="Trades" value={item.performance?.trades} help="Trades" /><Metric label="PF" value={item.performance?.profit_factor} help="PF" /><Metric label="PnL" value={item.performance?.net_pnl} help="PnL" /><Metric label="Drawdown" value={item.performance?.drawdown} help="Drawdown" /></div><div className="brain-candidate__decision"><span>BA-7 {evidenceText(item.ba7?.final_action)}</span><strong>BA-8 {evidenceText(item.ba8?.status)}</strong></div></a>)}</section>
-    {candidate ? <CandidateDetail candidate={candidate} /> : <p className="brain-empty">No completed paper candidate is available.</p>}
-    <ActivityFeed events={data.events} />
-  </>;
+function ConnectorRow({ connector }: Readonly<{ connector: ConnectorOutcome }>) {
+  return <li><span className={`connector-mark connector-mark--${connector.outcome || "unavailable"}`} aria-hidden="true" /><div><strong>{connector.label || connector.id || "Unnamed connector"}</strong><p>{connector.detail || "No connector detail recorded."}</p></div><div><b>{readable(connector.outcome)}</b><time>{dateTime(connector.last_run_at)}</time></div></li>;
+}
+
+function SourcesPanel({ projection }: Readonly<{ projection: KnowledgeOperationsData["sources"] }>) {
+  const sources = projection.data;
+  const connectors = recordItems(sources?.connectors) as ReadonlyArray<ConnectorOutcome>;
+  const failures = recordItems(sources?.fetch_failures);
+  return <section className="research-panel research-panel--sources" aria-labelledby="sources-title">
+    <ProjectionHeader label="Sources" title="Connector ledger" titleId="sources-title" projection={projection} />
+    <ProjectionMessage projection={projection} />
+    {sources ? <>
+      <dl className="source-totals"><DataPoint label="Receipts" value={exactNumber(sources.receipt_count)} /><DataPoint label="Snapshots" value={exactNumber(sources.snapshot_count)} /><DataPoint label="Quarantined" value={exactNumber(sources.quarantine_count)} /><DataPoint label="Last crawl" value={dateTime(sources.last_crawl_at, "No crawl recorded")} /></dl>
+      <div className="breakdown-pair"><Breakdown title="Sources by trust tier" counts={sources.counts_by_tier} /><Breakdown title="Sources by domain" counts={sources.counts_by_domain} /></div>
+      {connectors.length ? <ul className="connector-ledger">{connectors.map((connector, index) => <ConnectorRow connector={connector} key={connector.id || `${connector.label}-${index}`} />)}</ul> : <p className="research-empty-note">No connector outcomes recorded.</p>}
+      <section className="compact-ledger"><h3>Fetch failures</h3>{failures.length ? <ul>{failures.map((failure, index) => <li key={String(recordValue(failure, "failure_id", "source_id") || index)}><strong>{String(recordValue(failure, "source_id", "connector_id") || "Unknown source")}</strong><span>{evidenceText(recordValue(failure, "reason", "code", "status"))}</span><p>{evidenceText([recordValue(failure, "count"), dateTime(String(recordValue(failure, "occurred_at", "last_failed_at") || ""))])}</p></li>)}</ul> : <p>No fetch failures recorded.</p>}</section>
+    </> : null}
+  </section>;
+}
+
+function TrustPanel({ projection }: Readonly<{ projection: KnowledgeOperationsData["trust"] }>) {
+  const trust = projection.data;
+  const gaps = Array.isArray(trust?.active_knowledge_gaps) ? trust.active_knowledge_gaps.filter((gap) => typeof gap === "string" || isRecord(gap)) : [];
+  const skills = recordItems(trust?.skills);
+  const decisions = recordItems(trust?.admission_decisions);
+  return <section className="research-panel" aria-labelledby="trust-title">
+    <ProjectionHeader label="Trust" title="Admission chain" titleId="trust-title" projection={projection} />
+    <ProjectionMessage projection={projection} />
+    {trust ? <>
+      <dl className="trust-totals"><DataPoint label="Registered sources" value={exactNumber(trust.registered_source_count)} /><DataPoint label="Trusted sources" value={exactNumber(trust.trusted_source_count)} /><DataPoint label="Admitted claims" value={exactNumber(trust.admitted_claim_count)} /><DataPoint label="Validated skills" value={exactNumber(trust.validated_skill_count)} /><DataPoint label="Active gaps" value={exactNumber(trust.active_gap_count ?? gaps.length)} /></dl>
+      <div className="admission-note"><span>Latest admission</span><strong>{readable(trust.latest_admission?.status)}</strong><p>{trust.latest_admission?.reason || "No admission decision recorded."}</p></div>
+      <section className="compact-ledger"><h3>Active knowledge gaps</h3>{gaps.length ? <ul>{gaps.map((gap, index) => { const record = isRecord(gap) ? gap : {}; return <li key={String(recordValue(record, "gap_id", "id") || index)}><strong>{String(recordValue(record, "gap_id", "id") || gap)}</strong><span>{evidenceText([recordValue(record, "status"), recordValue(record, "priority")])}</span><p>{String(recordValue(record, "summary", "question", "query", "description") || gap)}</p></li>; })}</ul> : <p>No active knowledge gaps recorded.</p>}</section>
+      <section className="compact-ledger"><h3>Validated skill versions</h3>{skills.length ? <ul>{skills.map((skill, index) => <li key={String(recordValue(skill, "skill_id", "id") || index)}><strong>{String(recordValue(skill, "skill_id") || "Unnamed skill")} · v{evidenceText(recordValue(skill, "version"))} · {readable(typeof recordValue(skill, "validation_state") === "string" ? String(recordValue(skill, "validation_state")) : null)}</strong><span>{shortId(typeof recordValue(skill, "validation_receipt_id") === "string" ? String(recordValue(skill, "validation_receipt_id")) : null)}</span><p>Registry {shortId(typeof recordValue(skill, "registry_snapshot_id") === "string" ? String(recordValue(skill, "registry_snapshot_id")) : null)}</p></li>)}</ul> : <p>No skill version records available.</p>}</section>
+      <section className="compact-ledger"><h3>Claim admission decisions</h3>{decisions.length ? <ul>{decisions.map((decision, index) => <li key={String(recordValue(decision, "admission_id", "id") || index)}><strong>{String(recordValue(decision, "admission_id", "id") || "Admission decision")}</strong><span>{evidenceText([recordValue(decision, "claim_id"), recordValue(decision, "status")])}</span><p>{evidenceText(recordValue(decision, "reason_codes", "reasons"))}</p></li>)}</ul> : <p>No claim admission history recorded.</p>}</section>
+    </> : null}
+  </section>;
+}
+
+function CandidateOutcome({ candidate }: Readonly<{ candidate: LatestCandidate | null | undefined }>) {
+  if (!candidate) return <p className="candidate-empty">No candidate outcome recorded.</p>;
+  const title = evidenceText(candidate.ba8?.strategy_summary, shortId(candidate.candidate_id));
+  const ba6Status = candidate.ba6 ? "recorded" : "unavailable";
+  const ba7Status = candidate.ba7?.action === "retire_candidate" ? "retired" : candidate.ba7?.action || "unavailable";
+  const stage1 = stageSignal(candidate.stage?.status, stageKeys.stage1, candidate.stage?.stage1_metrics);
+  const stage15 = stageSignal(candidate.stage?.status, stageKeys.stage15, candidate.stage?.stage15_metrics);
+  const stage2 = stageSignal(candidate.stage?.status, stageKeys.stage2, candidate.stage?.stage2_metrics);
+  return <section className="candidate-outcome" aria-labelledby="candidate-title">
+    <header><div><p>Latest governed candidate</p><h2 id="candidate-title">{title}</h2></div><code>{shortId(candidate.candidate_id)}</code></header>
+    <section className="candidate-evidence"><h3>Candidate lineage</h3><dl><DataPoint label="Composition" value={candidate.lineage?.composition_id || "Not recorded"} /><DataPoint label="Hypothesis" value={candidate.lineage?.hypothesis_id || "Not recorded"} /><DataPoint label="Research spec" value={candidate.lineage?.research_spec_id || "Not recorded"} /><DataPoint label="StrategySpec" value={candidate.lineage?.strategy_spec_id || "Not recorded"} /><DataPoint label="Factory decision" value={candidate.lineage?.factory_decision_id || "Not recorded"} /><DataPoint label="Selected paper bot" value={candidate.lineage?.selected_bot_id || "Not recorded"} /></dl></section>
+    <section className="candidate-evidence"><h3>Exact Stage evidence</h3><dl><DataPoint label="Progress" value={stageProgress(candidate.stage?.status)} /><DataPoint label="Dataset" value={candidate.stage?.dataset_id || "Not recorded"} /><DataPoint label="Dataset SHA-256" value={candidate.stage?.dataset_sha256 || "Not recorded"} /><DataPoint label="Evidence IDs" value={evidenceText(candidate.stage?.evidence_ids)} /></dl></section>
+    <ol className="candidate-stage-line" aria-label="Stage outcomes"><StageOutcome name="Stage 1" stage={candidate.stage?.stage1_metrics} status={stage1.status} reason={stage1.reason} /><StageOutcome name="Stage 1.5" stage={candidate.stage?.stage15_metrics} status={stage15.status} reason={stage15.reason} /><StageOutcome name="Stage 2" stage={candidate.stage?.stage2_metrics} status={stage2.status} reason={stage2.reason} /></ol>
+    <div className="governed-outcomes">
+      <article className={`governed-outcome governed-outcome--${ba6Status}`}><span>BA-6</span><strong>BA-6 {readable(ba6Status)}</strong><h3>Failure classification</h3><p>{evidenceText(candidate.ba6?.failure_classification)}</p><dl><DataPoint label="Causal confidence" value={evidenceText(candidate.ba6?.causal_confidence)} /><DataPoint label="Components" value={evidenceText(candidate.ba6?.component_attribution)} /><DataPoint label="Regimes" value={evidenceText(candidate.ba6?.regime_attribution)} /><DataPoint label="Data limits" value={evidenceText(candidate.ba6?.data_limits)} /></dl><p>{candidate.ba6?.reusable_lesson || "No reusable lesson recorded."}</p></article>
+      <article className={`governed-outcome governed-outcome--${statusClass(ba7Status)}`}><span>BA-7</span><strong>BA-7 {readable(ba7Status)}</strong><p>{candidate.ba7?.action ? readable(candidate.ba7.action) : "No decision recorded."}</p><dl><DataPoint label="Decision" value={candidate.ba7?.decision_id || "Not recorded"} /><DataPoint label="Reasons" value={evidenceText(candidate.ba7?.reason_codes)} /><DataPoint label="Human boundary" value={candidate.ba7?.human_approval_required === null || candidate.ba7?.human_approval_required === undefined ? "Not recorded" : candidate.ba7.human_approval_required ? "Human approval required" : "Human approval not required"} /></dl></article>
+      <article className="governed-outcome governed-outcome--research"><span>Failure-directed research</span><strong>{candidate.directed_research?.knowledge_gap || "No knowledge gap recorded"}</strong><p>{candidate.directed_research?.books_index_searched_first === null || candidate.directed_research?.books_index_searched_first === undefined ? "Books-first search not recorded" : candidate.directed_research.books_index_searched_first ? "Books index searched first" : "Books index was not searched first"}</p><dl><DataPoint label="Queries" value={evidenceText(candidate.directed_research?.queries)} /><DataPoint label="Repair evidence" value={evidenceText(candidate.directed_research?.evidence_used_for_repairs)} /></dl></article>
+    </div>
+    <section className={`ba8-package ba8-package--${candidate.ba8?.status || "unavailable"}`}><header><div><span>BA-8 package</span><h3>BA-8 {readable(candidate.ba8?.status)}</h3></div><code>{candidate.ba8?.package_id || "No package ID"}</code></header><dl><DataPoint label="Strategy summary" value={evidenceText(candidate.ba8?.strategy_summary)} /><DataPoint label="Stage evidence" value={evidenceText(candidate.ba8?.stage_evidence)} /><DataPoint label="Risks" value={evidenceText(candidate.ba8?.risks)} /><DataPoint label="Limitations" value={evidenceText(candidate.ba8?.limitations)} /><DataPoint label="Evidence confidence" value={evidenceText(candidate.ba8?.evidence_confidence)} /><DataPoint label="Proposed target" value={evidenceText(candidate.ba8?.proposed_target)} /><DataPoint label="Package hash" value={candidate.ba8?.package_hash || "Not recorded"} /><DataPoint label="Expiry" value={dateTime(candidate.ba8?.expiry)} /><DataPoint label="Required human decision" value={evidenceText(candidate.ba8?.required_human_decision)} /><DataPoint label="Blocked reasons" value={evidenceText(candidate.ba8?.blocked_reasons)} /></dl></section>
+  </section>;
+}
+
+function OperationsContent({ data }: Readonly<{ data: KnowledgeOperationsData }>) {
+  return <><nav className="brain-nav" aria-label="Operations Console"><a href={routeHref("/")}>Dashboard</a><a aria-current="page" href={routeHref("/brain-research")}>Knowledge operations</a></nav><header className="research-hero"><div><p>Autonomous research · read-only evidence</p><h1>Knowledge operations</h1><p className="research-hero__deck">A private-console view of public-web learning, bounded paper research, immutable admission and governed candidate outcomes.</p></div><div className="authority-seal" aria-label="Authority boundary"><span>Authority boundary</span><strong>Zero live control</strong><p>No action on this page can run, retry, approve, deliver, apply, promote, or configure anything.</p></div></header><div id="operations-evidence" className="research-layout"><WorkerPanel projection={data.worker} /><QueuePanel projection={data.queue} /><SourcesPanel projection={data.sources} /><TrustPanel projection={data.trust} /></div><CandidateOutcome candidate={data.worker.data?.latest_candidate} /><footer className="research-footer"><span>Last projection updates</span><p>{Object.entries(data).map(([key, projection]) => `${endpointLabels[key as keyof typeof endpointLabels]} ${dateTime(projection.updatedAt)}`).join(" · ")}</p></footer></>;
 }
 
 export default function BrainResearch() {
-  const [data, setData] = useState<BrainResearchData | null>(null);
+  const [data, setData] = useState<KnowledgeOperationsData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => { let active = true; loadBrainResearch().then((result) => { if (active) setData(result); }).catch((reason: unknown) => { if (active) setError(reason instanceof Error ? reason.message : "brain_api_unavailable"); }); return () => { active = false; }; }, []);
-  return <main id="main" className="brain-research"><a className="skip-link" href="#candidate-list-title">Skip to candidates</a>{!configuredBrainApiBase() ? <section className="brain-notice"><h1>Brain Research</h1><p>Brain API endpoint is not configured.</p><p>This read-only interface remains unavailable until its authenticated same-origin API route is configured.</p></section> : error ? <section className="brain-notice"><h1>Brain Research</h1><p>Read-only Brain data is unavailable.</p><code>{error}</code></section> : data ? <ResearchContent data={data} /> : <section className="brain-notice"><h1>Brain Research</h1><p>Loading read-only research evidence…</p></section>}</main>;
+  useEffect(() => { let active = true; loadKnowledgeOperations().then((result) => { if (active) setData(result); }).catch((reason: unknown) => { if (active) setError(reason instanceof Error ? reason.message : "research_api_unavailable"); }); return () => { active = false; }; }, []);
+  return <main id="main" className="brain-research">{!configuredBrainApiBase() ? <section className="brain-notice"><p>Read-only private console</p><h1>Knowledge operations</h1><p>Brain research projections are not configured for this origin.</p></section> : error ? <section className="brain-notice"><p>Read-only private console</p><h1>Knowledge operations</h1><p>Research observability could not initialise.</p><code>{error}</code></section> : data ? <OperationsContent data={data} /> : <section className="brain-notice" aria-live="polite"><p>Read-only private console</p><h1>Knowledge operations</h1><p>Loading bounded research evidence…</p></section>}</main>;
 }

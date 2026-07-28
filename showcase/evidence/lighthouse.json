@@ -1,13 +1,13 @@
 {
   "reportVersion": "1.0.0",
-  "generatedAt": "2026-07-28T01:23:56.559Z",
+  "generatedAt": "2026-07-28T08:52:18.281Z",
   "tool": "Lighthouse 13.4.0",
   "protocol": {
     "preset": "desktop",
     "runsPerRoute": 3,
     "statistic": "median"
   },
-  "buildFingerprint": "ba7565e1bbb4c1aa2554845e2d554e02ae74b5ff08141506b1b1626c7d65c7b3",
+  "buildFingerprint": "beffa9c9f162bf0a187947834d2376795b8f26d15554fbd1ca584acbf765ed00",
   "pass": true,
   "routes": [
     {
@@ -20,8 +20,8 @@
       },
       "medians": {
         "performanceScore": 100,
-        "lcpMs": 553.5,
-        "tbtMs": 0,
+        "lcpMs": 550.6,
+        "tbtMs": 0.5,
         "cls": 0
       },
       "runs": [
@@ -29,31 +29,31 @@
           "run": 1,
           "performanceScore": 100,
           "fcpMs": 432.9,
-          "lcpMs": 559.1,
-          "tbtMs": 0,
+          "lcpMs": 559.5,
+          "tbtMs": 9,
           "cls": 0,
-          "speedIndexMs": 477.2,
-          "ttiMs": 561.1
+          "speedIndexMs": 575.2,
+          "ttiMs": 629.5
         },
         {
           "run": 2,
           "performanceScore": 100,
-          "fcpMs": 426.9,
-          "lcpMs": 550.7,
+          "fcpMs": 426.8,
+          "lcpMs": 550.6,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 452.9,
-          "ttiMs": 552.7
+          "speedIndexMs": 491.6,
+          "ttiMs": 552.6
         },
         {
           "run": 3,
           "performanceScore": 100,
-          "fcpMs": 429.3,
-          "lcpMs": 553.5,
-          "tbtMs": 0,
+          "fcpMs": 426.7,
+          "lcpMs": 550.4,
+          "tbtMs": 0.5,
           "cls": 0,
-          "speedIndexMs": 457.2,
-          "ttiMs": 555.5
+          "speedIndexMs": 484.9,
+          "ttiMs": 603.4
         }
       ]
     },
@@ -67,40 +67,40 @@
       },
       "medians": {
         "performanceScore": 100,
-        "lcpMs": 531.6,
+        "lcpMs": 531.1,
         "tbtMs": 0,
         "cls": 0
       },
       "runs": [
         {
           "run": 1,
-          "performanceScore": 100,
-          "fcpMs": 449.8,
-          "lcpMs": 559,
-          "tbtMs": 0,
+          "performanceScore": 94,
+          "fcpMs": 426.7,
+          "lcpMs": 650,
+          "tbtMs": 190,
           "cls": 0,
-          "speedIndexMs": 561.6,
-          "ttiMs": 559
+          "speedIndexMs": 786.4,
+          "ttiMs": 770
         },
         {
           "run": 2,
           "performanceScore": 100,
-          "fcpMs": 426.6,
-          "lcpMs": 529.9,
+          "fcpMs": 425.9,
+          "lcpMs": 529.1,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 478.7,
-          "ttiMs": 529.9
+          "speedIndexMs": 491.1,
+          "ttiMs": 529.1
         },
         {
           "run": 3,
           "performanceScore": 100,
-          "fcpMs": 427.7,
-          "lcpMs": 531.6,
+          "fcpMs": 427.6,
+          "lcpMs": 531.1,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 488.9,
-          "ttiMs": 531.6
+          "speedIndexMs": 500.7,
+          "ttiMs": 531.1
         }
       ]
     },
@@ -114,40 +114,40 @@
       },
       "medians": {
         "performanceScore": 100,
-        "lcpMs": 590.9,
-        "tbtMs": 0,
+        "lcpMs": 589.1,
+        "tbtMs": 4.5,
         "cls": 0
       },
       "runs": [
         {
           "run": 1,
           "performanceScore": 100,
-          "fcpMs": 426.8,
-          "lcpMs": 590.5,
-          "tbtMs": 0,
+          "fcpMs": 429.2,
+          "lcpMs": 593.4,
+          "tbtMs": 33,
           "cls": 0,
-          "speedIndexMs": 730.8,
-          "ttiMs": 596.5
+          "speedIndexMs": 821.8,
+          "ttiMs": 715.4
         },
         {
           "run": 2,
           "performanceScore": 100,
-          "fcpMs": 427.1,
-          "lcpMs": 590.9,
+          "fcpMs": 425.9,
+          "lcpMs": 589.1,
           "tbtMs": 0,
           "cls": 0,
-          "speedIndexMs": 717.6,
-          "ttiMs": 596.9
+          "speedIndexMs": 729.7,
+          "ttiMs": 595.1
         },
         {
           "run": 3,
           "performanceScore": 100,
-          "fcpMs": 427.2,
-          "lcpMs": 591.1,
-          "tbtMs": 0,
+          "fcpMs": 425.8,
+          "lcpMs": 589,
+          "tbtMs": 4.5,
           "cls": 0,
-          "speedIndexMs": 711.3,
-          "ttiMs": 597.1
+          "speedIndexMs": 694.2,
+          "ttiMs": 654
         }
       ]
     }

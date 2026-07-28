@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added a read-only Knowledge Operations console for worker, queue, source, trust, Stage, BA-6, BA-7, BA-8, and failure-directed research evidence.
+- Bound the console to exactly four GET-only research projections with fail-closed envelope handling, partial-state visibility, producer-shaped Stage status support, and no mutation controls.
+- Added desktop/mobile, keyboard, 200% zoom, axe, malformed-envelope, and malformed nested-evidence coverage.
+
 ## 2.0.0 — 2026-07-10
 
 - Rebuilt DEMETA Frontend as a compact, reference-routed skill.

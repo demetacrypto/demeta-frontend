@@ -1,6 +1,6 @@
 {
   "reportVersion": "1.0.0",
-  "generatedAt": "2026-07-28T01:24:01.123Z",
+  "generatedAt": "2026-07-28T08:52:31.602Z",
   "engine": "axe-core via @axe-core/playwright",
   "target": "WCAG 2.2 AA",
   "pass": true,
