@@ -284,8 +284,37 @@ function BrainDecisionFlow({ data }: Readonly<{ data: KnowledgeOperationsData }>
   </section>;
 }
 
+function compactMetric(value: number | null | undefined, fractionDigits = 2) {
+  return typeof value === "number" && Number.isFinite(value)
+    ? new Intl.NumberFormat("en-AU", { maximumFractionDigits: fractionDigits }).format(value)
+    : "Not recorded";
+}
+
+function OperatorSummary({ data }: Readonly<{ data: KnowledgeOperationsData }>) {
+  const candidate = data.worker.data?.latest_candidate;
+  const stage = candidate?.stage;
+  const stage1 = stageSignal(stage?.status || null, stageKeys.stage1, stage?.stage1_metrics);
+  const queue = data.queue.data?.counts;
+  const source = data.sources.data;
+  const query = candidate?.directed_research?.queries?.filter((item): item is string => typeof item === "string" && item.trim().length > 0)[0];
+  const noChange = candidate?.ba8?.status === "blocked" || stage1.status === "failed";
+  return <section className="operator-summary" aria-labelledby="operator-summary-title">
+    <header><div><p>Operator summary · live persisted evidence</p><h2 id="operator-summary-title">What happened — simply</h2></div><span>{dateTime(data.worker.updatedAt, "No current update")}</span></header>
+    <div className="operator-summary__status">
+      <strong>{noChange ? "No strategy was applied" : "Research outcome needs review"}</strong>
+      <p>{noChange ? "This was paper research only. No live trade, capital, configuration, or bot change was made." : "This page reports evidence only; it cannot apply a strategy or change a bot."}</p>
+    </div>
+    <div className="operator-summary__cards">
+      <article><span>1 · What ran</span><strong>Automatic research cycle</strong><p>Last completed: {dateTime(data.worker.data?.scheduler?.last_run_at, "Not recorded")}.</p><small>{exactNumber(source?.receipt_count)} source receipt · {exactNumber(data.trust.data?.admitted_claim_count)} claim admitted · {exactNumber(data.trust.data?.validated_skill_count)} skill validated</small></article>
+      <article className={stage1.status === "failed" ? "operator-summary__card--bad" : ""}><span>2 · Result</span><strong>Stage 1 — {readable(stage1.status)}</strong><p>{typeof stage?.stage1_metrics?.trades === "number" ? `${stage.stage1_metrics.trades} historical paper trades` : "No Stage-1 trade count recorded"}.</p><small>PF {compactMetric(stage?.stage1_metrics?.profit_factor, 2)} · PnL {compactMetric(stage?.stage1_metrics?.net_pnl, 0)}</small></article>
+      <article><span>3 · Why it stopped</span><strong>{stage1.status === "failed" ? "Stage 1 did not pass" : "Awaiting Stage evidence"}</strong><p>{stage1.status === "failed" ? "Stage 1.5 and Stage 2 were not run because the first gate failed." : "No downstream gate result is available yet."}</p><small>BA-8: {readable(candidate?.ba8?.status, "not recorded")}</small></article>
+      <article><span>4 · What happens next</span><strong>{readable(candidate?.ba7?.action, "no decision recorded")}</strong><p>{query ? `Research focus: ${query}.` : "No next research question recorded."}</p><small>Queue: {exactNumber(queue?.pending)} pending · {exactNumber(queue?.running)} running</small></article>
+    </div>
+  </section>;
+}
+
 function OperationsContent({ data }: Readonly<{ data: KnowledgeOperationsData }>) {
-  return <><nav className="brain-nav" aria-label="Operations Console"><a href={routeHref("/")}>Dashboard</a><a aria-current="page" href={routeHref("/brain-research")}>Knowledge operations</a></nav><header className="research-hero"><div><p>Autonomous research · read-only evidence</p><h1>Knowledge operations</h1><p className="research-hero__deck">A private-console view of public-web learning, bounded paper research, immutable admission and governed candidate outcomes.</p></div><div className="authority-seal" aria-label="Authority boundary"><span>Authority boundary</span><strong>Zero live control</strong><p>No action on this page can run, retry, approve, deliver, apply, promote, or configure anything.</p></div></header><BrainDecisionFlow data={data} /><div id="operations-evidence" className="research-layout"><WorkerPanel projection={data.worker} /><QueuePanel projection={data.queue} /><SourcesPanel projection={data.sources} /><TrustPanel projection={data.trust} /></div><CandidateOutcome candidate={data.worker.data?.latest_candidate} /><footer className="research-footer"><span>Last projection updates</span><p>{Object.entries(data).map(([key, projection]) => `${endpointLabels[key as keyof typeof endpointLabels]} ${dateTime(projection.updatedAt)}`).join(" · ")}</p></footer></>;
+  return <><nav className="brain-nav" aria-label="Operations Console"><a href={routeHref("/")}>Dashboard</a><a aria-current="page" href={routeHref("/brain-research")}>Knowledge operations</a></nav><header className="research-hero"><div><p>Autonomous research · read-only evidence</p><h1>Knowledge operations</h1><p className="research-hero__deck">A private-console view of bounded paper research. Start with the summary; technical evidence is available below when needed.</p></div><div className="authority-seal" aria-label="Authority boundary"><span>Authority boundary</span><strong>Zero live control</strong><p>No action on this page can run, retry, approve, deliver, apply, promote, or configure anything.</p></div></header><OperatorSummary data={data} /><details className="technical-audit"><summary>Technical audit details <small>IDs, flow map, source ledger, and full evidence</small></summary><div className="technical-audit__content"><BrainDecisionFlow data={data} /><div id="operations-evidence" className="research-layout"><WorkerPanel projection={data.worker} /><QueuePanel projection={data.queue} /><SourcesPanel projection={data.sources} /><TrustPanel projection={data.trust} /></div><CandidateOutcome candidate={data.worker.data?.latest_candidate} /></div></details><footer className="research-footer"><span>Last projection updates</span><p>{Object.entries(data).map(([key, projection]) => `${endpointLabels[key as keyof typeof endpointLabels]} ${dateTime(projection.updatedAt)}`).join(" · ")}</p></footer></>;
 }
 
 export default function BrainResearch() {
