@@ -1,6 +1,6 @@
 {
   "reportVersion": "1.0.0",
-  "generatedAt": "2026-07-10T18:41:50.986Z",
+  "generatedAt": "2026-07-28T00:37:35.906Z",
   "engine": "axe-core via @axe-core/playwright",
   "target": "WCAG 2.2 AA",
   "pass": true,
@@ -176,6 +176,12 @@
         {
           "expectedIndex": 16,
           "focusedIndex": 16,
+          "label": "04 Brain Research",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 17,
+          "focusedIndex": 17,
           "label": "Pause ambient motion",
           "focusVisible": true
         }
@@ -363,6 +369,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -496,6 +509,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -585,6 +605,12 @@
         {
           "expectedIndex": 12,
           "focusedIndex": 12,
+          "label": "04 Brain Research",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 13,
+          "focusedIndex": 13,
           "label": "Pause ambient motion",
           "focusVisible": true
         }
@@ -716,6 +742,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -821,6 +854,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -910,6 +950,12 @@
         {
           "expectedIndex": 12,
           "focusedIndex": 12,
+          "label": "04 Brain Research",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 13,
+          "focusedIndex": 13,
           "label": "Pause ambient motion",
           "focusVisible": true
         }
@@ -1041,6 +1087,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -1140,6 +1193,13 @@
           },
           {
             "label": "03 Foldline",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "04 Brain Research",
             "horizontallyContained": true,
             "clippedByAncestor": false,
             "targetSize": true,

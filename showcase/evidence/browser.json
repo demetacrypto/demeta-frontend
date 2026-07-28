@@ -1,6 +1,6 @@
 {
   "reportVersion": "1.0.0",
-  "generatedAt": "2026-07-10T18:41:50.986Z",
+  "generatedAt": "2026-07-28T00:37:35.906Z",
   "browser": "Chromium 149.0.7827.55",
   "pass": true,
   "runs": [
@@ -10,7 +10,7 @@
       "viewport": "1280x720",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 694.8,
+      "enhancementReadyMs": 719.3,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -34,10 +34,10 @@
         "lcpMs": 112,
         "cls": 0,
         "longTaskCount": 2,
-        "longTaskTotalMs": 295,
-        "observerBlockingProxyMs": 195,
-        "domContentLoadedMs": 42.6,
-        "loadMs": 42.7
+        "longTaskTotalMs": 311,
+        "observerBlockingProxyMs": 211,
+        "domContentLoadedMs": 47.3,
+        "loadMs": 47.3
       },
       "axe": {
         "violations": 0,
@@ -52,7 +52,7 @@
       "viewport": "390x844",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 597.5,
+      "enhancementReadyMs": 593.6,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -73,13 +73,13 @@
         "contextLost": false
       },
       "performance": {
-        "lcpMs": 76,
+        "lcpMs": 72,
         "cls": 0,
         "longTaskCount": 1,
-        "longTaskTotalMs": 135,
-        "observerBlockingProxyMs": 85,
-        "domContentLoadedMs": 24.5,
-        "loadMs": 24.5
+        "longTaskTotalMs": 134,
+        "observerBlockingProxyMs": 84,
+        "domContentLoadedMs": 24.7,
+        "loadMs": 24.7
       },
       "axe": {
         "violations": 0,
@@ -94,7 +94,7 @@
       "viewport": "1280x720",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 923.4,
+      "enhancementReadyMs": 1019.4,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -118,10 +118,10 @@
         "lcpMs": 56,
         "cls": 0,
         "longTaskCount": 2,
-        "longTaskTotalMs": 551,
-        "observerBlockingProxyMs": 451,
-        "domContentLoadedMs": 24,
-        "loadMs": 24.1
+        "longTaskTotalMs": 644,
+        "observerBlockingProxyMs": 544,
+        "domContentLoadedMs": 26.3,
+        "loadMs": 26.3
       },
       "axe": {
         "violations": 0,
@@ -136,7 +136,7 @@
       "viewport": "390x844",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 808.9,
+      "enhancementReadyMs": 821.3,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -159,11 +159,11 @@
       "performance": {
         "lcpMs": 56,
         "cls": 0,
-        "longTaskCount": 2,
-        "longTaskTotalMs": 452,
-        "observerBlockingProxyMs": 352,
-        "domContentLoadedMs": 26.8,
-        "loadMs": 26.8
+        "longTaskCount": 1,
+        "longTaskTotalMs": 412,
+        "observerBlockingProxyMs": 362,
+        "domContentLoadedMs": 29.5,
+        "loadMs": 29.5
       },
       "axe": {
         "violations": 0,
@@ -178,7 +178,7 @@
       "viewport": "1280x720",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 779,
+      "enhancementReadyMs": 747.4,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -202,10 +202,10 @@
         "lcpMs": 56,
         "cls": 0,
         "longTaskCount": 2,
-        "longTaskTotalMs": 386,
-        "observerBlockingProxyMs": 286,
-        "domContentLoadedMs": 22,
-        "loadMs": 22
+        "longTaskTotalMs": 370,
+        "observerBlockingProxyMs": 270,
+        "domContentLoadedMs": 22.8,
+        "loadMs": 22.8
       },
       "axe": {
         "violations": 0,
@@ -220,7 +220,7 @@
       "viewport": "390x844",
       "pass": true,
       "failures": [],
-      "enhancementReadyMs": 608.9,
+      "enhancementReadyMs": 692.6,
       "overflowPx": 0,
       "consoleErrors": [],
       "pageErrors": [],
@@ -244,10 +244,10 @@
         "lcpMs": 60,
         "cls": 0,
         "longTaskCount": 1,
-        "longTaskTotalMs": 191,
-        "observerBlockingProxyMs": 141,
-        "domContentLoadedMs": 26.1,
-        "loadMs": 26.1
+        "longTaskTotalMs": 278,
+        "observerBlockingProxyMs": 228,
+        "domContentLoadedMs": 29.7,
+        "loadMs": 29.7
       },
       "axe": {
         "violations": 0,
@@ -378,6 +378,12 @@
         {
           "expectedIndex": 16,
           "focusedIndex": 16,
+          "label": "04 Brain Research",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 17,
+          "focusedIndex": 17,
           "label": "Pause ambient motion",
           "focusVisible": true
         }
@@ -565,6 +571,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -698,6 +711,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -787,6 +807,12 @@
         {
           "expectedIndex": 12,
           "focusedIndex": 12,
+          "label": "04 Brain Research",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 13,
+          "focusedIndex": 13,
           "label": "Pause ambient motion",
           "focusVisible": true
         }
@@ -918,6 +944,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -1023,6 +1056,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -1112,6 +1152,12 @@
         {
           "expectedIndex": 12,
           "focusedIndex": 12,
+          "label": "04 Brain Research",
+          "focusVisible": true
+        },
+        {
+          "expectedIndex": 13,
+          "focusedIndex": 13,
           "label": "Pause ambient motion",
           "focusVisible": true
         }
@@ -1243,6 +1289,13 @@
             "hitTarget": true
           },
           {
+            "label": "04 Brain Research",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
             "label": "Pause ambient motion",
             "horizontallyContained": true,
             "clippedByAncestor": false,
@@ -1342,6 +1395,13 @@
           },
           {
             "label": "03 Foldline",
+            "horizontallyContained": true,
+            "clippedByAncestor": false,
+            "targetSize": true,
+            "hitTarget": true
+          },
+          {
+            "label": "04 Brain Research",
             "horizontallyContained": true,
             "clippedByAncestor": false,
             "targetSize": true,

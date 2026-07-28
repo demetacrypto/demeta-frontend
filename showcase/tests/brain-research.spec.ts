@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const apiBase = "http://127.0.0.1:4173/brain-api";
 const candidateId = "research-candidate:3f1a8bd817bbe19abd79219811d9861b4ab9e24c1c487d71195b7598e4a0272a";
+const routeWithMockApi = `/brain-research?brainApiBase=${encodeURIComponent(apiBase)}`;
 
 const candidate = {
   candidate_id: candidateId,
@@ -76,7 +77,7 @@ test.describe("Brain Research", () => {
 
   test("renders the certified failed-and-blocked paper cycle without mutation controls", async ({ page }) => {
     await mockBrainApi(page);
-    await page.goto("/brain-research");
+    await page.goto(routeWithMockApi);
 
     await expect(page.getByRole("heading", { name: "Brain Research" })).toBeVisible();
     await expect(page.getByText("Sidecar active")).toBeVisible();
@@ -96,7 +97,7 @@ test.describe("Brain Research", () => {
   test("opens the candidate evidence view and keeps the phone layout contained", async ({ page }) => {
     await mockBrainApi(page);
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/brain-research");
+    await page.goto(routeWithMockApi);
     await page.getByRole("link", { name: /mean_reversion/i }).click();
 
     await expect(page.getByRole("heading", { name: /mean_reversion/i })).toBeVisible();

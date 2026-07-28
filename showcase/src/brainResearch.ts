@@ -38,7 +38,10 @@ export type BrainResearchData = Readonly<{
   deliveryPackages: Record<string, unknown>[];
 }>;
 
-const apiBase = String(import.meta.env.VITE_BRAIN_RESEARCH_API_BASE || "").replace(/\/$/, "");
+const testApiBase = window.location.hostname === "127.0.0.1"
+  ? new URLSearchParams(window.location.search).get("brainApiBase") || ""
+  : "";
+const apiBase = String(import.meta.env.VITE_BRAIN_RESEARCH_API_BASE || testApiBase).replace(/\/$/, "");
 
 export function configuredBrainApiBase(): string | null {
   return apiBase || null;
