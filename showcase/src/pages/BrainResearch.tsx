@@ -103,6 +103,7 @@ function Metadata({ candidate }: Readonly<{ candidate: BrainCandidate }>) {
 }
 
 function CandidateDetail({ candidate }: Readonly<{ candidate: BrainCandidate }>) {
+  const lineage = candidate.improvement_history?.[0];
   return <section className="brain-detail" aria-labelledby="candidate-detail-title">
     <div className="brain-section-heading"><div><p>Candidate evidence</p><h2 id="candidate-detail-title">{candidate.label || shortId(candidate.candidate_id)}</h2></div><span>{shortId(candidate.candidate_id)}</span></div>
     <p className="brain-detail__meta">Created {dateTime(candidate.created_at)} · Updated {dateTime(candidate.updated_at)}</p>
@@ -113,13 +114,14 @@ function CandidateDetail({ candidate }: Readonly<{ candidate: BrainCandidate }>)
       <article><h3>BA-6 learning <Help label="BA-6 Learning" /></h3><p>{evidenceText(candidate.learning?.facts)}</p><p>{evidenceText(candidate.learning?.inferences)}</p><p className="brain-muted">{evidenceText(candidate.learning?.next_research_recommendation)}</p></article>
       <article><h3>BA-7 decision <Help label="BA-7 Decision" /></h3><p>{evidenceText(candidate.ba7?.initial_action)} → {evidenceText(candidate.ba7?.final_action)}</p><p>{evidenceText(candidate.ba7?.reason)}</p><p><b>Repair:</b> {evidenceText(candidate.ba7?.changed_component)}</p><p>{evidenceText(candidate.ba7?.repair_thesis)}</p></article>
       <article><h3>Capacity <Help label="Capacity" /></h3><p><b>Reserved:</b> {evidenceText(candidate.ba7?.capacity?.reserved)}</p><p><b>Released:</b> {evidenceText(candidate.ba7?.capacity?.released)}</p><p>{candidate.ba7?.released ? "Terminal capacity released." : "No terminal capacity release recorded."}</p></article>
+      <article><h3>Improvement lineage</h3><p><b>Parent:</b> {shortId(lineage?.parent_candidate_id || candidate.parent_candidate_id)}</p><p><b>Repair child:</b> {shortId(lineage?.child_candidate_id || candidate.child_candidate_id)}</p><p><b>Change:</b> {lineage?.changed_components?.join(" · ") || "Not recorded in this candidate artifact"}</p><p><b>Disposition:</b> {readable(lineage?.final_disposition || candidate.lifecycle_status || "unavailable")}</p></article>
       <article className="brain-detail__wide"><h3>BA-8 limitations <Help label="BA-8 Delivery" /></h3><p><b>{evidenceText(candidate.ba8?.status)}</b></p><p>{evidenceText(candidate.ba8?.missing_requirements)}</p><p><b>Expiry:</b> {dateTime(candidate.ba8?.expiry)}</p><Metadata candidate={candidate} /></article>
     </div>
   </section>;
 }
 
 function ActivityFeed({ events }: Readonly<{ events: BrainEvent[] }>) {
-  return <section className="brain-activity" aria-labelledby="activity-title"><div className="brain-section-heading"><div><p>Structured audit</p><h2 id="activity-title">Activity feed <Help label="Activity Feed" /></h2></div><span>Newest first</span></div><ol>{events.map((event, index) => <li key={event.id || `${event.type}-${index}`}><time>{dateTime(event.timestamp)}</time><strong>{readable(event.type || "event")}</strong><p>{event.explanation || "No explanation recorded."}</p><span>{shortId(event.candidate_id)}{event.stage_id ? ` · ${shortId(event.stage_id)}` : ""}</span></li>)}</ol></section>;
+  return <section className="brain-activity" aria-labelledby="activity-title"><div className="brain-section-heading"><div><p>Structured audit</p><h2 id="activity-title">Activity feed <Help label="Activity Feed" /></h2></div><span>Newest first</span></div><ol>{events.map((event, index) => <li key={event.id || `${event.type}-${index}`}><time>{dateTime(event.timestamp)}</time><strong>{readable(event.type || "event")}</strong><p>{event.explanation || "No explanation recorded."}</p><span>{shortId(event.candidate_id)}{event.stage_id ? ` · ${shortId(event.stage_id)}` : ""}{event.package_id ? ` · ${shortId(event.package_id)}` : ""}</span></li>)}</ol></section>;
 }
 
 function ResearchContent({ data }: Readonly<{ data: BrainResearchData }>) {

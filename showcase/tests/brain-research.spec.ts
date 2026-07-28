@@ -71,7 +71,7 @@ async function mockBrainApi(page: import("@playwright/test").Page) {
       : path === "/candidates"
         ? { items: [candidate] }
         : path === "/events"
-          ? { items: [{ id: "event:1", timestamp: available("2026-07-28T00:00:00Z"), type: "capacity_released", candidate_id: candidateId, stage_id: "stage-evidence:stage1", explanation: "Capacity released — 40 compute, 900 seconds, 3 Stage runs." }] }
+          ? { items: [{ id: "event:1", timestamp: available("2026-07-28T00:00:00Z"), type: "capacity_released", candidate_id: candidateId, stage_id: "stage-evidence:stage1", package_id: "ba8-package:sha256:blocked", explanation: "Capacity released — 40 compute, 900 seconds, 3 Stage runs." }] }
           : { items: [{ package_id: "ba8-package:sha256:blocked", status: "blocked", candidate_id: candidateId }] };
     await route.fulfill({ contentType: "application/json", body: JSON.stringify(payload) });
   });
@@ -102,6 +102,7 @@ test.describe("Brain Research", () => {
     await expect(page.getByText("0", { exact: true }).first()).toBeVisible();
     await expect(page.getByText("The repair was overconstrained; retire without a second repair.")).toBeVisible();
     await expect(page.getByText("Capacity released — 40 compute, 900 seconds, 3 Stage runs.")).toBeVisible();
+    await expect(page.getByText("ba8-packag…locked")).toBeVisible();
     await expect(page.getByText("BA-8 blocked")).toBeVisible();
     await expect(page.getByText(/Capital-normalized drawdown was not calculated/)).toBeVisible();
     await expect(page.getByRole("button", { name: /start|run|approve|deploy/i })).toHaveCount(0);
@@ -135,6 +136,8 @@ test.describe("Brain Research", () => {
     await expect(page.getByText("Modular components")).toBeVisible();
     await expect(page.getByText("Stage timeline")).toBeVisible();
     await expect(page.getByText("BA-8 limitations")).toBeVisible();
+    await expect(page.getByText("Improvement lineage")).toBeVisible();
+    await expect(page.getByText("Parent: candidate-…parent")).toBeVisible();
     await page.setViewportSize({ width: 390, height: 844 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
   });
