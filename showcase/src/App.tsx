@@ -4,7 +4,7 @@ import Vitreum from "./pages/Vitreum";
 import Foldline from "./pages/Foldline";
 import MaterialIndex from "./pages/MaterialIndex";
 import BrainResearch from "./pages/BrainResearch";
-import { currentRoute, routeHref } from "./routing";
+import { BRAIN_RESEARCH_ROUTE, currentRoute, routeHref } from "./routing";
 
 const studies = Object.freeze([
   { path: "/pressure-atlas", short: "Flow", label: "Pressure Atlas" },
@@ -18,7 +18,7 @@ function CurrentPage() {
   if (path === "/pressure-atlas") return <PressureAtlas />;
   if (path === "/vitreum") return <Vitreum />;
   if (path === "/foldline") return <Foldline />;
-  if (path === "/brain-research") return <BrainResearch />;
+  if (path === BRAIN_RESEARCH_ROUTE) return <BrainResearch />;
   return <MaterialIndex />;
 }
 
@@ -26,6 +26,8 @@ export function App() {
   const current = currentRoute();
   const [motionPaused, setMotionPaused] = useState(false);
   const currentStudy = studies.find(({ path }) => path === current);
+
+  if (current === BRAIN_RESEARCH_ROUTE) return <BrainResearch />;
 
   useEffect(() => {
     document.documentElement.dataset.userMotion = motionPaused ? "paused" : "running";
