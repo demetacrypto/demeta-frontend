@@ -253,8 +253,39 @@ function CandidateOutcome({ candidate }: Readonly<{ candidate: LatestCandidate |
   </section>;
 }
 
+function BrainDecisionFlow({ data }: Readonly<{ data: KnowledgeOperationsData }>) {
+  const candidate = data.worker.data?.latest_candidate;
+  const stage = candidate?.stage;
+  const stage1 = stageSignal(stage?.status || null, stageKeys.stage1, stage?.stage1_metrics);
+  const stage15 = stageSignal(stage?.status || null, stageKeys.stage15, stage?.stage15_metrics);
+  const stage2 = stageSignal(stage?.status || null, stageKeys.stage2, stage?.stage2_metrics);
+  const nodes = [
+    ["BA-0", "Thinking boundary", "available", "Immutable authority contract; read/derive only, no runtime or order authority."],
+    ["BA-1", "Memory spine", candidate?.lineage?.hypothesis_id ? "recorded" : "not_recorded", "Requires a descriptive, immutable event; it never grants execution authority."],
+    ["BA-2", "Source & claim admission", data.trust.data?.admitted_claim_count ? "admitted" : "unavailable", "Requires receipt-bound source evidence and fail-closed claim admission."],
+    ["BA-3", "Skill validation", data.trust.data?.validated_skill_count ? "validated" : "unavailable", "Requires a validated skill version and immutable receipt lineage."],
+    ["BA-4", "Hypothesis & protocol", candidate?.lineage?.hypothesis_id ? "recorded" : "unavailable", "Requires an observable contract and bounded experiment protocol."],
+    ["BA-5", "StrategySpec creation", candidate?.lineage?.strategy_spec_id ? "created" : "unavailable", "Requires an admitted BA-4 hypothesis and fixed strategy lineage."],
+    ["Stage 1", "Sealed evaluation", stage1.status || "unavailable", "Requires canonical declared-scope evidence; pass is required before Stage 1.5."],
+    ["Stage 1.5", "Robustness gate", stage15.status || "not_permitted", "Runs only after Stage 1 passes; otherwise it remains skipped/not permitted."],
+    ["Stage 2", "Paper shadow gate", stage2.status || "not_permitted", "Runs only after upstream gates pass; it is not live authority or auto-apply."],
+    ["BA-6", "Reflection", candidate?.ba6?.failure_classification ? "recorded" : "unavailable", "Requires immutable Stage evidence; records diagnosis and reusable research learning only."],
+    ["BA-7", "Bounded decision", candidate?.ba7?.action || "unavailable", "Requires BA-6 evidence and capacity accounting; selects only a bounded research action."],
+    ["BA-8", "Human-governed package", candidate?.ba8?.status || "unavailable", "Requires complete evidence and remains non-executable pending the explicit human boundary."],
+  ] as const;
+  return <section className="brain-flow" aria-labelledby="brain-flow-title" data-live-updated={data.worker.updatedAt || "unavailable"}>
+    <header><div><p>Live evidence path · 15 second visible refresh</p><h2 id="brain-flow-title">DEMETA thinking → governed strategy outcome</h2></div><span>{dateTime(data.worker.updatedAt, "No current worker projection")}</span></header>
+    <p className="brain-flow__intro">The diagram renders persisted evidence where it exists. Contractual steps stay explicitly contractual; absent evidence is never inferred as a pass.</p>
+    <ol className="brain-flow__nodes">
+      {nodes.map(([id, title, state, condition]) => <li key={id} className={`brain-flow__node brain-flow__node--${statusClass(String(state))}`}>
+        <span>{id}</span><strong>{title}</strong><b>{readable(String(state))}</b><p>{condition}</p>
+      </li>)}
+    </ol>
+  </section>;
+}
+
 function OperationsContent({ data }: Readonly<{ data: KnowledgeOperationsData }>) {
-  return <><nav className="brain-nav" aria-label="Operations Console"><a href={routeHref("/")}>Dashboard</a><a aria-current="page" href={routeHref("/brain-research")}>Knowledge operations</a></nav><header className="research-hero"><div><p>Autonomous research · read-only evidence</p><h1>Knowledge operations</h1><p className="research-hero__deck">A private-console view of public-web learning, bounded paper research, immutable admission and governed candidate outcomes.</p></div><div className="authority-seal" aria-label="Authority boundary"><span>Authority boundary</span><strong>Zero live control</strong><p>No action on this page can run, retry, approve, deliver, apply, promote, or configure anything.</p></div></header><div id="operations-evidence" className="research-layout"><WorkerPanel projection={data.worker} /><QueuePanel projection={data.queue} /><SourcesPanel projection={data.sources} /><TrustPanel projection={data.trust} /></div><CandidateOutcome candidate={data.worker.data?.latest_candidate} /><footer className="research-footer"><span>Last projection updates</span><p>{Object.entries(data).map(([key, projection]) => `${endpointLabels[key as keyof typeof endpointLabels]} ${dateTime(projection.updatedAt)}`).join(" · ")}</p></footer></>;
+  return <><nav className="brain-nav" aria-label="Operations Console"><a href={routeHref("/")}>Dashboard</a><a aria-current="page" href={routeHref("/brain-research")}>Knowledge operations</a></nav><header className="research-hero"><div><p>Autonomous research · read-only evidence</p><h1>Knowledge operations</h1><p className="research-hero__deck">A private-console view of public-web learning, bounded paper research, immutable admission and governed candidate outcomes.</p></div><div className="authority-seal" aria-label="Authority boundary"><span>Authority boundary</span><strong>Zero live control</strong><p>No action on this page can run, retry, approve, deliver, apply, promote, or configure anything.</p></div></header><BrainDecisionFlow data={data} /><div id="operations-evidence" className="research-layout"><WorkerPanel projection={data.worker} /><QueuePanel projection={data.queue} /><SourcesPanel projection={data.sources} /><TrustPanel projection={data.trust} /></div><CandidateOutcome candidate={data.worker.data?.latest_candidate} /><footer className="research-footer"><span>Last projection updates</span><p>{Object.entries(data).map(([key, projection]) => `${endpointLabels[key as keyof typeof endpointLabels]} ${dateTime(projection.updatedAt)}`).join(" · ")}</p></footer></>;
 }
 
 export default function BrainResearch() {
