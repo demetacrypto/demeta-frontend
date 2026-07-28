@@ -3,12 +3,14 @@ import PressureAtlas from "./pages/PressureAtlas";
 import Vitreum from "./pages/Vitreum";
 import Foldline from "./pages/Foldline";
 import MaterialIndex from "./pages/MaterialIndex";
+import BrainResearch from "./pages/BrainResearch";
 import { currentRoute, routeHref } from "./routing";
 
 const studies = Object.freeze([
   { path: "/pressure-atlas", short: "Flow", label: "Pressure Atlas" },
   { path: "/vitreum", short: "Glass", label: "Vitreum" },
-  { path: "/foldline", short: "Cloth", label: "Foldline" }
+  { path: "/foldline", short: "Cloth", label: "Foldline" },
+  { path: "/brain-research", short: "Brain", label: "Brain Research" }
 ]);
 
 function CurrentPage() {
@@ -16,6 +18,7 @@ function CurrentPage() {
   if (path === "/pressure-atlas") return <PressureAtlas />;
   if (path === "/vitreum") return <Vitreum />;
   if (path === "/foldline") return <Foldline />;
+  if (path === "/brain-research") return <BrainResearch />;
   return <MaterialIndex />;
 }
 
@@ -39,7 +42,7 @@ export function App() {
           <span>DEMETA / Material systems</span>
           <strong>{currentStudy?.label || "Study index"}</strong>
         </div>
-        <nav className="study-footer__routes" aria-label="Material studies">
+        <nav className="study-footer__routes" aria-label="DEMETA studies">
           <a className={current === "/" ? "is-current" : ""} href={routeHref("/")} aria-current={current === "/" ? "page" : undefined}>
             <span>00</span> Index
           </a>

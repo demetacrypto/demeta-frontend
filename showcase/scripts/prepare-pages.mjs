@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const showcaseRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const dist = join(showcaseRoot, "dist");
 const index = join(dist, "index.html");
-const routes = Object.freeze(["pressure-atlas", "vitreum", "foldline"]);
+const routes = Object.freeze(["pressure-atlas", "vitreum", "foldline", "brain-research"]);
 
 for (const route of routes) {
   const routeDirectory = join(dist, route);
