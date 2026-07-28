@@ -150,7 +150,7 @@ function Breakdown({ title, counts }: Readonly<{ title: string; counts: Readonly
 function StageOutcome({ name, stage, status, reason }: Readonly<{ name: string; stage: CandidateStage | null | undefined; status: string; reason?: string | null }>) {
   const metrics = [
     typeof stage?.trades === "number" ? `${stage.trades} trades` : null,
-    typeof stage?.profit_factor === "number" ? `PF ${stage.profit_factor}` : null,
+    typeof (stage?.profit_factor ?? stage?.pf) === "number" ? `PF ${stage?.profit_factor ?? stage?.pf}` : null,
     typeof stage?.net_pnl === "number" ? `PnL ${stage.net_pnl}` : null
   ].filter(Boolean).join(" · ");
   return <li className={`candidate-step candidate-step--${statusClass(status)}`}><span>{name}</span><strong>{name} — {readable(status)}</strong><p>{metrics || readable(reason, status === "skipped" || status === "not_permitted" ? "Prior gate did not pass" : "No metrics recorded")}</p>{typeof stage?.max_drawdown === "number" ? <small>Drawdown {stage.max_drawdown}</small> : null}</li>;
@@ -306,7 +306,7 @@ function OperatorSummary({ data }: Readonly<{ data: KnowledgeOperationsData }>) 
     </div>
     <div className="operator-summary__cards">
       <article><span>1 · What ran</span><strong>Automatic research cycle</strong><p>Last completed: {dateTime(data.worker.data?.scheduler?.last_run_at, "Not recorded")}.</p><small>{exactNumber(source?.receipt_count)} source receipt · {exactNumber(data.trust.data?.admitted_claim_count)} claim admitted · {exactNumber(data.trust.data?.validated_skill_count)} skill validated</small></article>
-      <article className={stage1.status === "failed" ? "operator-summary__card--bad" : ""}><span>2 · Result</span><strong>Stage 1 — {readable(stage1.status)}</strong><p>{typeof stage?.stage1_metrics?.trades === "number" ? `${stage.stage1_metrics.trades} historical paper trades` : "No Stage-1 trade count recorded"}.</p><small>PF {compactMetric(stage?.stage1_metrics?.profit_factor, 2)} · PnL {compactMetric(stage?.stage1_metrics?.net_pnl, 0)}</small></article>
+      <article className={stage1.status === "failed" ? "operator-summary__card--bad" : ""}><span>2 · Result</span><strong>Stage 1 — {readable(stage1.status)}</strong><p>{typeof stage?.stage1_metrics?.trades === "number" ? `${stage.stage1_metrics.trades} historical paper trades` : "No Stage-1 trade count recorded"}.</p><small>PF {compactMetric(stage?.stage1_metrics?.profit_factor ?? stage?.stage1_metrics?.pf, 2)} · PnL {compactMetric(stage?.stage1_metrics?.net_pnl, 0)}</small></article>
       <article><span>3 · Why it stopped</span><strong>{stage1.status === "failed" ? "Stage 1 did not pass" : "Awaiting Stage evidence"}</strong><p>{stage1.status === "failed" ? "Stage 1.5 and Stage 2 were not run because the first gate failed." : "No downstream gate result is available yet."}</p><small>BA-8: {readable(candidate?.ba8?.status, "not recorded")}</small></article>
       <article><span>4 · What happens next</span><strong>{readable(candidate?.ba7?.action, "no decision recorded")}</strong><p>{query ? `Research focus: ${query}.` : "No next research question recorded."}</p><small>Queue: {exactNumber(queue?.pending)} pending · {exactNumber(queue?.running)} running</small></article>
     </div>

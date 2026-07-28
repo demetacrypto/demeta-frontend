@@ -18,6 +18,7 @@ export type CandidateStage = Readonly<{
   status?: string | null;
   reason?: string | null;
   trades?: number | null;
+  pf?: number | null;
   profit_factor?: number | null;
   net_pnl?: number | null;
   max_drawdown?: number | null;
