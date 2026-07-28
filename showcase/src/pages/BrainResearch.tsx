@@ -53,7 +53,7 @@ function CandidateDetail({ candidate }: Readonly<{ candidate: BrainCandidate }>)
 function ResearchContent({ data }: Readonly<{ data: BrainResearchData }>) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const candidate = data.candidates.find((item) => item.candidate_id === selectedId) || data.candidates[0];
-  const sidecar = (data.status.sidecar || {}) as Record<string, unknown>;
+  const sidecar = (data.status.service || {}) as Record<string, unknown>;
   return (
     <>
       <section className="brain-hero" aria-labelledby="brain-title">
@@ -62,7 +62,7 @@ function ResearchContent({ data }: Readonly<{ data: BrainResearchData }>) {
         <p className="brain-hero__deck">A governed record of candidate evidence, gates, reflection and delivery disposition. This surface cannot start cycles, route stages, approve delivery, or affect trading.</p>
         <dl className="brain-status">
           <div><dt>Sidecar</dt><dd>Sidecar {present(sidecar.state)}</dd></div>
-          <div><dt>Latest autonomous cycle</dt><dd>{dateTime(data.status.latest_cycle_at)}</dd></div>
+          <div><dt>Latest autonomous cycle</dt><dd>{dateTime(data.status.last_autonomous_cycle_at)}</dd></div>
           <div><dt>Authority</dt><dd>Denied for live control</dd></div>
         </dl>
       </section>

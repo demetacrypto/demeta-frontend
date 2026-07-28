@@ -207,11 +207,11 @@
       { "id": "vitreum-no-webgl", "kind": "no-webgl", "path": "public/screenshots/vitreum-no-webgl.png", "sha256": "d6751242ec212e9fa33f8be1e30675658233a863497822db8759173eff51b94d", "viewport": "1280x720" }
     ],
     "reports": [
-      { "id": "vitreum-build", "kind": "build", "path": "evidence/build.json", "sha256": "131ede4411a7487f9b5d99891e691c51f7265c63dcde85e97efcd9ec5942b55e" },
-      { "id": "vitreum-lighthouse", "kind": "performance", "path": "evidence/lighthouse.json", "sha256": "b4186d02f97e9eb235a427a544a4bbedd82db6eb9400aab96bc49fecdc10cabb", "notes": "Three desktop runs per route; the release gate recomputes median LCP, CLS, and TBT against this exact build." },
-      { "id": "vitreum-keyboard", "kind": "keyboard", "path": "evidence/browser.json", "sha256": "dc62a2b9b4c5fcdf768900c111fa05a00fce7271b4c261442793bbc37c376b46", "notes": "The browser report records complete tab order, every state-control family, pause/resume, CTA activation, visible focus, and 24-by-24-pixel minimum targets." },
-      { "id": "vitreum-console", "kind": "console", "path": "evidence/browser.json", "sha256": "dc62a2b9b4c5fcdf768900c111fa05a00fce7271b4c261442793bbc37c376b46", "notes": "The browser report records console and page errors for every route/profile pair." },
-      { "id": "vitreum-accessibility", "kind": "axe", "path": "evidence/accessibility.json", "sha256": "32f0e059eeb6ff19cfe7e9ce9bf5ec0fe5391c67f28bbb01e1d67c783ff39eea" },
+      { "id": "vitreum-build", "kind": "build", "path": "evidence/build.json", "sha256": "a4f26602e9a2a6b40e74c33b84b0a52a8bd027940909f2626b8e1dbd45c20616" },
+      { "id": "vitreum-lighthouse", "kind": "performance", "path": "evidence/lighthouse.json", "sha256": "1cac3f739350e7b316807f25828b4f817bf7434299d51a55cf6d08d83aebe83e", "notes": "Three desktop runs per route; the release gate recomputes median LCP, CLS, and TBT against this exact build." },
+      { "id": "vitreum-keyboard", "kind": "keyboard", "path": "evidence/browser.json", "sha256": "3b43855d9082ded1c32ee601c760da987d284840f24e6bdb7095700f719e255e", "notes": "The browser report records complete tab order, every state-control family, pause/resume, CTA activation, visible focus, and 24-by-24-pixel minimum targets." },
+      { "id": "vitreum-console", "kind": "console", "path": "evidence/browser.json", "sha256": "3b43855d9082ded1c32ee601c760da987d284840f24e6bdb7095700f719e255e", "notes": "The browser report records console and page errors for every route/profile pair." },
+      { "id": "vitreum-accessibility", "kind": "axe", "path": "evidence/accessibility.json", "sha256": "273412879386edbc330c84cf7bb6899957e8684eafffc0424c031672e9f918c6" },
       { "id": "vitreum-manual-review", "kind": "manual-review", "path": "evidence/manual-review.json", "sha256": "2947203050d4ccfe242c97931a5b879d3caf79acde3c281d3ef239cbd90aaaf9" }
     ],
     "keyboardFlow": true,

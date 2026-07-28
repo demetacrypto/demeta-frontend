@@ -1,12 +1,12 @@
 {
   "reportVersion": "1.0.0",
-  "generatedAt": "2026-07-28T01:18:13.005Z",
+  "generatedAt": "2026-07-28T01:24:01.123Z",
   "command": "npm run build",
   "node": "v25.6.1",
   "pass": true,
-  "buildFingerprint": "80cb22a038e259c3a96f1c656f17961ad7459e57177882640a1fc99e294f7791",
+  "buildFingerprint": "ba7565e1bbb4c1aa2554845e2d554e02ae74b5ff08141506b1b1626c7d65c7b3",
   "initialJsGzipKiB": 67.27,
-  "enhancedSharedGzipKiB": 132.09,
+  "enhancedSharedGzipKiB": 132.1,
   "routeBundles": [
     {
       "route": "/pressure-atlas",
@@ -27,7 +27,7 @@
       "route": "/vitreum",
       "pass": true,
       "initialJsGzipKiB": 67.27,
-      "routeJsGzipKiB": 201.67,
+      "routeJsGzipKiB": 201.68,
       "cssGzipKiB": 8.97,
       "mediaMiB": 0,
       "budget": {
@@ -42,7 +42,7 @@
       "route": "/foldline",
       "pass": true,
       "initialJsGzipKiB": 67.27,
-      "routeJsGzipKiB": 201.92,
+      "routeJsGzipKiB": 201.93,
       "cssGzipKiB": 8.97,
       "mediaMiB": 0.153,
       "budget": {
@@ -56,22 +56,22 @@
   ],
   "files": [
     {
-      "name": "FoldlineScene-C0UdLUfn.js",
+      "name": "FoldlineScene-C0ICnIVu.js",
       "bytes": 5310,
       "gzipBytes": 2621,
-      "sha256": "0122e2a3d4b77fafa29f26b255fd87bc1ed9b6766e850fc17d269a9c476d5901"
+      "sha256": "6102a3efd6119591c9fdb2d69b10d9a3eb8deb7f8d5605c9c6e768a579ad34f8"
     },
     {
-      "name": "PressureAtlasScene-BHUPyxaZ.js",
+      "name": "PressureAtlasScene-DTnIBxQm.js",
       "bytes": 4843,
       "gzipBytes": 2124,
-      "sha256": "e5176dcd662c223f3930068cb137cde55e38327a097277b38e3ecbf3b57be87d"
+      "sha256": "de32e0776fbc2d9d1e7dd1d9af2477cd0296c5862df581447b76843a05dc3941"
     },
     {
-      "name": "VitreumScene-DetsiEZw.js",
+      "name": "VitreumScene-BUMnY0kK.js",
       "bytes": 5116,
-      "gzipBytes": 2363,
-      "sha256": "f06132d3c1bd6b215328bc88a3fcf6596723a0864d63ac75dc7ee518ae4138f6"
+      "gzipBytes": 2362,
+      "sha256": "8c04b24f472b63bd101a469a23649532be3e5e74715fcdd4b90dad2b96e366a7"
     },
     {
       "name": "foldline-textile.webp",
@@ -86,10 +86,10 @@
       "sha256": "a49e7ddceceb9a6051c112bd59511bd5be0e6c4f493ff3c40e1ef2917d924f59"
     },
     {
-      "name": "index-sfcVDeyB.js",
-      "bytes": 224723,
-      "gzipBytes": 68881,
-      "sha256": "18c8fcae4b0ce324a4401bb53c71e782bf43c8f50d7cf2ba9abc22e69caeed05"
+      "name": "index-Dir6yHGD.js",
+      "bytes": 224732,
+      "gzipBytes": 68888,
+      "sha256": "feef4eb44b36280feb887313e2c44d5ac3351692d6e439a62702e218d5596fa7"
     },
     {
       "name": "pressure-atlas-specimen.webp",
@@ -98,10 +98,10 @@
       "sha256": "c983836ecd61fea940ad96eed2fdb85019d6334062443e583e3e334eb232a9a7"
     },
     {
-      "name": "runtime-Cl8pI4LK.js",
+      "name": "runtime-ChK7mIZe.js",
       "bytes": 5781,
-      "gzipBytes": 2460,
-      "sha256": "368f9a1538185c53a457a6efdc4a9296f28a5f2377c75a208c39cb1e4299d60d"
+      "gzipBytes": 2461,
+      "sha256": "51f5be8404b2b9526084cb8ffd0b266823f994e2e4e2107b90329c7635e34b81"
     },
     {
       "name": "three-C0SvHCyD.js",

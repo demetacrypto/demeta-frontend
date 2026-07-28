@@ -60,7 +60,7 @@ async function mockBrainApi(page: import("@playwright/test").Page) {
   await page.route("**/brain/research/**", async (route) => {
     const path = new URL(route.request().url()).pathname.replace("/brain/research", "");
     const payload = path === "/status"
-      ? { sidecar: { state: "active", started_at: "2026-07-27T23:00:00Z" }, latest_cycle_at: "2026-07-27T23:22:52Z" }
+      ? { service: { state: "active", started_at: "2026-07-27T23:00:00Z" }, last_autonomous_cycle_at: "2026-07-27T23:22:52Z" }
       : path === "/candidates"
         ? { items: [candidate] }
         : path === `/candidates/${encodeURIComponent(candidateId)}`
